@@ -1,8 +1,9 @@
 #  HTML5 Boilerplate Starkers WordPress Theme
 
-##  Based Upon Two Projects
-HTML5 Boilerplate [https://github.com/paulirish/html5-boilerplate](https://github.com/paulirish/html5-boilerplate)
-Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
+##  Project origins
+* HTML5 Boilerplate [https://github.com/paulirish/html5-boilerplate](https://github.com/paulirish/html5-boilerplate)
+* Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
+* Aaron T. Grogg's Boilerplate [http://aarontgrogg.com/2010/10/06/my-first-wp-theme-boilerplate-starkers/] (http://aarontgrogg.com/2010/10/06/my-first-wp-theme-boilerplate-starkers/)
 
 ## License:
 
