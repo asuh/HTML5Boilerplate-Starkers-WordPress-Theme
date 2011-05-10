@@ -202,7 +202,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the &lt;/body&gt; (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):<br />';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'/js/jquery.js?ver=x\'&gt;&lt;/script&gt;</code></p>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js\'&gt;&lt;/script&gt;</code></p>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
@@ -307,7 +307,7 @@
 			wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.Modernizr && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). 'js/libs/modernizr-1.7.min.js"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/libs/modernizr-1.7.min.js"></script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 		}
 
 	//	$options['ieshiv_script']
@@ -323,7 +323,6 @@
 			wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js', array(), '' );
 			wp_enqueue_script( 'jquery' );
-			echo 'doody';
 		}
 
 	//	$options['plugins_js']
