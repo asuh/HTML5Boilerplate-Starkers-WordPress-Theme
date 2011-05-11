@@ -91,6 +91,31 @@ add_filter('the_generator', 'complete_version_removal');
 // http://tutzone.net/2011/02/how-to-hide-login-errors-in-wordpress.html
 add_filter('login_errors', create_function('$a', "return null;"));
 
+
+// add to robots.txt
+// http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
+add_action('do_robots', 'boilerplate_robots');
+
+function boilerplate_robots() {
+	echo "Disallow: /cgi-bin\n";
+	echo "Disallow: /wp-admin\n";
+	echo "Disallow: /wp-includes\n";
+	echo "Disallow: /wp-content/plugins\n";
+	echo "Disallow: /plugins\n";
+	echo "Disallow: /wp-content/cache\n";
+	echo "Disallow: /wp-content/themes\n";
+	echo "Disallow: /trackback\n";
+	echo "Disallow: /feed\n";
+	echo "Disallow: /comments\n";
+	echo "Disallow: /category/*/*\n";
+	echo "Disallow: */trackback\n";
+	echo "Disallow: */feed\n";
+	echo "Disallow: */comments\n";
+	echo "Disallow: /*?*\n";
+	echo "Disallow: /*?\n";
+	echo "Allow: /wp-content/uploads\n";
+	echo "Allow: /assets";
+}
  
 /**
 * END TLD scripts
