@@ -314,7 +314,7 @@
 		function add_ieshiv_script() {
 			echo '<!--[if lt IE 9]>'.PHP_EOL;
 			echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"></script>'.PHP_EOL; // try getting from CDN
-			echo '	<script>!window.ieshiv && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). 'js/ieshiv.js"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '	<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js"></script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
