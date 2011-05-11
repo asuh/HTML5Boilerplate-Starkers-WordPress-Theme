@@ -330,7 +330,7 @@
 			$options = get_option('plugin_options');
 			$account = $options['google_analytics_account'];
 			echo PHP_EOL.'<script>'.PHP_EOL;
-			echo 'var _gaq=[["_setAccount","UA-'.$account.'"],["_trackPageview"]];'.PHP_EOL;
+			echo 'var _gaq=[["_setAccount","UA-'.$account.'"],["_trackPageview"],["_trackPageLoadTime"]];'.PHP_EOL;
 			echo '(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;'.PHP_EOL;
 			echo 'g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";'.PHP_EOL;
 			echo 's.parentNode.insertBefore(g,s)}(document,"script"));'.PHP_EOL;
