@@ -116,6 +116,10 @@ function boilerplate_robots() {
 	echo "Allow: /wp-content/uploads\n";
 	echo "Allow: /assets";
 }
+
+// remove WordPress version from RSS feed
+function tld_no_generator() { return ''; }
+add_filter('the_generator', 'tld_no_generator');
  
 /**
 * END TLD scripts
