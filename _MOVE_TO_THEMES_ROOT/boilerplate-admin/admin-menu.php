@@ -251,7 +251,7 @@
 			$account = (isset($options['google_analytics_account']) && $options['google_analytics_account']) ? $options['google_analytics_account'] : 'XXXXX-X';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[google_analytics_js]" value="true" ' .$checked. '/>';
 			echo '<p>To include Google Analytics, select this option and include your account number here:<br />';
-			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
+			echo 'UA-<input type="text" size="10" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>, where \'UA-XXXXX-X\' will be replaced with the code you insert above:</p>';
 			echo '<code>&lt;script&gt;</code>';
 			echo '<code>var _gaq=[["_setAccount","'.(($account !== 'XXXXX-X') ? 'UA-'.$account : 'UA-XXXXX-X').'"],["_trackPageview"]];</code>';
