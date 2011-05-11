@@ -53,7 +53,6 @@
 			add_settings_field('viewport', '<em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> use full zoom?:', 'viewport_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('favicon', 'Got Favicon?:', 'favicon_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('favicon_ithing', 'Got <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr></em> Favicon?', 'favicon_ithing_setting', 'boilerplate-admin', 'main_section');
-			add_settings_field('ie_css', 'IE CSS?:', 'ie_css_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('handheld_css', 'Handheld CSS?:', 'handheld_css_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('print_css', 'Print CSS?:', 'print_css_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('modernizr_js', 'Modernizr JS?:', 'modernizr_js_setting', 'boilerplate-admin', 'main_section');
@@ -139,19 +138,6 @@
 			echo '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
 			echo '<code>&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png" /&gt;</code>';
-		}
-
-	//	callback fn for ie_css
-		function ie_css_setting() {
-			$options = get_option('plugin_options');
-			$checked = (isset($options['ie_css']) && $options['ie_css']) ? 'checked="checked" ' : '';
-			echo '<input class="check-field" type="checkbox" name="plugin_options[ie_css]" value="true" ' .$checked. '/>';
-			echo '<p>If you would like to add a IE-specific CSS file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>'.get_stylesheet_directory_uri() . '/css/ie.css</code>';
-			echo '<p><strong>I recommend adding any custom IE-specific CSS to this file and either copying from the starter file or using an <code>@import</code> to add the starter file rather than editing the starter file itself.  This will help to avoid your changes being overwritten during upgrades.</strong></p>';
-			echo '<p><strong>And remember</strong>, you don\'t need IE-specific hacks if you activate the IE-Conditional <code>&lt;html&gt;</code> above, because you can target IE specifically by using the IE classes that are being added to <code>&lt;html&gt;</code>.  Sweet!</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;!--[if IE ]&gt;&lt;link href="'.get_stylesheet_directory_uri().'/css/ie.css"&gt;&lt;![endif]--&gt;</code>';
 		}
 
 	//	callback fn for handheld_css
@@ -283,11 +269,6 @@
 	//	$options['favicon_ithing']
 		function add_favicon_ithing() {
 			echo '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />'.PHP_EOL;
-		}
-
-	//	$options['ie_css'];
-		function add_ie_stylesheet() {
-			echo '<!--[if IE ]><link rel="stylesheet" href="'.get_stylesheet_directory_uri().'/css/ie.css"><![endif]-->'.PHP_EOL;
 		}
 
 	//	$options['handheld_css']
