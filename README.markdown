@@ -1,5 +1,8 @@
 #  HTML5 Boilerplate Starkers WordPress Theme
 
+## To Do List
+* Update Starker code to match Twenty Ten 1.2
+
 ##  Project origins
 * HTML5 Boilerplate [https://github.com/paulirish/html5-boilerplate](https://github.com/paulirish/html5-boilerplate)
 * Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
