@@ -19,7 +19,7 @@ get_header(); ?>
 				 get_template_part( 'loop', 'search' );
 				?>
 <?php else : ?>
-					<h2><?php _e( 'Nothing Found', 'boilerplate' ); ?></h2>
+					<h1><?php _e( 'Nothing Found', 'boilerplate' ); ?></h1>
 					<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'boilerplate' ); ?></p>
 					<?php get_search_form(); ?>
 <?php endif; ?>

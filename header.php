@@ -29,7 +29,8 @@
 		<!-- CSS : implied media="all" -->
 		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
+		<link rel="profile" href="http://gmpg.org/xfn/11" />
+		
 		<?php
 		/* Always have wp_head() just before the closing </head>
 		 * tag of your theme, or you will break many plugins, which

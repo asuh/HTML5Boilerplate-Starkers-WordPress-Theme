@@ -199,7 +199,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_stylesheet_directory_uri().'js/plug-in.js?ver=x\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_stylesheet_directory_uri().'js/plug-in.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>';
 		}
@@ -225,7 +225,7 @@
 			echo '<p><a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_belatedPNG</a> adds IE6 support for PNG images used as CSS background images and HTML &lt;img/&gt;</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
 			echo '<code>&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'js/dd_belatedpng.js?ver=x\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'js/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
 			echo '<code>&lt;script&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
@@ -233,14 +233,14 @@
 	//	callback fn for google_analytics_js
 		function google_analytics_js_setting() {
 			$options = get_option('plugin_options');
-			$checked = (isset($options['google_analytics_js']) && $options['google_analytics_js']) ? 'checked="checked" ' : '';
-			$account = (isset($options['google_analytics_account']) && $options['google_analytics_account']) ? $options['google_analytics_account'] : 'XXXXX-X';
+			$checked = (isset($options['google_analytics_js']) && $options['google_analytics_js'] && isset($options['google_analytics_account']) && str_replace('UA-','',$options['google_analytics_account']) !== 'XXXXX-X') ? 'checked="checked" ' : '';
+			$account = (isset($options['google_analytics_account']) && $options['google_analytics_account']) ? str_replace('UA-','',$options['google_analytics_account']) : 'XXXXX-X';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[google_analytics_js]" value="true" ' .$checked. '/>';
 			echo '<p>To include Google Analytics, select this option and include your account number here:<br />';
-			echo 'UA-<input type="text" size="10" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
+			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>, where \'UA-XXXXX-X\' will be replaced with the code you insert above:</p>';
 			echo '<code>&lt;script&gt;</code>';
-			echo '<code>var _gaq=[["_setAccount","'.(($account !== 'XXXXX-X') ? 'UA-'.$account : 'UA-XXXXX-X').'"],["_trackPageview"]];</code>';
+			echo '<code>var _gaq=[["_setAccount","UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"],["_trackPageview"]];</code>';
 			echo '<code>(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;</code>';
 			echo '<code>g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";</code>';
 			echo '<code>s.parentNode.insertBefore(g,s)}(document,"script"));</code>';
@@ -332,13 +332,12 @@
 			$options = get_option('plugin_options');
 			$account = $options['google_analytics_account'];
 			echo PHP_EOL.'<script>'.PHP_EOL;
-			echo 'var _gaq=[["_setAccount","UA-'.$account.'"],["_trackPageview"],["_trackPageLoadTime"]];'.PHP_EOL;
+			echo 'var _gaq=[["_setAccount","UA-'.str_replace('UA-','',$account).'"],["_trackPageview"],["_trackPageLoadTime"]];'.PHP_EOL;
 			echo '(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;'.PHP_EOL;
 			echo 'g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";'.PHP_EOL;
 			echo 's.parentNode.insertBefore(g,s)}(document,"script"));'.PHP_EOL;
 			echo '</script>'.PHP_EOL;
 		}
-
 
 
 /*	5)	Add Boilerplate options to page as requested */
