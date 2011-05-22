@@ -19,7 +19,7 @@
 	get_sidebar( 'footer' );
 ?>
 			<div id="copyright">
-				&copy; <?php echo date("Y"); ?> <a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a> All Rights Reserved. <?php bloginfo('name'); ?> is maintained by <a href="http://www.twolanedesign.com/" title="Two Lane Design - Affordable Web Designs">TwoLaneDesign.com</a>
+				&copy; <?php echo date("Y"); ?> <a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a> All Rights Reserved. <?php echo do_shortcode( '[footer_credit]' ); ?>
 			</div><!-- end #copyright -->
 
 		</footer><!-- end footer -->
