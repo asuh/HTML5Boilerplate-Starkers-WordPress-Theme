@@ -61,6 +61,7 @@
 			add_settings_field('site_js', 'Site-specific JS?:', 'site_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('belated_png_js', 'Belated PNG JS?:', 'belated_png_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('google_analytics_js', 'Google Analytics?:', 'google_analytics_js_setting', 'boilerplate-admin', 'main_section');
+			add_settings_field('footer_credit', 'Footer Credit?:', 'footer_credit_setting', 'boilerplate-admin', 'main_section');
 		}
 		add_action('admin_init', 'register_and_build_fields');
 
@@ -245,6 +246,24 @@
 			echo '<code>&lt;/script&gt;</code>';
 			echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
 		}
+
+	//	callback for footer credit
+		function footer_credit_setting() {
+			$options = get_option('plugin_options');
+			$checked = (isset($options['footer_credit']) && $options['footer_credit']) ? 'checked="checked" ' : '';
+			$business_name = (isset($options['your_business_name']) && $options['your_business_name']) ? $options['your_business_name'] : 'Your Business Name';
+			$business_title = (isset($options['your_business_title']) && $options['your_business_title']) ? $options['your_business_title'] : 'Your Business Title';
+			$website = (isset($options['your_business_website']) && $options['your_business_website']) ? $options['your_business_website'] : 'yourbusiness.com';
+			$credit = (isset($options['your_business_credit']) && $options['your_business_credit']) ? $options['your_business_credit'] : 'maintained';
+			echo '<input class="check-field" type="checkbox" name="plugin_options[footer_credit]" value="true" ' .$checked. '/>';
+			echo '<p>If you are developing a website for a client and want a linkback to your site in the footer, here\'s an easy way to give your business site credit. <strong>All fields are required</strong>.</p>';
+			echo '<p><label for="business_name">Your Business Name: </label><input type="text" size="40" id="business_name" name="plugin_options[your_business_name]" value="'.$business_name.'" onfocus="javascript:if(this.value===\'Your Business Name\'){this.select();}" /></p>';
+			echo '<p><label for="business_title">Your Business Title: </label><input type="text" size="40" id="business_title" name="plugin_options[your_business_title]" value="'.$business_title.'" onfocus="javascript:if(this.value===\'Your Business Title\'){this.select();}" /></p>';
+			echo '<p><label for="business_website">Your Business URI: </label><input type="text" size="40" id="business_website" name="plugin_options[your_business_website]" value="'.$website.'" onfocus="javascript:if(this.value===\'yourbusiness.com\'){this.select();}" /></p>';
+			echo '<p><label for="business_credit">Your Business Credit: </label><input type="text" size="40" id="business_credit" name="plugin_options[your_business_credit]" value="'.$credit.'" onfocus="javascript:if(this.value===\'Your Business Credit\'){this.select();}" /></p>';
+			echo '<p>The code will look like this:</p>';
+			echo '<code><em>Blog Name</em> is '.$credit.' by &lt;a href="'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'" title="'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
+		}
 		
 
 /*	4)	Create functions to add above elements to pages */
@@ -337,6 +356,16 @@
 			echo '</script>'.PHP_EOL;
 		}
 
+	//	$options['footer_credit']
+		function add_footer_credit() {
+			$options = get_option('plugin_options');
+			$website = $options['your_business_website'];
+			$business_title = $options['your_business_title'];
+			$business_name = $options['your_business_name'];
+			$credit = $options['your_business_credit'];
+			return bloginfo( 'name' ).' is '.$credit.' by <a href="http://'.$website.'" title="'.$business_title.'">'.$business_name.'</a>.';
+		}
+
 
 /*	5)	Add Boilerplate options to page as requested */
 		if (!is_admin() ) {
@@ -382,6 +411,9 @@
 			}
 			if (isset($options['google_analytics_js']) && $options['google_analytics_js']) {
 				add_action('wp_footer', 'add_google_analytics_script');
+			}
+			if (isset($options['footer_credit']) && $options['footer_credit']) {
+				add_shortcode('footer_credit', 'add_footer_credit');
 			}
 		}
 

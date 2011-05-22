@@ -19,8 +19,13 @@
   margin:0 6px 0 -20px;
 }
 
+#boilerplate-options-wrap p label {
+	width: 140px;
+	display: inline-block;
+}
+
 #boilerplate-options-wrap p input {
-  border-color:#666;
+  border-color:#999;
 }
 
 #boilerplate-options-wrap table.form-table tr {
