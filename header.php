@@ -47,7 +47,7 @@
 					<span>
 						<?php bloginfo( 'name' ); ?>
 					</span>
-					<img src="<?php bloginfo('stylesheet_directory'); ?>/img/logo.png" width="xxx" height="xxx" alt="Logo Description" title="Site Title" />
+					<img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" width="xxx" height="xxx" alt="Logo Description" title="Site Title" />
 					<!-- Remove img tag above if logo is not an image -->
 				</a>
 			</<?php echo $heading_tag; ?>>
