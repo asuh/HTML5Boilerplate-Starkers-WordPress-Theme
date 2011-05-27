@@ -1,7 +1,8 @@
 #  HTML5 Boilerplate Starkers WordPress Theme
 
 ## To Do List
-* Update Starker code to match Twenty Ten 1.2
+* Update Starker code to match Twenty Eleven
+* Fix Footer Credit PHP to work properly when no credit is enabled
 
 ##  Project origins
 * HTML5 Boilerplate [https://github.com/paulirish/html5-boilerplate](https://github.com/paulirish/html5-boilerplate)
