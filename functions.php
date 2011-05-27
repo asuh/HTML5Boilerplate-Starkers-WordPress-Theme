@@ -166,10 +166,21 @@ function boilerplate_setup() {
 	add_editor_style();
 
 	// Add the_post_thumbnail() wherever thumbnail should appear
-	add_theme_support( 'post-thumbnails' );
+	if ( function_exists( 'add_theme_support' ) ) {
+		add_theme_support( 'post-thumbnails' );
+	}
 
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
+
+	// Make theme available for translation
+	// Translations can be filed in the /languages/ directory
+	load_theme_textdomain( 'boilerplate', TEMPLATEPATH . '/languages' );
+
+	$locale = get_locale();
+	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	if ( is_readable( $locale_file ) )
+		require_once( $locale_file );
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
@@ -572,6 +583,17 @@ function boilerplate_posted_in() {
 	);
 }
 endif;
+
+// add category nicenames in body and post class
+	function category_id_class($classes) {
+	    global $post;
+	    foreach((get_the_category($post->ID)) as $category)
+	        $classes[] = $category->category_nicename;
+	        return $classes;
+	}
+	add_filter('post_class', 'category_id_class');
+	add_filter('body_class', 'category_id_class');
+
 
 /* Uncomment if you won't use child theme */
 /*	Begin Boilerplate Admin 
