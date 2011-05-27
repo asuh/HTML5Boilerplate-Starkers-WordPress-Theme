@@ -1,21 +1,22 @@
 <?php
 
 /*
- 	Begin HTML5 Boilerplate Admin panel.
+	Begin Boilerplate Admin panel.
 
 	There are essentially 5 sections to this:
-	1)	Add "HTML5 Boilerplate Admin" link to left-nav Admin Menu & callback function for clicking that menu link
+	1)	Add "Boilerplate Admin" link to left-nav Admin Menu & callback function for clicking tat menu link
 	2)	Add Admin Page CSS if on the Admin Page
-	3)	Add "HTML5 Boilerplate Admin" Page options
+	3)	Add "Boilerplate Admin" Page options
 	4)	Create functions to add above elements to pages
-	5)	Add HTML5 Boilerplate options to page as requested
+	5)	Add Boilerplate options to page as requested
 */
 
-/*	1)	Add "HTML5 Boilerplate" link to left-nav Admin Menu */
+/*	1)	Add "Boilerplate Admin" link to left-nav Admin Menu */
 
 	//	Add option if in Admin Page
 		function create_boilerplate_admin_page() {
-			add_submenu_page('themes.php', 'Boilerplate Admin', 'Boilerplate Admin', 'administrator', 'boilerplate-admin', 'build_boilerplate_admin_page');
+		//	add_theme_page( $page_title, $menu_title, $capability, $menu_slug, $function);
+			add_theme_page('Boilerplate Admin', 'Boilerplate Admin', 'administrator', 'boilerplate-admin', 'build_boilerplate_admin_page');
 		}
 		add_action('admin_menu', 'create_boilerplate_admin_page');
 
@@ -27,6 +28,7 @@
 				<h2>Boilerplate Admin</h2>
 				<p>So, there's actually a tremendous amount going on here.  If you're not familiar with <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> or the <a href="http://starkerstheme.com/">Starkers theme</a> (upon which this theme is based) you should check them out.</p>
 				<p>Choose below which options you want included in your site.</p>
+				<p>The clumsiest part of this plug-in is dealing with the CSS files.  Check the <a href="<?php echo get_template_directory_uri() ?>/readme.txt">Read Me file</a> for details on how I suggest handling them.</p>
 				<form method="post" action="options.php" enctype="multipart/form-data">
 					<?php settings_fields('plugin_options'); /* very last function on this page... */ ?>
 					<?php do_settings_sections('boilerplate-admin'); /* let's get started! */?>
@@ -39,7 +41,7 @@
 /*	2)	Add Admin Page CSS if on the Admin Page */
 
 		function admin_register_head() {
-			echo '<link rel="stylesheet" href="'.get_template_directory_uri() . '/boilerplate-admin/style.css" />'.PHP_EOL;
+			echo '<link rel="stylesheet" href="' .get_template_directory_uri(). '/boilerplate-admin/admin-style.css" />'.PHP_EOL;
 		}
 		add_action('admin_head', 'admin_register_head');
 
@@ -147,10 +149,10 @@
 			$checked = (isset($options['handheld_css']) && $options['handheld_css']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[handheld_css]" value="true" ' .$checked. '/>';
 			echo '<p>If you would like to add a handheld CSS file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>'.get_template_directory_uri() . '/css/handheld.css</code></p>';
+			echo '<code>' .get_template_directory_uri(). '/css/handheld.css</code></p>';
 			echo '<p>Add what you want to that file and select this option. Here are a <a href="http://thinkvitamin.com/design/make-your-site-mobile-friendly/">couple</a> <a href="http://adactio.com/journal/1700/">resources</a> for making your site mobile-ready, but there are plenty more on the web.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;link rel=\'stylesheet\' id=\'handheld-css\'  href=\''.get_template_directory_uri().'/css/handheld.css\' media=\'handheld\' /&gt;</code>';
+			echo '<code>&lt;link rel=\'stylesheet\' id=\'handheld-css\'  href=\'' .get_template_directory_uri().'/css/handheld.css\' type=\'textcss\' media=\'handheld\' /&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
@@ -160,10 +162,10 @@
 			$checked = (isset($options['print_css']) && $options['print_css']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[print_css]" value="true" ' .$checked. '/>';
 			echo '<p>If you would like to add a print CSS file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>'.get_template_directory_uri() . '/css/print.css</code>';
+			echo '<code>'. get_template_directory_uri(). '/css/print.css</code>';
 			echo '<p>Add what you want to that file and select this option. Here are a <a href="http://remysharp.com/2007/05/03/pretty-in-print-tips-for-print-styles/">couple</a> <a href="http://westciv.com/style_master/academycss_tutorial/advanced/printing.html">resources</a> for making your site print-ready, but there are plenty more on the web.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;link rel=\'stylesheet\' id=\'print-css\' href=\''.get_template_directory_uri().'/css/print.css\' media=\'print\' /&gt;</code>';
+			echo '<code>&lt;link rel=\'stylesheet\' id=\'print-css\' href=\''.get_template_directory_uri().'/css/print.css\' type=\'textcss\' media=\'print\' /&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: Boilerplate\'s style.css does have a few lines of CSS pertaining to print, with a link to <a href="http://www.phpied.com/delay-loading-your-print-css/">this article</a>; your call.</strong></p>';
 		}
@@ -175,7 +177,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[modernizr_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "no-cssreflections" or "cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'/js/libs/modernizr-1.7.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-1.7.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers.</strong></p>';
 		}
@@ -186,9 +188,10 @@
 			$checked = (isset($options['jquery_js']) && $options['jquery_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
-			echo '<p>Selecting this option will add the following code to your pages just before the &lt;/body&gt; (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):<br />';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\'&gt;&lt;/script&gt;</code></p>';
+			echo '<p>Selecting this option will add the following code to your pages to the <code>wp_head()</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
+			echo '<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).</p>';
 		}
 
 	//	callback fn for plugins_js
@@ -198,7 +201,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'js/plug-in.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/plug-in.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>';
 		}
@@ -209,10 +212,10 @@
 			$checked = (isset($options['site_js']) && $options['site_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[site_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you would like to add your own site JavaScript file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>'.get_template_directory_uri(). 'js/script.js</code>';
+			echo '<code>' .get_template_directory_uri(). 'js/script.js</code>';
 			echo '<p>Add what you want to that file and select this option.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'js/script.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'js/script.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
@@ -224,7 +227,7 @@
 			echo '<p><a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_belatedPNG</a> adds IE6 support for PNG images used as CSS background images and HTML &lt;img/&gt;</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
 			echo '<code>&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\''.get_template_directory_uri().'js/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'js/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
 			echo '<code>&lt;script&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
@@ -305,14 +308,14 @@
 			wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/libs/modernizr-1.7.min.js"></script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/libs/modernizr-1.7.min.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 		}
 
 	//	$options['ieshiv_script']
 		function add_ieshiv_script() {
 			echo '<!--[if lt IE 9]>'.PHP_EOL;
 			echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"></script>'.PHP_EOL; // try getting from CDN
-			echo '	<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js"></script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
@@ -384,7 +387,8 @@
 			}
 			if (isset($options['modernizr_js']) && $options['modernizr_js']) {
 				add_action('wp_print_styles', 'add_modernizr_script');
-			} else { // if Modernizr isn't selected, add IEShiv inside an IE Conditional Comment
+			} else { 
+				// if Modernizr isn't selected, add IEShiv inside an IE Conditional Comment
 				add_action('wp_print_styles', 'add_ieshiv_script');
 			}
 			if (isset($options['ie_css']) && $options['ie_css']) {
