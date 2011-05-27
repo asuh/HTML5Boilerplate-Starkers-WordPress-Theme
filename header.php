@@ -9,10 +9,9 @@
  * @since Boilerplate 1.0
  */
 ?><!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js ie6"><![endif]-->
-<!--[if IE 7]>	 <html <?php language_attributes(); ?> class="no-js ie7"><![endif]-->
-<!--[if IE 8]>	 <html <?php language_attributes(); ?> class="no-js ie8"><![endif]-->
+<!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js ie6 oldie"><![endif]-->
+<!--[if IE 7]>	 <html <?php language_attributes(); ?> class="no-js ie7 oldie"><![endif]-->
+<!--[if IE 8]>	 <html <?php language_attributes(); ?> class="no-js ie8 oldie"><![endif]-->
 <!--[if gt IE 8]><!--><html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -23,7 +22,7 @@
 			 * We filter the output of wp_title() a bit -- see
 			 * boilerplate_filter_wp_title() in functions.php.
 			 */
-			wp_title( '|', true, 'right' );
+			boilerplate_filter_wp_title( '|', true, 'right' );
 		?></title>
 
 		<!-- CSS : implied media="all" -->

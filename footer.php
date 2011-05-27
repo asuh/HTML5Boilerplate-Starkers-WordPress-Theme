@@ -10,7 +10,7 @@
  * @since Boilerplate 1.0
  */
 ?>
-		</div><!-- end #main -->
+		</div><!-- #main -->
 		<footer role="contentinfo">
 <?php
 	/* A sidebar in the footer? Yep. You can can customize
@@ -20,9 +20,9 @@
 ?>
 			<div id="copyright">
 				&copy; <?php echo date("Y"); ?> <a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a> All Rights Reserved. <?php if (function_exists('footer_credit')) { echo do_shortcode( '[footer_credit]' ); } ?>
-			</div><!-- end #copyright -->
+			</div><!-- #copyright -->
 
-		</footer><!-- end footer -->
+		</footer><!-- footer -->
 <?php
 	/* Always have wp_footer() just before the closing </body>
 	 * tag of your theme, or you will break many plugins, which
