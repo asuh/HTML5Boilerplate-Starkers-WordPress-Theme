@@ -20,7 +20,7 @@ get_header(); ?>
 					</div><!-- .entry-meta -->
 					<div class="entry-content">
 						<?php the_content(); ?>
-						<?php wp_link_pages( array( 'before' => '' . __( 'Pages:', 'boilerplaste' ), 'after' => '' ) ); ?>
+						<?php wp_link_pages( array( 'before' => '' . __( 'Pages:', 'boilerplate' ), 'after' => '' ) ); ?>
 					</div><!-- .entry-content -->
 <?php if ( get_the_author_meta( 'description' ) ) : // If a user has filled out their description, show a bio on their entries  ?>
 					<footer id="entry-author-info">
