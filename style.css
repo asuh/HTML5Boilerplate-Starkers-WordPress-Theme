@@ -177,6 +177,7 @@ body, select, input, textarea {
 
 /* For image replacement */
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
 
 /* Hide for both screenreaders and browsers:
    css-discuss.incutio.com/wiki/Screenreader_Visibility */
@@ -317,12 +318,12 @@ Verdana, Tahoma, Geneva, sans-serif - t
 @media only screen and (min-width: 480px) {
   /* Style adjustments for viewports 480px and over go here */
 
-}/*/mediaquery*/
+}
 
 @media only screen and (min-width: 768px) {
   /* Style adjustments for viewports 768px and over go here */
 
-}/*/mediaquery*/
+}
 
 
 
