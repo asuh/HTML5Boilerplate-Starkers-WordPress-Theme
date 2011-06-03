@@ -16,7 +16,7 @@ Major components:
 * Modernizr: MIT/BSD license
 * jQuery: MIT/GPL license
 * DD_belatedPNG: MIT license
-* YUI Profiling: BSD license
+* Respond: MIT/GPL license
 * HTML5Doctor CSS reset: Public Domain
 * CSS Reset Reloaded: Public Domain
 
@@ -43,5 +43,6 @@ This is a set of files that a front-end developer can use to get started on a we
 12. Never go wrong with your doctype or markup!
 13. An optimal print stylesheet, performance optimized
 14. iOS, Android, Opera Mobile-adaptable markup and CSS skeleton.
-15. IE6 pngfix baked in.
-16. jQuery, waiting for you
+15. Responsive Web Design support for IE6-8
+16. IE6 pngfix baked in.
+17. jQuery, waiting for you
