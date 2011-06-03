@@ -58,6 +58,7 @@
 			add_settings_field('handheld_css', 'Handheld CSS?:', 'handheld_css_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('print_css', 'Print CSS?:', 'print_css_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('modernizr_js', 'Modernizr JS?:', 'modernizr_js_setting', 'boilerplate-admin', 'main_section');
+			add_settings_field('respond_js', 'Respond JS?:', 'respond_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('jquery_js', 'jQuery JS?:', 'jquery_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('plugins_js', 'jQuery Plug-ins JS?:', 'plugins_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('site_js', 'Site-specific JS?:', 'site_js_setting', 'boilerplate-admin', 'main_section');
@@ -180,6 +181,17 @@
 			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-1.7.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers.</strong></p>';
+		}
+
+	//	callback fn for respond_js
+		function respond_js_setting() {
+			$options = get_option('plugin_options');
+			$checked = (isset($options['respond_js']) && $options['respond_js']) ? 'checked="checked" ' : '';
+			echo '<input class="check-field" type="checkbox" name="plugin_options[respond_js]" value="true" ' .$checked. '/>';
+			echo '<p><a href="https://github.com/scottjehl/Respond">Respond</a> is a script that appends classes to the <code>&lt;html&gt;</code> and enables responsive web designs in browsers that don\'t support CSS3 Media Queries - in particular, Internet Explorer 8 and under.</p>';
+			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/respond.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
 	//	callback fn for jquery_js
@@ -308,7 +320,7 @@
 			wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/libs/modernizr-1.7.min.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/libs/modernizr-2.0.min.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 		}
 
 	//	$options['ieshiv_script']
@@ -317,6 +329,12 @@
 			echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"></script>'.PHP_EOL; // try getting from CDN
 			echo '<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<![endif]-->'.PHP_EOL;
+		}
+
+	//	$options['respond_js']
+		function add_respond_script() {
+			wp_register_script( 'respond', get_template_directory_uri() . '/js/libs/respond.min.js', array(), '' );
+			wp_enqueue_script( 'respond' );
 		}
 
 	//	$options['jquery_js']
@@ -390,6 +408,9 @@
 			} else { 
 				// if Modernizr isn't selected, add IEShiv inside an IE Conditional Comment
 				add_action('wp_print_styles', 'add_ieshiv_script');
+			}
+			if (isset($options['respond_js']) && $options['respond_js']) {
+				add_action('wp_print_styles', 'add_respond_script');
 			}
 			if (isset($options['ie_css']) && $options['ie_css']) {
 				add_action('wp_print_styles', 'add_ie_stylesheet');
