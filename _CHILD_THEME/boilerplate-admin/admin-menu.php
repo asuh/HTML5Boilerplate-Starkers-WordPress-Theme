@@ -51,12 +51,10 @@
 		function register_and_build_fields() { 
 			register_setting('plugin_options', 'plugin_options', 'validate_setting');
 			add_settings_section('main_section', '', 'section_cb', 'boilerplate-admin');
-			add_settings_field('chrome', 'Google Chrome / IE-edge?:', 'chrome_setting', 'boilerplate-admin', 'main_section');
+			add_settings_field('google_chrome', 'IE-edge / Google Chrome?:', 'google_chrome_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('viewport', '<em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> use full zoom?:', 'viewport_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('favicon', 'Got Favicon?:', 'favicon_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('favicon_ithing', 'Got <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr></em> Favicon?', 'favicon_ithing_setting', 'boilerplate-admin', 'main_section');
-			add_settings_field('handheld_css', 'Handheld CSS?:', 'handheld_css_setting', 'boilerplate-admin', 'main_section');
-			add_settings_field('print_css', 'Print CSS?:', 'print_css_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('modernizr_js', 'Modernizr JS?:', 'modernizr_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('respond_js', 'Respond JS?:', 'respond_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('jquery_js', 'jQuery JS?:', 'jquery_js_setting', 'boilerplate-admin', 'main_section');
@@ -64,6 +62,7 @@
 			add_settings_field('site_js', 'Site-specific JS?:', 'site_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('belated_png_js', 'Belated PNG JS?:', 'belated_png_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('google_analytics_js', 'Google Analytics?:', 'google_analytics_js_setting', 'boilerplate-admin', 'main_section');
+			add_settings_field('cache_buster', 'Cache-Buster?:', 'cache_buster_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('footer_credit', 'Footer Credit?:', 'footer_credit_setting', 'boilerplate-admin', 'main_section');
 		}
 		add_action('admin_init', 'register_and_build_fields');
@@ -102,11 +101,11 @@
 	//	in case you need it...
 		function section_cb() {}
 	
-	//	callback fn for chrome
-		function chrome_setting() {
+	//	callback fn for google_chrome
+		function google_chrome_setting() {
 			$options = get_option('plugin_options');
-			$checked = (isset($options['chrome']) && $options['chrome']) ? 'checked="checked" ' : '';
-			echo '<input class="check-field" type="checkbox" name="plugin_options[chrome]" value="true" ' .$checked. '/>';
+			$checked = (isset($options['google_chrome']) && $options['google_chrome']) ? 'checked="checked" ' : '';
+			echo '<input class="check-field" type="checkbox" name="plugin_options[google_chrome]" value="true" ' .$checked. '/>';
 			echo '<p>Force the most-recent IE rendering engine or users with <a href="http://www.chromium.org/developers/how-tos/chrome-frame-getting-started">Google Chrome Frame</a> installed to see your site using Google Frame.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
 			echo '<code>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /&gt;</code>';
@@ -142,33 +141,8 @@
 			echo '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
 			echo '<code>&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png" /&gt;</code>';
-		}
-
-	//	callback fn for handheld_css
-		function handheld_css_setting() {
-			$options = get_option('plugin_options');
-			$checked = (isset($options['handheld_css']) && $options['handheld_css']) ? 'checked="checked" ' : '';
-			echo '<input class="check-field" type="checkbox" name="plugin_options[handheld_css]" value="true" ' .$checked. '/>';
-			echo '<p>If you would like to add a handheld CSS file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>'.get_stylesheet_directory_uri() . '/css/handheld.css</code></p>';
-			echo '<p>Add what you want to that file and select this option. Here are a <a href="http://thinkvitamin.com/design/make-your-site-mobile-friendly/">couple</a> <a href="http://adactio.com/journal/1700/">resources</a> for making your site mobile-ready, but there are plenty more on the web.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;link rel=\'stylesheet\' id=\'handheld-css\'  href=\''.get_stylesheet_directory_uri().'/css/handheld.css\' type=\'textcss\' media=\'handheld\' /&gt;</code>';
-			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
-		}
-
-	//	callback fn for print_css
-		function print_css_setting() {
-			$options = get_option('plugin_options');
-			$checked = (isset($options['print_css']) && $options['print_css']) ? 'checked="checked" ' : '';
-			echo '<input class="check-field" type="checkbox" name="plugin_options[print_css]" value="true" ' .$checked. '/>';
-			echo '<p>If you would like to add a print CSS file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>'. get_stylesheet_directory_uri(). '/css/print.css</code>';
-			echo '<p>Add what you want to that file and select this option. Here are a <a href="http://remysharp.com/2007/05/03/pretty-in-print-tips-for-print-styles/">couple</a> <a href="http://westciv.com/style_master/academycss_tutorial/advanced/printing.html">resources</a> for making your site print-ready, but there are plenty more on the web.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;link rel=\'stylesheet\' id=\'print-css\' href=\''.get_stylesheet_directory_uri().'/css/print.css\' type=\'textcss\' media=\'print\' /&gt;</code>';
-			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
-			echo '<p><strong>Note: Boilerplate\'s style.css does have a few lines of CSS pertaining to print, with a link to <a href="http://www.phpied.com/delay-loading-your-print-css/">this article</a>; your call.</strong></p>';
+			echo '<code>&lt;link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-ipad.png" /&gt;</code>';
+			echo '<code>&lt;link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-iphone4.png" /&gt;</code>';
 		}
 
 	//	callback fn for modernizr_js
@@ -176,11 +150,14 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['modernizr_js']) && $options['modernizr_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[modernizr_js]" value="true" ' .$checked. '/>';
-			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "no-cssreflections" or "cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities.</p>';
+			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-1.7.min.js\'&gt;&lt;/script&gt;</code>';
-			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
-			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers.</strong></p>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.0.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
+			echo '<code>&lt;!--[if lt IE 9]&gt;</code>';
+			echo '<code>	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
+			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'%3Cscript src="' .BP_PLUGIN_URL. 'js/ieshiv.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
+			echo '<code>&lt;![endif]--&gt;</code>';
 		}
 
 	//	callback fn for respond_js
@@ -188,10 +165,9 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['respond_js']) && $options['respond_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[respond_js]" value="true" ' .$checked. '/>';
-			echo '<p><a href="https://github.com/scottjehl/Respond">Respond</a> is a script that appends classes to the <code>&lt;html&gt;</code> and enables responsive web designs in browsers that don\'t support CSS3 Media Queries - in particular, Internet Explorer 8 and under.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
+			echo '<p><a href="http://filamentgroup.com/lab/respondjs_fast_css3_media_queries_for_internet_explorer_6_8_and_more/">Respond.js</a> is a JS library that helps IE<=8 understand <code>@media</code> queries, specifically <code>min-width</code> and <code>max-width</code>, allowing you to more reliably implement <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive design</a> across all browsers.</p>';
+			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/respond.min.js\'&gt;&lt;/script&gt;</code>';
-			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
 	//	callback fn for jquery_js
@@ -200,9 +176,8 @@
 			$checked = (isset($options['jquery_js']) && $options['jquery_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
-			echo '<p>Selecting this option will add the following code to your pages to the <code>wp_head()</code>';
+			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/head&gt;</code></p>';
 			echo '<code>&lt;script type=\'text/javascript\' src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\'&gt;&lt;/script&gt;</code>';
-			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).</p>';
 		}
 
@@ -213,7 +188,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_stylesheet_directory_uri().'js/plug-in.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_stylesheet_directory_uri().'/js/plug-in.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>';
 		}
@@ -224,10 +199,10 @@
 			$checked = (isset($options['site_js']) && $options['site_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[site_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you would like to add your own site JavaScript file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>' .get_stylesheet_directory_uri(). 'js/script.js</code>';
+			echo '<code>' .get_stylesheet_directory_uri(). '/js/script.js</code>';
 			echo '<p>Add what you want to that file and select this option.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_stylesheet_directory_uri().'js/script.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_stylesheet_directory_uri().'/js/script.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
@@ -239,7 +214,7 @@
 			echo '<p><a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_belatedPNG</a> adds IE6 support for PNG images used as CSS background images and HTML &lt;img/&gt;</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
 			echo '<code>&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'js/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
 			echo '<code>&lt;script&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
@@ -247,14 +222,15 @@
 	//	callback fn for google_analytics_js
 		function google_analytics_js_setting() {
 			$options = get_option('plugin_options');
-			$checked = (isset($options['google_analytics_js']) && $options['google_analytics_js'] && isset($options['google_analytics_account']) && str_replace('UA-','',$options['google_analytics_account']) !== 'XXXXX-X') ? 'checked="checked" ' : '';
+			$checked = (isset($options['google_analytics_js']) && $options['google_analytics_js'] && isset($options['google_analytics_account']) && $options['google_analytics_account'] && $options['google_analytics_account'] !== 'XXXXX-X') ? 'checked="checked" ' : '';
 			$account = (isset($options['google_analytics_account']) && $options['google_analytics_account']) ? str_replace('UA-','',$options['google_analytics_account']) : 'XXXXX-X';
+			$msg = ($account === 'XXXXX-X') ? ', where </code>XXXXX-X</code> will be replaced with the code you insert above' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[google_analytics_js]" value="true" ' .$checked. '/>';
 			echo '<p>To include Google Analytics, select this option and include your account number here:<br />';
 			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
-			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>, where \'UA-XXXXX-X\' will be replaced with the code you insert above:</p>';
+			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>'.$msg.':</p>';
 			echo '<code>&lt;script&gt;</code>';
-			echo '<code>var _gaq=[["_setAccount","UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"],["_trackPageview"]];</code>';
+			echo '<code>var _gaq=[["_setAccount","UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"],["_trackPageview"],["_trackPageLoadTime"]];</code>';
 			echo '<code>(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;</code>';
 			echo '<code>g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";</code>';
 			echo '<code>s.parentNode.insertBefore(g,s)}(document,"script"));</code>';
@@ -262,6 +238,19 @@
 			echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
 		}
 		
+	//	callback fn for cache_buster
+		function cache_buster_setting() {
+			$options = get_option('plugin_options');
+			$checked = (isset($options['cache_buster']) && $options['cache_buster']) ? 'checked="checked" ' : '';
+			$version = (isset($options['cache_buster_version']) && $options['cache_buster_version']) ? $options['cache_buster_version'] : '1';
+			echo '<input class="check-field" type="checkbox" name="plugin_options[cache_buster]" value="true" ' .$checked. '/>';
+			echo '<p>To force browsers to fetch a new version of a file, versus one it might already have cached, you can add a "cache buster" to the end of your CSS and JS files.  ';
+			echo 'To increment the cache buster version number, type something here:<br />';
+			echo '<input type="text" size="4" name="plugin_options[cache_buster_version]" value="'.$version.'" /></p>';
+			echo '<p>Selecting this option will add the following code to the end of all of your CSS and JS file names on all of your pages:</p>';
+			echo '<code>?ver='.$version.'</code>';
+		}
+
 	//	callback for footer credit
 		function footer_credit_setting() {
 			$options = get_option('plugin_options');
@@ -283,8 +272,8 @@
 		
 /*	4)	Create functions to add above elements to pages */
 
-	//	$options['chrome']
-		function add_chrome() {
+	//	$options['google_chrome']
+		function add_google_chrome() {
 			echo '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />'.PHP_EOL;
 		}
 
@@ -301,61 +290,58 @@
 	//	$options['favicon_ithing']
 		function add_favicon_ithing() {
 			echo '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />'.PHP_EOL;
-		}
-
-	//	$options['handheld_css']
-		function add_handheld_stylesheet() {
-			wp_register_style( 'handheld', get_stylesheet_directory_uri() . '/css/handheld.css', array(), '', 'handheld' );
-			wp_enqueue_style( 'handheld');
-		}
-
-	//	$options['print_css']; implement as: http://www.alistapart.com/articles/return-of-the-mobile-stylesheet ?
-		function add_print_stylesheet() {
-			wp_register_style( 'print', get_stylesheet_directory_uri() . '/css/print.css', array(), '', 'print' );
-			wp_enqueue_style( 'print');
+			echo '<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-ipad.png" />'.PHP_EOL;
+			echo '<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-iphone4.png" />'.PHP_EOL;
 		}
 
 	//	$options['modernizr_js']
 		function add_modernizr_script() {
+			$cache = cache_buster();
 			wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
-			echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/libs/modernizr-2.0.min.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
+			//echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
+			//echo '<script>!window.Modernizr && document.write(unescape(\'%3Cscript src="' .BP_PLUGIN_URL. 'js/modernizr.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"></script>'.PHP_EOL;
 		}
 
 	//	$options['ieshiv_script']
 		function add_ieshiv_script() {
+			$cache = cache_buster();
 			echo '<!--[if lt IE 9]>'.PHP_EOL;
 			echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js'.$cache.'"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
 	//	$options['respond_js']
 		function add_respond_script() {
-			wp_register_script( 'respond', get_template_directory_uri() . '/js/libs/respond.min.js', array(), '' );
+			$cache = cache_buster();
+			wp_register_script( 'respond', get_template_directory_uri() . '/js/libs/respond.min.js', array(), str_replace('?ver=','',$cache) );
 			wp_enqueue_script( 'respond' );
 		}
 
 	//	$options['jquery_js']
 		function add_jquery_script() {
+			$cache = cache_buster();
 			wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
-			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', array(), '' );
+			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', array(), str_replace('?ver=','',$cache) );
 			wp_enqueue_script( 'jquery' );
 		}
 
 	//	$options['plugins_js']
 		function add_plugin_script() {
-			wp_register_script( 'plug_ins', get_stylesheet_directory_uri() . '/js/plugins.js', array('jquery'), '', true );
+			$cache = cache_buster();
+			wp_register_script( 'plug_ins', get_stylesheet_directory_uri() . '/js/plugins.js', array('jquery'), str_replace('?ver=','',$cache), true );
 			wp_enqueue_script( 'plug_ins' );
 		}
 
 	//	$options['site_js']
 		function add_site_script() {
-			wp_register_script( 'site_script', get_stylesheet_directory_uri() . '/js/script.js', array(), '', true );
+			$cache = cache_buster();
+			wp_register_script( 'site_script', get_stylesheet_directory_uri() . '/js/script.js', array(), str_replace('?ver=','',$cache), true );
 			wp_enqueue_script( 'site_script' );
 		}
-
 
 	//	$options['belated_png_js']
 		function add_belated_png_script() {
@@ -377,6 +363,12 @@
 			echo '</script>'.PHP_EOL;
 		}
 
+	//	$options['cache_buster']
+		function cache_buster() {
+			$options = get_option('plugin_options');
+			return (isset($options['cache_buster']) && $options['cache_buster']) ? '?ver='.$options['cache_buster_version'] : '';
+		}
+
 	//	$options['footer_credit']
 		function add_footer_credit() {
 			$options = get_option('plugin_options');
@@ -391,8 +383,8 @@
 /*	5)	Add Boilerplate options to page as requested */
 		if (!is_admin() ) {
 			$options = get_option('plugin_options');
-			if (isset($options['chrome']) && $options['chrome']) {
-				add_action('wp_print_styles', 'add_chrome');
+			if (isset($options['google_chrome']) && $options['google_chrome']) {
+				add_action('wp_print_styles', 'add_google_chrome');
 			}
 			if (isset($options['viewport']) && $options['viewport']) {
 				add_action('wp_print_styles', 'add_viewport');
@@ -412,29 +404,20 @@
 			if (isset($options['respond_js']) && $options['respond_js']) {
 				add_action('wp_print_styles', 'add_respond_script');
 			}
-			if (isset($options['ie_css']) && $options['ie_css']) {
-				add_action('wp_print_styles', 'add_ie_stylesheet');
-			}
-			if (isset($options['handheld_css']) && $options['handheld_css']) {
-				add_action('wp_print_styles', 'add_handheld_stylesheet');
-			}
-			if (isset($options['print_css']) && $options['print_css']) {
-				add_action('wp_print_styles', 'add_print_stylesheet');
-			}
 			if (isset($options['jquery_js']) && $options['jquery_js']) {
 				add_action('wp_loaded', 'add_jquery_script');
 			}
 			// for jQuery plug-ins, make sure jQuery was also set
 			if (isset($options['jquery_js']) && $options['jquery_js'] && isset($options['plugins_js']) && $options['plugins_js']) {
-				add_action('wp_footer', 'add_plugin_script');
+				add_action('wp_loaded', 'add_plugin_script');
 			}
 			if (isset($options['site_js']) && $options['site_js']) {
-				add_action('wp_footer', 'add_site_script');
+				add_action('wp_loaded', 'add_site_script');
 			}
 			if (isset($options['belated_png_js']) && $options['belated_png_js']) {
 				add_action('wp_footer', 'add_belated_png_script');
 			}
-			if (isset($options['google_analytics_js']) && $options['google_analytics_js']) {
+			if (isset($options['google_analytics_js']) && $options['google_analytics_js'] && isset($options['google_analytics_account']) && $options['google_analytics_account'] && $options['google_analytics_account'] !== 'XXXXX-X') {
 				add_action('wp_footer', 'add_google_analytics_script');
 			}
 			if (isset($options['footer_credit']) && $options['footer_credit']) {
