@@ -4,7 +4,7 @@
 	Description: A merger created by Aaron T. Grogg (<a href="http://aarontgrogg.com/">http://aarontgrogg.com/</a>) of the HTML5 Boilerplate (<a href="http://html5boilerplate.com/">http://html5boilerplate.com/</a>) and the Starkers theme (<a href="http://starkerstheme.com/">http://starkerstheme.com/</a>), Boilerplate: Starkers provides developers with an ideal, bleeding-edge, clean-start theme.  Mark-up is minimal (thanks Elliott) and the most edge-case web technology is baked right in (thanks Paul, Divya and a large cast of supporting characters)!  Boilerplate themes are designed to serve as a Parent theme to whatever Child (<a href="http://codex.wordpress.org/Child_Themes">http://codex.wordpress.org/Child_Themes</a>) you care to add, but you could just as easily use this as a starting point and alter the PHP as your design needs.  More about this theme can be found at <a href="http://aarontgrogg.com/boilerplate/">http://aarontgrogg.com/boilerplate/</a>.
 	Author: Aaron T. Grogg, based on the work of Paul Irish, Divya Manian, and Elliot Jay Stocks
 	Author URI: http://aarontgrogg.com/
-	Version: 2.1.8
+	Version: 3.0
 	Tags: custom-menu, editor-style, theme-options, threaded-comments, sticky-post, microformats, rtl-language-support, translation-ready
 
 	License: GNU General Public License v2.0
@@ -13,23 +13,26 @@
 	This CSS file is a concatenation of style.css from HTML5 Boilerplate and style.css from Starkers.
 	Comment blocks indicate where each begins and ends, like this, for example...
 */
-/*
-  HTML5 ✰ Boilerplate
 
-  style.css contains a reset, font normalization and some base styles.
+/** START HTML5 Boilerplate CSS **/
 
-  credit is left where credit is due.
-  much inspiration was taken from these projects:
-    yui.yahooapis.com/2.8.1/build/base/base.css
-    camendesign.com/design/
-    praegnanz.de/weblog/htmlcssjs-kickstart
-*/
+/**
+ * HTML5 ✰ Boilerplate
+ *
+ * style.css contains a reset, font normalization and some base styles.
+ *
+ * Credit is left where credit is due.
+ * Much inspiration was taken from these projects:
+ * - yui.yahooapis.com/2.8.1/build/base/base.css
+ * - camendesign.com/design/
+ * - praegnanz.de/weblog/htmlcssjs-kickstart
+ */
 
-/*
-	html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
-	v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
-	html5doctor.com/html-5-reset-stylesheet/
-*/
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
 
 html, body, body div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -66,8 +69,6 @@ abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
 table { border-collapse: collapse; border-spacing: 0; }
 
 hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-
-/* END RESET CSS */
 
 
 /**
@@ -161,11 +162,32 @@ body, select, input, textarea {
   /* font-family: Georgia, serif;  */
 }
 
+/* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+
 /* These selection declarations have to be separate
    No text-shadow: twitter.com/miketaylr/status/12228805301
    Also: hot pink! */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
+::-moz-selection { background: #fe57a1; color:#fff; text-shadow: none; }
+::selection { background:#fe57a1; color:#fff; text-shadow: none; }
+
+/**
+ * Primary styles
+ *
+ * Author:
+ */
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -201,7 +223,51 @@ body, select, input, textarea {
 
 
 
-/* WORDPRESS CODEX LAYOUT CLASSES */
+/**
+ * Placeholder media queries for responsive design. Modify as design requires.
+ * These follow after, and will override, the primary ('mobile first') styles
+ * The closing /mediaquery comment is required by respond.js min/max-width Media Query polyfill
+ */
+
+@media only screen and (min-width: 480px) {
+  /* Style adjustments for viewports 480px and over go here */
+
+}
+
+@media only screen and (min-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+
+}
+
+
+
+/**
+ * Print styles.
+ *
+ * Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+ */
+@media print {
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important;
+  -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
+}
+
+/** END HTML5 Boilerplate CSS **/
+
+
+/** START Starkers CSS **/
+
+/* LAYOUT */
 /* ----------------------------------------- */
 
 /* These rather presentational classes are generated by WordPress, so it's useful to have some styles for them. Edit as you see fit. More info: http://codex.wordpress.org/CSS */
@@ -214,16 +280,6 @@ body, select, input, textarea {
 /* div, ul, li { position:relative } This will save you having to declare each div / ul / li's position as 'relative' and allows you to absolutely position elements inside them
 br.clear { clear:both; display:block; height:1px; margin:-1px 0 0 0 } /* Use this br class to clear your floated columns */
 li#theme-switcher { background:#fff; border:10px solid red; padding:20px; position:fixed; top:0; right:0 } /* Use this if you have the Theme Switcher Reloaded plugin (http://themebot.com/webmaster-tools/1-wordpress-theme-switcher-reloaded) installed and want to make it nice and obvious */
-*/
-
-/** END HTML5 Boilerplate CSS **/
-
-
-
-/** START Starkers CSS **/
-
-/* You might find the following useful */
-/* div, ul, li { position:relative } This will save you having to declare each div / ul / li's position as 'relative' and allows you to absolutely position elements inside them */
 
 /* TYPOGRAPHY */
 /* ----------------------------------------- */
@@ -305,45 +361,3 @@ Verdana, Tahoma, Geneva, sans-serif - t
 .bypostauthor{}
 .sticky{}
 /** END WordPress-Defined CSS Classes **/
-
-
-
-
-/**
- * Placeholder media queries for responsive design. Modify as design requires.
- * These follow after, and will override, the primary ('mobile first') styles
- * The closing /mediaquery comment is required by respond.js min/max-width Media Query polyfill
- */
-
-@media only screen and (min-width: 480px) {
-  /* Style adjustments for viewports 480px and over go here */
-
-}
-
-@media only screen and (min-width: 768px) {
-  /* Style adjustments for viewports 768px and over go here */
-
-}
-
-
-
-/**
- * Print styles.
- *
- * Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
- */
-@media print {
-  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important;
-  -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
-  a, a:visited { color: #444 !important; text-decoration: underline; }
-  a[href]:after { content: " (" attr(href) ")"; }
-  abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
-  tr, img { page-break-inside: avoid; }
-  img { max-width: 100% !important; }
-  @page { margin: 0.5cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3{ page-break-after: avoid; }
-}
