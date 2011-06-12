@@ -48,3 +48,4 @@ This is a set of files that a front-end developer can use to get started on a we
 16. IE6 pngfix baked in.
 17. jQuery, waiting for you
 18. Optional vCard widget
+19. Versioning for css/js
