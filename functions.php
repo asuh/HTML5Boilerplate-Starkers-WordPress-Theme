@@ -673,19 +673,22 @@ function boilerplate_posted_in() {
 }
 endif;
 
+/*	Begin Boilerplate */
+
+/* Uncomment if you won't use child theme */
+/*  // add admin
+	require_once(TEMPLATEPATH . '/boilerplate-admin/admin-menu.php'); */
+	
+/*	End Boilerplate */
+
 // add category nicenames in body and post class
-	function category_id_class($classes) {
+	function boilerplate_category_id_class($classes) {
 	    global $post;
 	    foreach((get_the_category($post->ID)) as $category)
 	        $classes[] = $category->category_nicename;
 	        return $classes;
 	}
-	add_filter('post_class', 'category_id_class');
-	add_filter('body_class', 'category_id_class');
+	add_filter('post_class', 'boilerplate_category_id_class');
+	add_filter('body_class', 'boilerplate_category_id_class');
 
-
-/* Uncomment if you won't use child theme */
-/*	Begin Boilerplate Admin 
-	require_once(TEMPLATEPATH . '/boilerplate-admin/admin-menu.php');
-	End Boilerplate Plug-in */
 ?>
