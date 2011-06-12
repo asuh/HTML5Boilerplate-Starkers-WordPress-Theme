@@ -46,3 +46,4 @@ This is a set of files that a front-end developer can use to get started on a we
 15. Responsive Web Design support for IE6-8
 16. IE6 pngfix baked in.
 17. jQuery, waiting for you
+18. Optional vCard widget
