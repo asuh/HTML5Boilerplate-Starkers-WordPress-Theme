@@ -51,6 +51,7 @@
 		function register_and_build_fields() { 
 			register_setting('plugin_options', 'plugin_options', 'validate_setting');
 			add_settings_section('main_section', '', 'section_cb', 'boilerplate-admin');
+			add_settings_field('toolbar', 'IE6 Image Toolbar?:', 'toolbar_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('google_chrome', 'IE-edge / Google Chrome?:', 'google_chrome_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('viewport', '<em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> use full zoom?:', 'viewport_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('favicon', 'Got Favicon?:', 'favicon_setting', 'boilerplate-admin', 'main_section');
@@ -101,6 +102,16 @@
 	//	in case you need it...
 		function section_cb() {}
 	
+	//	callback fn for toolbar
+		function toolbar_setting() {
+			$options = get_option('plugin_options');
+			$checked = (isset($options['toolbar']) && $options['toolbar']) ? 'checked="checked" ' : '';
+			echo '<input class="check-field" type="checkbox" name="plugin_options[toolbar]" value="true" ' .$checked. '/>';
+			echo '<p>Kill the IE6 Image Toolbar that appears when users hover over images on your site.</p>';
+			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;meta http-equiv="imagetoolbar" content="false" /&gt;</code>';
+		}
+
 	//	callback fn for google_chrome
 		function google_chrome_setting() {
 			$options = get_option('plugin_options');
@@ -152,11 +163,14 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[modernizr_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
+			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
+			//echo '<code>&lt;script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"&gt;&lt;/script&gt;</code>';
+			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). 'js/modernizr.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
 			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.0.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
 			echo '<code>&lt;!--[if lt IE 9]&gt;</code>';
 			echo '<code>	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
-			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'%3Cscript src="' .BP_PLUGIN_URL. 'js/ieshiv.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
+			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). '/js/ieshiv.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
 
@@ -167,7 +181,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[respond_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://filamentgroup.com/lab/respondjs_fast_css3_media_queries_for_internet_explorer_6_8_and_more/">Respond.js</a> is a JS library that helps IE<=8 understand <code>@media</code> queries, specifically <code>min-width</code> and <code>max-width</code>, allowing you to more reliably implement <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive design</a> across all browsers.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/respond.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src="' .get_template_directory_uri().'/js/libs/respond.min.js"&gt;&lt;/script&gt;</code>';
 		}
 
 	//	callback fn for jquery_js
@@ -177,7 +191,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/head&gt;</code></p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).</p>';
 		}
 
@@ -272,6 +286,11 @@
 		
 /*	4)	Create functions to add above elements to pages */
 
+	//	$options['toolbar']
+		function add_toolbar() {
+			echo '<meta http-equiv="imagetoolbar" content="false" />'.PHP_EOL;
+		}
+
 	//	$options['google_chrome']
 		function add_google_chrome() {
 			echo '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />'.PHP_EOL;
@@ -301,7 +320,7 @@
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
 			//echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
-			//echo '<script>!window.Modernizr && document.write(unescape(\'%3Cscript src="' .BP_PLUGIN_URL. 'js/modernizr.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			//echo '<script>!window.Modernizr && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). '/js/modernizr.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"></script>'.PHP_EOL;
 		}
 
@@ -310,7 +329,7 @@
 			$cache = cache_buster();
 			echo '<!--[if lt IE 9]>'.PHP_EOL;
 			echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). 'js/ieshiv.js'.$cache.'"%3E%3C/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.ieshiv && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). '/js/ieshiv.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
@@ -383,6 +402,9 @@
 /*	5)	Add Boilerplate options to page as requested */
 		if (!is_admin() ) {
 			$options = get_option('plugin_options');
+			if (isset($options['toolbar']) && $options['toolbar']) {
+				add_action('wp_print_styles', 'add_toolbar');
+			}
 			if (isset($options['google_chrome']) && $options['google_chrome']) {
 				add_action('wp_print_styles', 'add_google_chrome');
 			}
