@@ -3,6 +3,7 @@
 ## To Do List
 * Update Starker code to match Twenty Eleven
 * Fix Footer Credit PHP to work properly when no credit is enabled
+* Update email for vCard to include Obfuscation http://www.albionresearch.com/misc/obfuscator.php
 
 ##  Project origins
 * HTML5 Boilerplate [https://github.com/paulirish/html5-boilerplate](https://github.com/paulirish/html5-boilerplate)
