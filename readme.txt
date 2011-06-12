@@ -43,6 +43,35 @@ Atg
 
 === Change Log ===
 
+= v.3.0 2011-06-02 =
+
+Fixed error in header.php, I was applying `boilerplate_filter_wp_title` as a `filter` to `wp_title` in functions.php,
+but then calling `boilerplate_filter_wp_title` in header.php, rather than `wp_title`... der...  Thanks, Randy Runnels!
+
+Per Paul & Divya recommendations:
+- Dropping cdnjs link for Modernizr, resorting to local link only, hopefully soon that will be replaced with Google CDN link.
+- Removed handheld.css, because "our research has shown not enough devices read it to make it worthwhile". Additionally, if you're doing your CSS right (a la Responsive Design, you're building for smaller screens first, then adding CSS for larger screens via `@media` queries, right?).
+- Removed print.css because "extra print stylesheets are downloaded at load, so its a big hit"; this, too, is best served via `@media` queries in your main CSS.
+- Removed YUI Profiling stuff because you "probably weren't using it anyway", right?
+- Removed Belated PNG because it "is a really slow solution and an overkill for PNGs", check [http://html5boilerplate.com/docs/#Notes-on-using-PNG](http://html5boilerplate.com/docs/#Notes-on-using-PNG) for deets on dealing with PNGs in ye olde IE.
+
+Added removal of IE6 Image Toolbar option to Admin panel.
+
+Added [Google Verification](http://www.google.com/support/webmasters/bin/answer.py?answer=35179) option to Admin panel.
+
+Added iPad and iPhone 4 favicon links to existing "iThing Favicon" block.
+
+Added [Respond.js](http://filamentgroup.com/lab/respondjs_fast_css3_media_queries_for_internet_explorer_6_8_and_more/) option to Admin panel.
+
+Added cache-buster option in Admin panel, allowing you to either include, and easily increment, a cache-buster / version number to any theme CSS or JS files.
+
+Updated `/style.css` to latest HTML5 Boilerplate version.
+
+Updated jQuery to 1.6.1.
+
+Updated `/js/plugins.js` to include `console.log` bit.
+
+
 = v.2.1.8 2011-05-08 =
 
 Attempting to clear issues WP is having with Boilerplate CSS.
@@ -128,7 +157,6 @@ Boilerplate starts with the Starkers theme (http://starkerstheme.com/)...
   should be copied FROM that directory and pasted TO your blog's root directory.
 * The .htaccess in that directory is filled with things which I honestly do not understand...
   I had to comment-out several items in order to get my WP installation to work, so, play if you like.
-* "Replace Me Title" is the default custom logo for login. Dimensions are 310px by 70px and it is advised you update you this image to be custom made for your site.
 
 Be sure to read these "read me" type files as well:
 	- _READ_ME.txt and _LICENSE.txt are from Starkers Theme
