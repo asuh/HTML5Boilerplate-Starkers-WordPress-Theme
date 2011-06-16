@@ -22,7 +22,7 @@
 			 * We filter the output of wp_title() a bit -- see
 			 * boilerplate_filter_wp_title() in functions.php.
 			 */
-			boilerplate_filter_wp_title( '|', true, 'right' );
+			wp_title( '|', true, 'right' );
 		?></title>
 
 		<!-- CSS : implied media="all" -->
