@@ -134,6 +134,7 @@ class boilerplate_vcard extends WP_Widget {
 		$postal_code = $instance['postal_code'];
 		$country = $instance['country'];
 		$tel = $instance['tel'];
+		$fax = $instance['fax'];
 		$email = $instance['email'];
 	?>
 		<?php echo $before_widget; ?>
@@ -147,8 +148,9 @@ class boilerplate_vcard extends WP_Widget {
 				<?php if ($postal_code) { ?><span class="postal-code"><?php echo $postal_code; ?></span><?php } ?>
 				<?php if ($country) { ?><div class="country-name"><?php echo $country; ?></div><?php } ?>
 			</div>
-			<?php if ($tel) { ?><div class="tel"><span class="type">Work: </span><span class="value"><?php echo $tel; ?></span></div><?php } ?>
-			<?php if ($tel) { ?><a class="email" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><?php } ?>
+			<?php if ($tel) { ?><div class="tel"><span class="type">Office: </span><span class="value"><?php echo $tel; ?></span></div><?php } ?>
+			<?php if ($fax) { ?><div class="fax"><span class="type">Fax: </span><span class="value"><?php echo $fax; ?></span></div><?php } ?>
+			<?php if ($email) { ?><a class="email" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><?php } ?>
 		</p>        
         
         <?php echo $after_widget; ?>
@@ -197,6 +199,10 @@ class boilerplate_vcard extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('tel'); ?>"><?php _e('Telephone:', 'boilerplate'); ?></label>
 			<input type="text" name="<?php echo $this->get_field_name('tel'); ?>" value="<?php echo $tel; ?>" class="widefat" id="<?php echo $this->get_field_id('tel'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('fax'); ?>"><?php _e('Fax Number:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('fax'); ?>" value="<?php echo $fax; ?>" class="widefat" id="<?php echo $this->get_field_id('fax'); ?>" />
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id('email'); ?>"><?php _e('Email:', 'boilerplate'); ?></label>
