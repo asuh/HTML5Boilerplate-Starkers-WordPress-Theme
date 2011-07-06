@@ -191,7 +191,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/head&gt;</code></p>';
-			echo '<code>&lt;script src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).</p>';
 		}
 
@@ -344,7 +344,7 @@
 		function add_jquery_script() {
 			$cache = cache_buster();
 			wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
-			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', array(), str_replace('?ver=','',$cache) );
+			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js', array(), str_replace('?ver=','',$cache) );
 			wp_enqueue_script( 'jquery' );
 		}
 
