@@ -681,13 +681,13 @@ endif;
 
 /*	Begin Boilerplate */
 
-/* Uncomment if you won't use child theme */
-/*  // add admin
-	require_once(TEMPLATEPATH . '/boilerplate-admin/admin-menu.php'); */
+
+// Add Boilerplate Admin Panel
+	locate_template( 'boilerplate-admin/admin-menu.php', true );
 	
 /*	End Boilerplate */
 
-// add category nicenames in body and post class
+// Add category nicenames in body and post class
 	function boilerplate_category_id_class($classes) {
 	    global $post;
 	    foreach((get_the_category($post->ID)) as $category)

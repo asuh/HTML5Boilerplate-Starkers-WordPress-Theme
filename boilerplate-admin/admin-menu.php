@@ -62,6 +62,7 @@
 			add_settings_field('plugins_js', 'jQuery Plug-ins JS?:', 'plugins_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('site_js', 'Site-specific JS?:', 'site_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('belated_png_js', 'Belated PNG JS?:', 'belated_png_js_setting', 'boilerplate-admin', 'main_section');
+			add_settings_field('chrome_frame', 'Chrome-Frame?:', 'chrome_frame_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('google_analytics_js', 'Google Analytics?:', 'google_analytics_js_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('cache_buster', 'Cache-Buster?:', 'cache_buster_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('footer_credit', 'Footer Credit?:', 'footer_credit_setting', 'boilerplate-admin', 'main_section');
@@ -233,6 +234,19 @@
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
 
+	//	callback fn for chrome_frame
+		function chrome_frame_setting() {
+			$options = get_option('plugin_options');
+			$checked = (isset($options['chrome_frame']) && $options['chrome_frame']) ? 'checked="checked" ' : '';
+			echo '<input class="check-field" type="checkbox" name="plugin_options[chrome_frame]" value="true" ' .$checked. '/>';
+			echo '<p>Prompt IE 6 users to install <a href="http://chromium.org/developers/how-tos/chrome-frame-getting-started">Chrome Frame</a>.</p>';
+			echo '<p>Selecting this option will add the following code just before the <code>&lt;/body&gt;</code>:</p>';
+			echo '<code>&lt;!--[if lt IE 7]&gt;</code>';
+			echo '<code>&lt;script src=\'http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script&gt;window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})&lt;/script&gt;</code>';
+			echo '<code>&lt;![endif]--&gt;</code>';
+		}
+
 	//	callback fn for google_analytics_js
 		function google_analytics_js_setting() {
 			$options = get_option('plugin_options');
@@ -251,6 +265,7 @@
 			echo '<code>&lt;/script&gt;</code>';
 			echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
 		}
+
 
 	//	callback fn for cache_buster
 		function cache_buster_setting() {
@@ -370,6 +385,14 @@
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
+	//	$options['chrome_frame']
+		function add_chrome_frame() {
+			echo '<!--[if lt IE 7 ]>'.PHP_EOL;
+			echo '<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>'.PHP_EOL;
+			echo '<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>'.PHP_EOL;
+			echo '<![endif]-->'.PHP_EOL;
+		}
+
 	//	$options['google_analytics_js']
 		function add_google_analytics_script() {
 			$options = get_option('plugin_options');
@@ -438,6 +461,9 @@
 			}
 			if (isset($options['belated_png_js']) && $options['belated_png_js']) {
 				add_action('wp_footer', 'add_belated_png_script');
+			}
+			if (isset($options['chrome_frame']) && $options['chrome_frame']) {
+				add_action('wp_footer', 'add_chrome_frame');
 			}
 			if (isset($options['google_analytics_js']) && $options['google_analytics_js'] && isset($options['google_analytics_account']) && $options['google_analytics_account'] && $options['google_analytics_account'] !== 'XXXXX-X') {
 				add_action('wp_footer', 'add_google_analytics_script');
