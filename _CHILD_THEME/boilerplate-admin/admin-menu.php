@@ -294,7 +294,7 @@
 			echo '<p><label for="business_website">Your Business URI: </label><input type="text" size="40" id="business_website" name="plugin_options[your_business_website]" value="'.$website.'" onfocus="javascript:if(this.value===\'yourbusiness.com\'){this.select();}" /></p>';
 			echo '<p><label for="business_credit">Your Business Credit: </label><input type="text" size="40" id="business_credit" name="plugin_options[your_business_credit]" value="'.$credit.'" onfocus="javascript:if(this.value===\'Your Business Credit\'){this.select();}" /></p>';
 			echo '<p>The code will look like this:</p>';
-			echo '<code><em>Blog Name</em> is '.$credit.' by &lt;a href="'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'" title="'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
+			echo '<code><em>Site Title</em> is '.$credit.' by &lt;a href="'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'" title="'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
 		}
 
 		
