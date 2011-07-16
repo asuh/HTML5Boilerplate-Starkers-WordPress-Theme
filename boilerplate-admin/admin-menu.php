@@ -165,13 +165,13 @@
 			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
 			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
-			//echo '<code>&lt;script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"&gt;&lt;/script&gt;</code>';
-			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). 'js/modernizr.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.0.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code>&lt;script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"&gt;&lt;/script&gt;</code>';
+			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js"><\/script>\'))&lt;/script&gt;</code>';
+			//echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.0.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
 			echo '<code>&lt;!--[if lt IE 9]&gt;</code>';
 			echo '<code>	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
-			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). '/js/ieshiv.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
+			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/ieshiv.js"></script>\'))&lt;/script&gt;</code>';
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
 
@@ -334,9 +334,9 @@
 			wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
-			//echo '<script src="//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"></script>'.PHP_EOL; // try getting from CDN
-			//echo '<script>!window.Modernizr && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). '/js/modernizr.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
-			echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"></script>'.PHP_EOL;
+			echo '<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>'.PHP_EOL; // try getting from CDN
+			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"><\/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			//echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"></script>'.PHP_EOL;
 		}
 
 	//	$options['ieshiv_script']
@@ -344,7 +344,7 @@
 			$cache = cache_buster();
 			echo '<!--[if lt IE 9]>'.PHP_EOL;
 			echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.ieshiv && document.write(unescape(\'%3Cscript src="' .get_template_directory_uri(). '/js/ieshiv.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			echo '<script>!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/ieshiv.js'.$cache.'"><\/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
