@@ -171,7 +171,7 @@
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
 			echo '<code>&lt;!--[if lt IE 9]&gt;</code>';
 			echo '<code>	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
-			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/ieshiv.js"></script>\'))&lt;/script&gt;</code>';
+			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/ieshiv.js"&gt;&lt;/script&gt;\'))&lt;/script&gt;</code>';
 			echo '<code>&lt;![endif]--&gt;</code>';
 		}
 
