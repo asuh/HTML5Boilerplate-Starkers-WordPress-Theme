@@ -334,7 +334,7 @@
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
 			echo '<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>'.PHP_EOL; // try getting from CDN
-			echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"><\/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+			//echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"><\/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			//echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"></script>'.PHP_EOL;
 		}
 
