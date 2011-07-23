@@ -26,7 +26,7 @@
 			<div id="boilerplate-options-wrap">
 				<div class="icon32" id="icon-tools"><br /></div>
 				<h2>Boilerplate Admin</h2>
-				<p>So, there's actually a tremendous amount going on here.  If you're not familiar with <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> or the <a href="http://starkerstheme.com/">Starkers theme</a> (upon which this theme is based) you should check them out.</p>
+				<p>So, there's actually a tremendous amount going on here.  If you're not familiar with <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> or the <a href="http://wordpress.org/extend/themes/twentyeleven">Twenty Eleven theme</a> (upon which this theme is based) you should check them out.</p>
 				<p>Choose below which options you want included in your site.</p>
 				<p>The clumsiest part of this plug-in is dealing with the CSS files.  Check the <a href="<?php echo get_template_directory_uri() ?>/readme.txt">Read Me file</a> for details on how I suggest handling them.</p>
 				<form method="post" action="options.php" enctype="multipart/form-data">
