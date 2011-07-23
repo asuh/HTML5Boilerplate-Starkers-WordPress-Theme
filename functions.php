@@ -91,7 +91,6 @@ add_filter('the_generator', 'complete_version_removal');
 // http://tutzone.net/2011/02/how-to-hide-login-errors-in-wordpress.html
 add_filter('login_errors', create_function('$a', "return null;"));
 
-
 // add to robots.txt
 // http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
 add_action('do_robots', 'boilerplate_robots');
@@ -213,7 +212,6 @@ class boilerplate_vcard extends WP_Widget {
 } 
 
 register_widget('boilerplate_vcard');
-
 
  
 /**

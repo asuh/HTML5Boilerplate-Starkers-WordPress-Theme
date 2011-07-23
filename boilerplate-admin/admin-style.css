@@ -48,9 +48,28 @@
 #boilerplate-options-wrap code {
 	display:block;
 	font-weight: normal;
-	background:#000;
-	color:lime;
+	background:#141414;
+	color:#E8ED97;
 }
+
+#boilerplate-options-wrap code span {
+	color: #a0c25f;
+}
+
+#boilerplate-options-wrap code b {
+	font-weight: normal;
+	color: white;
+}
+
+
+#boilerplate-options-wrap code.comment {
+	color: #666;
+}
+
+#boilerplate-options-wrap code.html {
+	color: #cda869;
+}
+
 
 #boilerplate-options-wrap p code {
 	display:inline;

@@ -109,8 +109,8 @@
 			$checked = (isset($options['toolbar']) && $options['toolbar']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[toolbar]" value="true" ' .$checked. '/>';
 			echo '<p>Kill the IE6 Image Toolbar that appears when users hover over images on your site.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;meta http-equiv="imagetoolbar" content="false" /&gt;</code>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;meta http-equiv=<span>"imagetoolbar"</span> content=<span>"false"</span> /&gt;</code>';
 		}
 
 	//	callback fn for google_chrome
@@ -119,8 +119,8 @@
 			$checked = (isset($options['google_chrome']) && $options['google_chrome']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[google_chrome]" value="true" ' .$checked. '/>';
 			echo '<p>Force the most-recent IE rendering engine or users with <a href="http://www.chromium.org/developers/how-tos/chrome-frame-getting-started">Google Chrome Frame</a> installed to see your site using Google Frame.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /&gt;</code>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;meta http-equiv=<span>"X-UA-Compatible"</span> content=<span>"IE=edge,chrome=1"</span> /&gt;</code>';
 		}
 
 	//	callback fn for viewport
@@ -129,8 +129,8 @@
 			$checked = (isset($options['viewport']) && $options['viewport']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[viewport]" value="true" ' .$checked. '/>';
 			echo '<p>Force <em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html#//apple_ref/doc/uid/TP40006509-SW19">show site at full-zoom</a>, instead of trying to show the entire page.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" /&gt;</code>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;meta name=<span>"viewport"</span> content=<span>"width=device-width; initial-scale=1.0; maximum-scale=1.0;"</span> /&gt;</code>';
 		}
 
 	//	callback fn for favicon
@@ -140,8 +140,8 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[favicon]" value="true" ' .$checked. '/>';
 			echo '<p>If you plan to use a <a href="http://en.wikipedia.org/wiki/Favicon">favicon</a> for your site, place the "favicon.ico" file in the root directory of your site.</p>';
 			echo '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;link rel="shortcut icon" href="/favicon.ico" /&gt;</code>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;link rel=<span>"shortcut icon"</span> href=<span>"/favicon.ico"</span> /&gt;</code>';
 		}
 
 	//	callback fn for favicon_ithing
@@ -151,10 +151,10 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[favicon_ithing]" value="true" ' .$checked. '/>';
 			echo '<p>To allow <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr></em> users to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">add an icon for your site to their Home screen</a>, place the "apple-touch-icon.png" file in the root directory of your site.</p>';
 			echo '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png" /&gt;</code>';
-			echo '<code>&lt;link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-ipad.png" /&gt;</code>';
-			echo '<code>&lt;link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-iphone4.png" /&gt;</code>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon.png"</span> /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-ipad.png" /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"114x114"</span> href=<span>"/apple-touch-icon-iphone4.png"</span> /&gt;</code>';
 		}
 
 	//	callback fn for modernizr_js
@@ -162,17 +162,17 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['modernizr_js']) && $options['modernizr_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[modernizr_js]" value="true" ' .$checked. '/>';
-			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
+			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code class="html">&lt;head&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
-			echo '<code>&lt;script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"&gt;&lt;/script&gt;</code>';
+			echo '<code><b>&lt;</b>script src<b>=</b><span>"//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js"><\/script>\'))&lt;/script&gt;</code>';
 			//echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.0.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
-			echo '<code>&lt;!--[if lt IE 9]&gt;</code>';
-			echo '<code>	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
-			echo '<code>	&lt;script&gt;!window.ieshiv && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/ieshiv.js"&gt;&lt;/script&gt;\'))&lt;/script&gt;</code>';
-			echo '<code>&lt;![endif]--&gt;</code>';
+			echo '<code class="comment">&lt;!--[if lt IE 9]&gt;</code>';
+			echo '<code class="comment">	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
+			echo '<code class="comment">	&lt;script&gt;!window.ieshiv && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/ieshiv.js"&gt;&lt;/script&gt;\'))&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;![endif]--&gt;</code>';
 		}
 
 	//	callback fn for respond_js
@@ -181,8 +181,8 @@
 			$checked = (isset($options['respond_js']) && $options['respond_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[respond_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://filamentgroup.com/lab/respondjs_fast_css3_media_queries_for_internet_explorer_6_8_and_more/">Respond.js</a> is a JS library that helps IE<=8 understand <code>@media</code> queries, specifically <code>min-width</code> and <code>max-width</code>, allowing you to more reliably implement <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive design</a> across all browsers.</p>';
-			echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src="' .get_template_directory_uri().'/js/libs/respond.min.js"&gt;&lt;/script&gt;</code>';
+			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
+			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>"' .get_template_directory_uri().'/js/libs/respond.min.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 		}
 
 	//	callback fn for jquery_js
@@ -192,7 +192,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/head&gt;</code></p>';
-			echo '<code>&lt;script src=\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code><b>&lt;</b>script src<b>=</b><span>\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).</p>';
 		}
 
@@ -202,8 +202,8 @@
 			$checked = (isset($options['plugins_js']) && $options['plugins_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>';
-			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_stylesheet_directory_uri().'/js/plug-in.js\'&gt;&lt;/script&gt;</code>';
+			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
+			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_stylesheet_directory_uri().'/js/plug-in.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>';
 		}
@@ -214,10 +214,10 @@
 			$checked = (isset($options['site_js']) && $options['site_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[site_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you would like to add your own site JavaScript file, Boilerplate provides a starter file located in:</p>';
-			echo '<code>' .get_stylesheet_directory_uri(). '/js/script.js</code>';
+			echo '<code><span>' .get_stylesheet_directory_uri(). '/js/script.js</span></code>';
 			echo '<p>Add what you want to that file and select this option.</p>';
-			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_stylesheet_directory_uri().'/js/script.js\'&gt;&lt;/script&gt;</code>';
+			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
+			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_stylesheet_directory_uri().'/js/script.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
@@ -227,11 +227,11 @@
 			$checked = (isset($options['belated_png_js']) && $options['belated_png_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[belated_png_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_belatedPNG</a> adds IE6 support for PNG images used as CSS background images and HTML &lt;img/&gt;</p>';
-			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
-			echo '<code>&lt;script&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
-			echo '<code>&lt;![endif]--&gt;</code>';
+			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
+			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;</code>';
+			echo '<code class="comment">&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;script&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;![endif]--&gt;</code>';
 		}
 
 	//	callback fn for chrome_frame
@@ -240,11 +240,11 @@
 			$checked = (isset($options['chrome_frame']) && $options['chrome_frame']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[chrome_frame]" value="true" ' .$checked. '/>';
 			echo '<p>Prompt IE 6 users to install <a href="http://chromium.org/developers/how-tos/chrome-frame-getting-started">Chrome Frame</a>.</p>';
-			echo '<p>Selecting this option will add the following code just before the <code>&lt;/body&gt;</code>:</p>';
-			echo '<code>&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code>&lt;script src=\'http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js\'&gt;&lt;/script&gt;</code>';
-			echo '<code>&lt;script&gt;window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})&lt;/script&gt;</code>';
-			echo '<code>&lt;![endif]--&gt;</code>';
+			echo '<p>Selecting this option will add the following code just before the <code class="html">&lt;/body&gt;</code>:</p>';
+			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;</code>';
+			echo '<code class="comment">&lt;script src=\'http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;script&gt;window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;![endif]--&gt;</code>';
 		}
 		
 	//	callback fn for google_analytics_js
@@ -256,13 +256,13 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[google_analytics_js]" value="true" ' .$checked. '/>';
 			echo '<p>To include Google Analytics, select this option and include your account number here:<br />';
 			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
-			echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>'.$msg.':</p>';
-			echo '<code>&lt;script&gt;</code>';
-			echo '<code>var _gaq=[["_setAccount","UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"],["_trackPageview"],["_trackPageLoadTime"]];</code>';
-			echo '<code>(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;</code>';
-			echo '<code>g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";</code>';
-			echo '<code>s.parentNode.insertBefore(g,s)}(document,"script"));</code>';
-			echo '<code>&lt;/script&gt;</code>';
+			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>'.$msg.':</p>';
+			echo '<code><b>&lt;</b>script<b>&gt;</b></code>';
+			echo '<code>var <b>_gaq</b>=<b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>],[</b><span>"_trackPageLoadTime"</span><b>]]</b>;</code>';
+			echo '<code><b>(</b>function<b>(d,t){</b>var <b>g</b>=<b>d</b>.createElement<b>(t),s</b>=<b>d</b>.getElementsByTagName<b>(t)[</b>0<b>];g.async</b>=<b>1</b>;</code>';
+			echo '<code><b>g</b>.src=<b>(</b><span>"https:"</span>==<b>location</b>.protocol<b>?</b><span>"//ssl"</span><b>:</b><span>"//www"</span><b>)</b>+<span>".google-analytics.com/ga.js"</span><b>;</b></code>';
+			echo '<code><b>s</b>.parentNode.insertBefore<b>(g,s)}(</b>document<b>,</b><span>"script"</span><b>));</b></code>';
+			echo '<code><b>&lt;</b>/script<b>&gt;</b></code>';
 			echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
 		}
 		
@@ -294,7 +294,7 @@
 			echo '<p><label for="business_website">Your Business URI: </label><input type="text" size="40" id="business_website" name="plugin_options[your_business_website]" value="'.$website.'" onfocus="javascript:if(this.value===\'yourbusiness.com\'){this.select();}" /></p>';
 			echo '<p><label for="business_credit">Your Business Credit: </label><input type="text" size="40" id="business_credit" name="plugin_options[your_business_credit]" value="'.$credit.'" onfocus="javascript:if(this.value===\'Your Business Credit\'){this.select();}" /></p>';
 			echo '<p>The code will look like this:</p>';
-			echo '<code><em>Site Title</em> is '.$credit.' by &lt;a href="'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'" title="'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
+			echo '<code><em>Site Title</em> is '.$credit.' by &lt;a href=<span>"'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'"</span> title=<span>"'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"</span>&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
 		}
 
 		
