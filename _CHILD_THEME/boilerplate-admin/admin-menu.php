@@ -130,7 +130,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[viewport]" value="true" ' .$checked. '/>';
 			echo '<p>Force <em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html#//apple_ref/doc/uid/TP40006509-SW19">show site at full-zoom</a>, instead of trying to show the entire page.</p>';
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;meta name=<span>"viewport"</span> content=<span>"width=device-width; initial-scale=1.0; maximum-scale=1.0;"</span> /&gt;</code>';
+			echo '<code>&lt;meta name=<span>"viewport"</span> content=<span>"width=device-width;initial-scale=1.0;"</span> /&gt;</code>';
 		}
 
 	//	callback fn for favicon
@@ -242,8 +242,8 @@
 			echo '<p>Prompt IE 6 users to install <a href="http://chromium.org/developers/how-tos/chrome-frame-getting-started">Chrome Frame</a>.</p>';
 			echo '<p>Selecting this option will add the following code just before the <code class="html">&lt;/body&gt;</code>:</p>';
 			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code class="comment">&lt;script src=\'http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js\'&gt;&lt;/script&gt;</code>';
-			echo '<code class="comment">&lt;script&gt;window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;script defer src=\'http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;script defer&gt;window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})&lt;/script&gt;</code>';
 			echo '<code class="comment">&lt;![endif]--&gt;</code>';
 		}
 		
@@ -258,10 +258,10 @@
 			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>'.$msg.':</p>';
 			echo '<code><b>&lt;</b>script<b>&gt;</b></code>';
-			echo '<code>var <b>_gaq</b>=<b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>],[</b><span>"_trackPageLoadTime"</span><b>]]</b>;</code>';
-			echo '<code><b>(</b>function<b>(d,t){</b>var <b>g</b>=<b>d</b>.createElement<b>(t),s</b>=<b>d</b>.getElementsByTagName<b>(t)[</b>0<b>];g.async</b>=<b>1</b>;</code>';
-			echo '<code><b>g</b>.src=<b>(</b><span>"https:"</span>==<b>location</b>.protocol<b>?</b><span>"//ssl"</span><b>:</b><span>"//www"</span><b>)</b>+<span>".google-analytics.com/ga.js"</span><b>;</b></code>';
-			echo '<code><b>s</b>.parentNode.insertBefore<b>(g,s)}(</b>document<b>,</b><span>"script"</span><b>));</b></code>';
+			echo '<code>window<b>._gaq</b> = <b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>],[</b><span>"_trackPageLoadTime"</span><b>]];</b></code>';
+			echo '<code><b>Modernizr.</b>load<b>({</b></code>';
+			echo '<code><b>load:</b> <span>"https:"</span> == <b>location</b>.protocol<b> ? </b><span>"//ssl"</span><b> : </b><span>"//www"</span><b>)</b> + <span>".google-analytics.com/ga.js"</span></code>';
+			echo '<code><b>});</b></code>';
 			echo '<code><b>&lt;</b>/script<b>&gt;</b></code>';
 			echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
 		}
@@ -312,7 +312,7 @@
 
 	//	$options['viewport']
 		function add_viewport() {
-			echo '<meta name="viewport" content="width=device-width, initial-scale=1.0" />'.PHP_EOL;
+			echo '<meta name="viewport" content="width=device-width,initial-scale=1.0" />'.PHP_EOL;
 		}
 
 	//	$options['favicon']
@@ -387,8 +387,8 @@
 	//	$options['chrome_frame']
 		function add_chrome_frame() {
 			echo '<!--[if lt IE 7 ]>'.PHP_EOL;
-			echo '<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>'.PHP_EOL;
-			echo '<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>'.PHP_EOL;
+			echo '<script defer src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>'.PHP_EOL;
+			echo '<script defer>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>'.PHP_EOL;
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
