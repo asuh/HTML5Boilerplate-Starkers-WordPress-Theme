@@ -258,10 +258,10 @@
 			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>'.$msg.':</p>';
 			echo '<code><b>&lt;</b>script<b>&gt;</b></code>';
-			echo '<code>window<b>._gaq</b> = <b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>],[</b><span>"_trackPageLoadTime"</span><b>]];</b></code>';
-			echo '<code><b>Modernizr.</b>load<b>({</b></code>';
-			echo '<code><b>load:</b> <span>"https:"</span> == <b>location</b>.protocol<b> ? </b><span>"//ssl"</span><b> : </b><span>"//www"</span><b>)</b> + <span>".google-analytics.com/ga.js"</span></code>';
-			echo '<code><b>});</b></code>';
+			echo '<code>var <b>_gaq</b>=<b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>],[</b><span>"_trackPageLoadTime"</span><b>]]</b>;</code>';
+			echo '<code><b>(</b>function<b>(d,t){</b>var <b>g</b>=<b>d</b>.createElement<b>(t),s</b>=<b>d</b>.getElementsByTagName<b>(t)[</b>0<b>];</code>';
+			echo '<code><b>g</b>.src=<b>(</b><span>"https:"</span>==<b>location</b>.protocol<b>?</b><span>"//ssl"</span><b>:</b><span>"//www"</span><b>)</b>+<span>".google-analytics.com/ga.js"</span><b>;</b></code>';
+			echo '<code><b>s</b>.parentNode.insertBefore<b>(g,s)}(</b>document<b>,</b><span>"script"</span><b>));</b></code>';
 			echo '<code><b>&lt;</b>/script<b>&gt;</b></code>';
 			echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
 		}
@@ -398,7 +398,7 @@
 			$account = $options['google_analytics_account'];
 			echo PHP_EOL.'<script>'.PHP_EOL;
 			echo 'var _gaq=[["_setAccount","UA-'.str_replace('UA-','',$account).'"],["_trackPageview"],["_trackPageLoadTime"]];'.PHP_EOL;
-			echo '(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;'.PHP_EOL;
+			echo '(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];'.PHP_EOL;
 			echo 'g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";'.PHP_EOL;
 			echo 's.parentNode.insertBefore(g,s)}(document,"script"));'.PHP_EOL;
 			echo '</script>'.PHP_EOL;
