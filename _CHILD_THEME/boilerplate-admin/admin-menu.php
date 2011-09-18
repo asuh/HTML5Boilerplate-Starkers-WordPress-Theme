@@ -180,7 +180,7 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['respond_js']) && $options['respond_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[respond_js]" value="true" ' .$checked. '/>';
-			echo '<p><a href="http://filamentgroup.com/lab/respondjs_fast_css3_media_queries_for_internet_explorer_6_8_and_more/">Respond.js</a> is a JS library that helps IE<=8 understand <code>@media</code> queries, specifically <code>min-width</code> and <code>max-width</code>, allowing you to more reliably implement <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive design</a> across all browsers.</p>';
+			echo '<p><a href="http://filamentgroup.com/lab/respondjs_fast_css3_media_queries_for_internet_explorer_6_8_and_more/">Respond.js</a> is a JS library that helps IE<=8 understand <code>@media</code> queries, specifically <code>min-width</code> and <code>max-width</code>, allowing you to more reliably implement <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive design</a> across all browsers. As of Modernizr 2.0, <a href="http://filamentgroup.com/lab/respondjs_now_available_in_modernizr/">respond.js is already included</a>.</p>';
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>"' .get_template_directory_uri().'/js/libs/respond.min.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 		}
@@ -192,7 +192,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/head&gt;</code></p>';
-			echo '<code><b>&lt;</b>script src<b>=</b><span>\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
+			echo '<code><b>&lt;</b>script src<b>=</b><span>\'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).</p>';
 		}
 
@@ -203,7 +203,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
-			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_stylesheet_directory_uri().'/js/plug-in.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
+			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_stylesheet_directory_uri().'/js/plugins.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>';
 		}
@@ -358,7 +358,7 @@
 		function add_jquery_script() {
 			$cache = cache_buster();
 			wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
-			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js', array(), str_replace('?ver=','',$cache) );
+			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js', array(), str_replace('?ver=','',$cache) );
 			wp_enqueue_script( 'jquery' );
 		}
 
