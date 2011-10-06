@@ -229,8 +229,8 @@
 			echo '<p><a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_belatedPNG</a> adds IE6 support for PNG images used as CSS background images and HTML &lt;img/&gt;</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
 			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code class="comment">&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
-			echo '<code class="comment">&lt;script&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;script defer type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/dd_belatedpng.js\'&gt;&lt;/script&gt;</code>';
+			echo '<code class="comment">&lt;script defer&gt;DD_belatedPNG.fix(\'img, .png_bg\');&lt;/script&gt;</code>';
 			echo '<code class="comment">&lt;![endif]--&gt;</code>';
 		}
 
@@ -379,8 +379,8 @@
 	//	$options['belated_png_js']
 		function add_belated_png_script() {
 			echo '<!--[if lt IE 7 ]>'.PHP_EOL;
-			echo '<script src="' .get_template_directory_uri(). '/js/libs/dd_belatedpng.js"></script>'.PHP_EOL;
-			echo '<script>DD_belatedPNG.fix(\'img, .png_bg\');</script>'.PHP_EOL;
+			echo '<script defer src="' .get_template_directory_uri(). '/js/libs/dd_belatedpng.js"></script>'.PHP_EOL;
+			echo '<script defer>DD_belatedPNG.fix(\'img, .png_bg\');</script>'.PHP_EOL;
 			echo '<![endif]-->'.PHP_EOL;
 		}
 
