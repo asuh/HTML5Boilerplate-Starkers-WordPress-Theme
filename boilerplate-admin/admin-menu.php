@@ -203,7 +203,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
-			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_template_directory_uri().'/js/plugins.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
+			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_stylesheet_directory_uri().'/js/plugins.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 			echo '<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>';
 		}
@@ -214,10 +214,10 @@
 			$checked = (isset($options['site_js']) && $options['site_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[site_js]" value="true" ' .$checked. '/>';
 			echo '<p>If you would like to add your own site JavaScript file, Boilerplate provides a starter file located in:</p>';
-			echo '<code><span>' .get_template_directory_uri(). '/js/script.js</span></code>';
+			echo '<code><span>' .get_stylesheet_directory_uri(). '/js/script.js</span></code>';
 			echo '<p>Add what you want to that file and select this option.</p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>:</p>';
-			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_template_directory_uri().'/js/script.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
+			echo '<code><b>&lt;</b>script type<b>=</b><span>\'text/javascript\'</span> src=<span>\'' .get_stylesheet_directory_uri().'/js/script.js\'</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 			echo '<p>(The single quotes and no-longer-necessary attributes are from WP, would like to fix that... maybe next update...)</p>';
 		}
 
@@ -365,14 +365,14 @@
 	//	$options['plugins_js']
 		function add_plugin_script() {
 			$cache = cache_buster();
-			wp_register_script( 'plug_ins', get_template_directory_uri() . '/js/plugins.js', array('jquery'), str_replace('?ver=','',$cache), true );
+			wp_register_script( 'plug_ins', get_stylesheet_directory_uri() . '/js/plugins.js', array('jquery'), str_replace('?ver=','',$cache), true );
 			wp_enqueue_script( 'plug_ins' );
 		}
 
 	//	$options['site_js']
 		function add_site_script() {
 			$cache = cache_buster();
-			wp_register_script( 'site_script', get_template_directory_uri() . '/js/script.js', array(), str_replace('?ver=','',$cache), true );
+			wp_register_script( 'site_script', get_stylesheet_directory_uri() . '/js/script.js', array(), str_replace('?ver=','',$cache), true );
 			wp_enqueue_script( 'site_script' );
 		}
 
