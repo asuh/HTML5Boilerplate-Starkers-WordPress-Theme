@@ -324,6 +324,23 @@ td { vertical-align: top; }
 .alignright { float:right; padding: 0 0 10px 10px; }
 .wp-caption { border: 1px solid #ddd; text-align: center; background: #eee; padding: 14px 10px 6px 10px; margin: 15px 10px; }
 
+/* Required classes to pass Theme Check*/
+.home .sticky {
+	background: #f2f7fc;
+	border-top: 4px solid #000;
+	margin-left: -20px;
+	margin-right: -20px;
+	padding: 18px 20px;
+}
+.home .sticky .page-link a {
+	background: #d9e8f7;
+}
+@media print {
+	.home .sticky {
+		border: none;
+	}
+}
+
 /* You might find the following useful */
 /* div, ul, li { position:relative } This will save you having to declare each div / ul / li's position as 'relative' and allows you to absolutely position elements inside them
 br.clear { clear:both; display:block; height:1px; margin:-1px 0 0 0 } /* Use this br class to clear your floated columns */
