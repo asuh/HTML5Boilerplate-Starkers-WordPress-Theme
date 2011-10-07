@@ -19,7 +19,7 @@
 	get_sidebar( 'footer' );
 ?>
 			<div id="copyright">
-				&copy; <?php echo date("Y"); ?> <a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a> All Rights Reserved. <?php if (function_exists('footer_credit')) { echo do_shortcode( '[footer_credit]' ); } ?>
+				&copy; <?php echo date("Y"); ?> <a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a> All Rights Reserved. <?php boilerplate_credits(); ?>
 			</div><!-- #copyright -->
 
 		</footer><!-- footer -->

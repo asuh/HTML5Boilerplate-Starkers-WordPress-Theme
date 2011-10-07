@@ -468,7 +468,7 @@
 				add_action('wp_footer', 'add_google_analytics_script');
 			}
 			if (isset($options['footer_credit']) && $options['footer_credit'] && $options['footer_credit'] !== '' ) {
-				add_shortcode('footer_credit', 'add_footer_credit');
+				add_action('boilerplate_credits', 'add_footer_credit');
 			}
 		}
 

@@ -682,6 +682,9 @@ endif;
 
 // Add Boilerplate Admin Panel
 	locate_template( 'boilerplate-admin/admin-menu.php', true );
+
+// Custom Hooks
+function boilerplate_credits() { do_action('boilerplate_credits'); } //footer credit	
 	
 /*	End Boilerplate */
 
