@@ -287,6 +287,7 @@
 			$business_title = (isset($options['your_business_title']) && $options['your_business_title']) ? $options['your_business_title'] : 'Your Business Title';
 			$website = (isset($options['your_business_website']) && $options['your_business_website']) ? $options['your_business_website'] : 'yourbusiness.com';
 			$credit = (isset($options['your_business_credit']) && $options['your_business_credit']) ? $options['your_business_credit'] : 'maintained';
+			$blog_title = get_bloginfo();
 			echo '<input class="check-field" type="checkbox" name="plugin_options[footer_credit]" value="true" ' .$checked. '/>';
 			echo '<p>If you are developing a website for a client and want a linkback to your site in the footer, here\'s an easy way to give your business site credit. <strong>All fields are required</strong>.</p>';
 			echo '<p><label for="business_name">Your Business Name: </label><input type="text" size="40" id="business_name" name="plugin_options[your_business_name]" value="'.$business_name.'" onfocus="javascript:if(this.value===\'Your Business Name\'){this.select();}" /></p>';
@@ -294,7 +295,7 @@
 			echo '<p><label for="business_website">Your Business URI (minus http://): </label><input type="text" size="40" id="business_website" name="plugin_options[your_business_website]" value="'.$website.'" onfocus="javascript:if(this.value===\'yourbusiness.com\'){this.select();}" /></p>';
 			echo '<p><label for="business_credit">Your Business Credit: </label><input type="text" size="40" id="business_credit" name="plugin_options[your_business_credit]" value="'.$credit.'" onfocus="javascript:if(this.value===\'Your Business Credit\'){this.select();}" /></p>';
 			echo '<p>The code will look like this:</p>';
-			echo '<code><em>Site Title</em> is '.$credit.' by &lt;a href=<span>"'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'"</span> title=<span>"'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"</span>&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
+			echo '<code><em>'.$blog_title.'</em> is '.$credit.' by &lt;a href=<span>"'.(($website !== 'yourbusiness.com') ? 'http://'.$website : 'http://yourbusiness.com').'"</span> title=<span>"'.(($business_title !== 'Your Business Title') ? $business_title : 'Your Business Title').'"</span>&gt;'.(($business_name !== 'yourbusiness.com') ? $business_name : 'Your Business Name').'&lt;/a&gt;</code>';
 		}
 		
 
