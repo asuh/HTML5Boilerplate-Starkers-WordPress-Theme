@@ -215,7 +215,7 @@ register_widget('boilerplate_vcard');
 
 // remove dir and set lang="en" as default (rather than en-US)
 // https://github.com/retlehs/roots/issues/80
-function annex_language_attributes() {
+function boilerplate_language_attributes() {
 	$attributes = array();
 	$output = '';
 	$lang = get_bloginfo('language');
@@ -226,11 +226,21 @@ function annex_language_attributes() {
 	}
 
 	$output = implode(' ', $attributes);
-	$output = apply_filters('annex_language_attributes', $output);
+	$output = apply_filters('boilerplate_language_attributes', $output);
 	return $output;
 }
 
-add_filter('language_attributes', 'annex_language_attributes');
+add_filter('language_attributes', 'boilerplate_language_attributes');
+
+// http://www.deluxeblogtips.com/2011/01/remove-dashboard-widgets-in-wordpress.html
+function boilerplate_remove_dashboard_widgets() {
+	remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');
+	remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
+	remove_meta_box('dashboard_primary', 'dashboard', 'normal');
+	remove_meta_box('dashboard_secondary', 'dashboard', 'normal');
+}
+
+add_action('admin_init', 'boilerplate_remove_dashboard_widgets');
 
 /**
 * END TLD scripts
