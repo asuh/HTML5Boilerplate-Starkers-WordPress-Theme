@@ -230,6 +230,7 @@ function annex_language_attributes() {
 	return $output;
 }
 
+add_filter('language_attributes', 'annex_language_attributes');
 
 /**
 * END TLD scripts
