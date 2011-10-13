@@ -213,7 +213,24 @@ class boilerplate_vcard extends WP_Widget {
 
 register_widget('boilerplate_vcard');
 
- 
+// remove dir and set lang="en" as default (rather than en-US)
+// https://github.com/retlehs/roots/issues/80
+function annex_language_attributes() {
+	$attributes = array();
+	$output = '';
+	$lang = get_bloginfo('language');
+	if ($lang && $lang !== 'en-US') {
+		$attributes[] = "lang=\"$lang\"";
+	} else {
+		$attributes[] = 'lang="en"';
+	}
+
+	$output = implode(' ', $attributes);
+	$output = apply_filters('annex_language_attributes', $output);
+	return $output;
+}
+
+
 /**
 * END TLD scripts
 */
