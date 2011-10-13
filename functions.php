@@ -242,6 +242,16 @@ function boilerplate_remove_dashboard_widgets() {
 
 add_action('admin_init', 'boilerplate_remove_dashboard_widgets');
 
+//clean up the default WordPress style tags
+add_filter('style_loader_tag', 'boilerplate_clean_style_tag');
+
+function boilerplate_clean_style_tag($input) {
+  preg_match_all("!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches);
+  //only display media if it's print
+  $media = $matches[3][0] === 'print' ? ' media="print"' : '';                                                                             
+  return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
+}
+
 /**
 * END TLD scripts
 */
