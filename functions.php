@@ -54,16 +54,38 @@ function enable_threaded_comments(){
 }
 add_action('get_header', 'enable_threaded_comments');
 
+// remove version info from head and feeds
+// http://digwp.com/2010/04/wordpress-custom-functions-php-template-part-2/
+function complete_version_removal() {
+	return '';
+}
+
+// remove CSS from recent comments widget
+function boilerplate_remove_recent_comments_style() {
+	global $wp_widget_factory;
+	if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
+		remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+	}
+}
+
+// remove CSS from gallery
+function boilerplate_gallery_style($css) {
+	return preg_replace("!<style type='text/css'>(.*?)</style>!s", '', $css);
+}
+
 // remove junk from head
-remove_action('wp_head', 'rsd_link');
-remove_action('wp_head', 'wp_generator');
-remove_action('wp_head', 'feed_links', 2);
-remove_action('wp_head', 'index_rel_link');
-remove_action('wp_head', 'wlwmanifest_link');
-remove_action('wp_head', 'feed_links_extra', 3);
-remove_action('wp_head', 'start_post_rel_link', 10, 0);
-remove_action('wp_head', 'parent_post_rel_link', 10, 0);
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'wp_generator');
+	remove_action('wp_head', 'feed_links', 2);
+	remove_action('wp_head', 'index_rel_link');
+	remove_action('wp_head', 'wlwmanifest_link');
+	remove_action('wp_head', 'feed_links_extra', 3);
+	remove_action('wp_head', 'start_post_rel_link', 10, 0);
+	remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+	   add_action('wp_head', 'boilerplate_remove_recent_comments_style', 1);	
+	   add_filter('gallery_style', 'boilerplate_gallery_style');
+	   add_filter('the_generator', 'complete_version_removal');
 
 // kill the admin nag
 if (!current_user_can('edit_users')) {
@@ -78,14 +100,6 @@ function custom_login_logo() {
 	</style>';
 }
 add_action('login_head', 'custom_login_logo');
-
-
-// remove version info from head and feeds
-// http://digwp.com/2010/04/wordpress-custom-functions-php-template-part-2/
-function complete_version_removal() {
-	return '';
-}
-add_filter('the_generator', 'complete_version_removal');
 
 // remove login errors
 // http://tutzone.net/2011/02/how-to-hide-login-errors-in-wordpress.html
