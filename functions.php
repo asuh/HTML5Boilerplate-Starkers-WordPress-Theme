@@ -665,20 +665,6 @@ function boilerplate_widgets_init() {
 /** Register sidebars by running boilerplate_widgets_init() on the widgets_init hook. */
 add_action( 'widgets_init', 'boilerplate_widgets_init' );
 
-/**
- * Removes the default styles that are packaged with the Recent Comments widget.
- *
- * To override this in a child theme, remove the filter and optionally add your own
- * function tied to the widgets_init action hook.
- *
- * @since Twenty Ten 1.0
- */
-function boilerplate_remove_recent_comments_style() {
-	global $wp_widget_factory;
-	remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
-}
-add_action( 'widgets_init', 'boilerplate_remove_recent_comments_style' );
-
 if ( ! function_exists( 'boilerplate_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post—date/time and author.
