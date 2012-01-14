@@ -27,9 +27,9 @@ get_header();
 						if ( is_day() ) :
 							printf( __( 'Daily Archives: %s', 'boilerplate' ), get_the_date() );
 						elseif ( is_month() ) :
-							printf( __( 'Monthly Archives: %s', 'boilerplate' ), get_the_date('F Y') );
+							printf( __( 'Monthly Archives: %s', 'boilerplate' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'twentyten' ) ) );
 						elseif ( is_year() ) :
-							printf( __( 'Yearly Archives: %s', 'boilerplate' ), get_the_date('Y') );
+							printf( __( 'Yearly Archives: %s', 'boilerplate' ), get_the_date( _x( 'Y', 'yearly archives date format', 'twentyten' ) ) );
 						else :
 							_e( 'Blog Archives', 'boilerplate' );
 						endif;
@@ -42,7 +42,7 @@ get_header();
 	rewind_posts();
 	/* Run the loop for the archives page to output the posts.
 	 * If you want to overload this in a child theme then include a file
-	 * called loop-archives.php and that will be used instead.
+	 * called loop-archive.php and that will be used instead.
 	 */
 	 get_template_part( 'loop', 'archive' );
 ?>

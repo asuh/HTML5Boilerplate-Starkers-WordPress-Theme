@@ -320,10 +320,10 @@ function boilerplate_setup() {
 
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'boilerplate', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'boilerplate', get_template_directory() . '/languages' );
 
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	$locale_file = get_template_directory() . "/languages/$locale.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 
@@ -336,9 +336,12 @@ function boilerplate_setup() {
 	add_custom_background();
 
 	// Your changeable header business starts here
-	define( 'HEADER_TEXTCOLOR', '' );
+	if ( ! defined( 'HEADER_TEXTCOLOR' ) )
+		define( 'HEADER_TEXTCOLOR', '' );
+
 	// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
-	define( 'HEADER_IMAGE', '%s/images/headers/path.jpg' );
+	if ( ! defined( 'HEADER_IMAGE' ) )
+		define( 'HEADER_IMAGE', '%s/images/headers/path.jpg' );
 
 	// The height and width of your custom header. You can hook into the theme's own filters to change these values.
 	// Add a filter to boilerplate_header_image_width and boilerplate_header_image_height to change these values.
@@ -526,15 +529,30 @@ add_filter( 'get_the_excerpt', 'boilerplate_custom_excerpt_more' );
 /**
  * Remove inline styles printed when the gallery shortcode is used.
  *
- * Galleries are styled by the theme in Twenty Ten's style.css.
+ * Galleries are styled by the theme in Twenty Ten's style.css. This is just
+ * a simple filter call that tells WordPress to not use the default styles.
+ *
+ * @since Twenty Ten 1.2
+ */
+add_filter( 'use_default_gallery_style', '__return_false' );
+
+/**
+ * Deprecated way to remove inline styles printed when the gallery shortcode is used.
+ *
+ * This function is no longer needed or used. Use the use_default_gallery_style
+ * filter instead, as seen above.
  *
  * @since Twenty Ten 1.0
+ * @deprecated Deprecated in Twenty Ten 1.2 for WordPress 3.1
+ *
  * @return string The gallery style filter, with the styles themselves removed.
  */
 function boilerplate_remove_gallery_css( $css ) {
 	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
 }
-add_filter( 'gallery_style', 'boilerplate_remove_gallery_css' );
+// Backwards compatibility with WordPress 3.0.
+if ( version_compare( $GLOBALS['wp_version'], '3.1', '<' ) )
+	add_filter( 'gallery_style', 'boilerplate_remove_gallery_css' );
 
 if ( ! function_exists( 'boilerplate_comment' ) ) :
 /**
@@ -559,7 +577,7 @@ function boilerplate_comment( $comment, $args, $depth ) {
 				<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 			</div><!-- .comment-author .vcard -->
 			<?php if ( $comment->comment_approved == '0' ) : ?>
-				<em><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
+			<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
 				<br />
 			<?php endif; ?>
 			<footer class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
@@ -681,7 +699,7 @@ function boilerplate_posted_on() {
 		),
 		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			sprintf( esc_attr__( 'View all posts by %s', 'boilerplate' ), get_the_author() ),
+			esc_attr( sprintf( __( 'View all posts by %s', 'boilerplate' ), get_the_author() ) ),
 			get_the_author()
 		)
 	);

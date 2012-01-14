@@ -14,15 +14,18 @@
 
 get_header(); ?>
 
-<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
+		<div id="container" class="one-column">
+			<div id="content" role="main">
 
-				<h1><?php the_title(); ?></h1>
-				<?php the_content(); ?>
-				<?php wp_link_pages( array( 'before' => '' . __( 'Pages:', 'boilerplate' ), 'after' => '' ) ); ?>
-				<?php edit_post_link( __( 'Edit', 'boilerplate' ), '', '' ); ?>
+			<?php
+			/* Run the loop to output the page.
+			 * If you want to overload this in a child theme then include a file
+			 * called loop-page.php and that will be used instead.
+			 */
+			 get_template_part( 'loop', 'page' );
+			?>
 
-				<?php comments_template( '', true ); ?>
-
-<?php endwhile; ?>
+			</div><!-- #content -->
+		</div><!-- #container -->
 
 <?php get_footer(); ?>
