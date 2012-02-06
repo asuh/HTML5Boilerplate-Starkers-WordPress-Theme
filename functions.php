@@ -735,13 +735,19 @@ endif;
 
 /*	Begin Boilerplate */
 
+// IE Chrome Frame custom hook
+function ie_chrome_frame() {
+	do_action('ie_chrome_frame');
+}
+
+// Boilerplate Footer Credits Custom Hook
+function boilerplate_credits() {
+	do_action('boilerplate_credits');
+}
 
 // Add Boilerplate Admin Panel
 	locate_template( 'boilerplate-admin/admin-menu.php', true );
 
-// Custom Hooks
-function boilerplate_credits() { do_action('boilerplate_credits'); } //footer credit	
-	
 /*	End Boilerplate */
 
 // Add category nicenames in body and post class

@@ -42,6 +42,7 @@
 ?>
 	</head>
 	<body <?php body_class(); ?>>
+	<?php ie_chrome_frame(); ?>
 		<header role="banner">
 			<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?><<?php echo $heading_tag; ?> id="logo">
 				<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">

@@ -130,7 +130,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[viewport]" value="true" ' .$checked. '/>';
 			echo '<p>Force <em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html#//apple_ref/doc/uid/TP40006509-SW19">show site at full-zoom</a>, instead of trying to show the entire page.</p>';
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;meta name=<span>"viewport"</span> content=<span>"width=device-width;initial-scale=1.0;"</span> /&gt;</code>';
+			echo '<code>&lt;meta name=<span>"viewport"</span> content=<span>"width=device-width"</span> /&gt;</code>';
 		}
 
 	//	callback fn for favicon
@@ -165,9 +165,9 @@
 			echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code class="html">&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
-			echo '<code><b>&lt;</b>script src<b>=</b><span>"//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
-			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js"><\/script>\'))&lt;/script&gt;</code>';
-			//echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.0.min.js\'&gt;&lt;/script&gt;</code>';
+			//echo '<code><b>&lt;</b>script src<b>=</b><span>"//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
+			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.5.0.min.js"><\/script>\'))&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.5.0.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
 			echo '<code class="comment">&lt;!--[if lt IE 9]&gt;</code>';
 			echo '<code class="comment">	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
@@ -240,11 +240,8 @@
 			$checked = (isset($options['chrome_frame']) && $options['chrome_frame']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[chrome_frame]" value="true" ' .$checked. '/>';
 			echo '<p>Prompt IE 6 users to install <a href="http://chromium.org/developers/how-tos/chrome-frame-getting-started">Chrome Frame</a>.</p>';
-			echo '<p>Selecting this option will add the following code just before the <code class="html">&lt;/body&gt;</code>:</p>';
-			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;</code>';
-			echo '<code class="comment">&lt;script defer src=\'http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js\'&gt;&lt;/script&gt;</code>';
-			echo '<code class="comment">&lt;script defer&gt;window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})&lt;/script&gt;</code>';
-			echo '<code class="comment">&lt;![endif]--&gt;</code>';
+			echo '<p>Selecting this option will add the following code just after the <code class="html">&lt;body&gt;</code>:</p>';
+			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;&lt;p class=chromeframe&gt;Your browser is &lt;em&gt;ancient!&lt;/em&gt; &lt;a href="http://browsehappy.com/"&gt;Upgrade to a different browser&lt;/a&gt; or &lt;a href="http://www.google.com/chromeframe/?redirect=true"&gt;install Google Chrome Frame&lt;/a&gt; to experience this site.&lt;/p&gt;&lt;![endif]--&gt;</code>';
 		}
 
 	//	callback fn for google_analytics_js
@@ -258,7 +255,7 @@
 			echo 'UA-<input type="text" size="6" name="plugin_options[google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}" /></p>';
 			echo '<p>Selecting this option will add the following code to your pages just before the <code class="html">&lt;/body&gt;</code>'.$msg.':</p>';
 			echo '<code><b>&lt;</b>script<b>&gt;</b></code>';
-			echo '<code>var <b>_gaq</b>=<b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>],[</b><span>"_trackPageLoadTime"</span><b>]]</b>;</code>';
+			echo '<code>var <b>_gaq</b>=<b>[[</b><span>"_setAccount"</span><b>,</b><span>"UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"</span><b>],[</b><span>"_trackPageview"</span><b>]]</b>;</code>';
 			echo '<code><b>(</b>function<b>(d,t){</b>var <b>g</b>=<b>d</b>.createElement<b>(t),s</b>=<b>d</b>.getElementsByTagName<b>(t)[</b>0<b>];</code>';
 			echo '<code><b>g</b>.src=<b>(</b><span>"https:"</span>==<b>location</b>.protocol<b>?</b><span>"//ssl"</span><b>:</b><span>"//www"</span><b>)</b>+<span>".google-analytics.com/ga.js"</span><b>;</b></code>';
 			echo '<code><b>s</b>.parentNode.insertBefore<b>(g,s)}(</b>document<b>,</b><span>"script"</span><b>));</b></code>';
@@ -313,7 +310,7 @@
 
 	//	$options['viewport']
 		function add_viewport() {
-			echo '<meta name="viewport" content="width=device-width,initial-scale=1.0" />'.PHP_EOL;
+			echo '<meta name="viewport" content="width=device-width" />'.PHP_EOL;
 		}
 
 	//	$options['favicon']
@@ -334,9 +331,9 @@
 			wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
 			wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
-			echo '<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>'.PHP_EOL; // try getting from CDN
+			//echo '<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>'.PHP_EOL; // try getting from CDN
 			//echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"><\/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
-			//echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"></script>'.PHP_EOL;
+			echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.5.0.min.js'.$cache.'"></script>'.PHP_EOL;
 		}
 
 	//	$options['ieshiv_script']
@@ -387,10 +384,7 @@
 
 	//	$options['chrome_frame']
 		function add_chrome_frame() {
-			echo '<!--[if lt IE 7 ]>'.PHP_EOL;
-			echo '<script defer src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>'.PHP_EOL;
-			echo '<script defer>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>'.PHP_EOL;
-			echo '<![endif]-->'.PHP_EOL;
+			echo '<!--[if lt IE 7 ]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->'.PHP_EOL;
 		}
 
 	//	$options['google_analytics_js']
@@ -398,7 +392,7 @@
 			$options = get_option('plugin_options');
 			$account = $options['google_analytics_account'];
 			echo PHP_EOL.'<script>'.PHP_EOL;
-			echo 'var _gaq=[["_setAccount","UA-'.str_replace('UA-','',$account).'"],["_trackPageview"],["_trackPageLoadTime"]];'.PHP_EOL;
+			echo 'var _gaq=[["_setAccount","UA-'.str_replace('UA-','',$account).'"],["_trackPageview"]];'.PHP_EOL;
 			echo '(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];'.PHP_EOL;
 			echo 'g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";'.PHP_EOL;
 			echo 's.parentNode.insertBefore(g,s)}(document,"script"));'.PHP_EOL;
@@ -464,7 +458,7 @@
 				add_action('wp_footer', 'add_belated_png_script');
 			}
 			if (isset($options['chrome_frame']) && $options['chrome_frame']) {
-				add_action('wp_footer', 'add_chrome_frame');
+				add_action('ie_chrome_frame', 'add_chrome_frame');
 			}
 			if (isset($options['google_analytics_js']) && $options['google_analytics_js'] && isset($options['google_analytics_account']) && $options['google_analytics_account'] && $options['google_analytics_account'] !== 'XXXXX-X') {
 				add_action('wp_footer', 'add_google_analytics_script');
