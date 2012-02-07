@@ -2,7 +2,7 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the id=main div and all content
+ * Contains the closing of the id=content div and all content
  * after.  Calls sidebar-footer.php for bottom widgets.
  *
  * @package WordPress
@@ -10,7 +10,7 @@
  * @since Boilerplate 1.0
  */
 ?>
-		</div><!-- #main -->
+		</div><!-- #content -->
 		<footer role="contentinfo">
 <?php
 	/* A sidebar in the footer? Yep. You can can customize

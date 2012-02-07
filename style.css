@@ -369,6 +369,11 @@ img.aligncenter {
 	background: #d9e8f7;
 }
 
+.screen-reader-text {
+	position: absolute;
+	left: -9000px;
+}
+
 /* You might find the following useful */
 /* div, ul, li { position:relative } This will save you having to declare each div / ul / li's position as 'relative' and allows you to absolutely position elements inside them
 br.clear { clear:both; display:block; height:1px; margin:-1px 0 0 0 } /* Use this br class to clear your floated columns */

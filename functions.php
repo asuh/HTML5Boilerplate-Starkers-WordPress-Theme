@@ -37,238 +37,6 @@
  * @subpackage Boilerplate
  * @since Boilerplate 1.0
  */
-
-
-
-/**
-* TLD additional scripts added by Micah
-*/
-
-// http://digwp.com/2010/03/wordpress-functions-php-template-custom-functions/ 
-// enable threaded comments
-function enable_threaded_comments(){
-	if (!is_admin()) {
-		if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1))
-			wp_enqueue_script('comment-reply');
-		}
-}
-add_action('get_header', 'enable_threaded_comments');
-
-// remove version info from head and feeds
-// http://digwp.com/2010/04/wordpress-custom-functions-php-template-part-2/
-function complete_version_removal() {
-	return '';
-}
-
-// remove CSS from recent comments widget
-function boilerplate_remove_recent_comments_style() {
-	global $wp_widget_factory;
-	if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
-		remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
-	}
-}
-
-// remove CSS from gallery
-function boilerplate_gallery_style($css) {
-	return preg_replace("!<style type='text/css'>(.*?)</style>!s", '', $css);
-}
-
-// remove junk from head
-	remove_action('wp_head', 'rsd_link');
-	remove_action('wp_head', 'wp_generator');
-	remove_action('wp_head', 'feed_links', 2);
-	remove_action('wp_head', 'index_rel_link');
-	remove_action('wp_head', 'wlwmanifest_link');
-	remove_action('wp_head', 'feed_links_extra', 3);
-	remove_action('wp_head', 'start_post_rel_link', 10, 0);
-	remove_action('wp_head', 'parent_post_rel_link', 10, 0);
-	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-	   add_action('wp_head', 'boilerplate_remove_recent_comments_style', 1);	
-	   add_filter('gallery_style', 'boilerplate_gallery_style');
-	   add_filter('the_generator', 'complete_version_removal');
-
-// kill the admin nag
-if (!current_user_can('edit_users')) {
-	add_action('init', create_function('$a', "remove_action('init', 'wp_version_check');"), 2);
-	add_filter('pre_option_update_core', create_function('$a', "return null;"));
-}
-
-// custom admin login logo
-function custom_login_logo() {
-	echo '<style type="text/css">
-	h1 a { background-image: url('.get_bloginfo('template_directory').'/images/custom-login-logo.png) !important; }
-	</style>';
-}
-add_action('login_head', 'custom_login_logo');
-
-// remove login errors
-// http://tutzone.net/2011/02/how-to-hide-login-errors-in-wordpress.html
-add_filter('login_errors', create_function('$a', "return null;"));
-
-// add to robots.txt
-// http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
-add_action('do_robots', 'boilerplate_robots');
-
-function boilerplate_robots() {
-	echo "Disallow: /cgi-bin\n";
-	echo "Disallow: /wp-admin\n";
-	echo "Disallow: /wp-includes\n";
-	echo "Disallow: /wp-content/plugins\n";
-	echo "Disallow: /plugins\n";
-	echo "Disallow: /wp-content/cache\n";
-	echo "Disallow: /wp-content/themes\n";
-	echo "Disallow: /trackback\n";
-	echo "Disallow: /feed\n";
-	echo "Disallow: /comments\n";
-	echo "Disallow: /category/*/*\n";
-	echo "Disallow: */trackback\n";
-	echo "Disallow: */feed\n";
-	echo "Disallow: */comments\n";
-	echo "Disallow: /*?*\n";
-	echo "Disallow: /*?\n";
-	echo "Allow: /wp-content/uploads\n";
-	echo "Allow: /assets";
-}
-
-// vCard generator widget
-class boilerplate_vcard extends WP_Widget {
-
-	function boilerplate_vcard() {
-		$widget_ops = array('description' => 'Display a vCard');
-		parent::WP_Widget(false, __('vCard', 'boilerplate'), $widget_ops);      
-	}
-   
-	function widget($args, $instance) {  
-		extract($args);
-		$title = $instance['title'];
-		$street_address = $instance['street_address'];
-		$locality = $instance['locality'];
-		$region = $instance['region'];
-		$postal_code = $instance['postal_code'];
-		$country = $instance['country'];
-		$tel = $instance['tel'];
-		$fax = $instance['fax'];
-		$email = $instance['email'];
-	?>
-		<?php echo $before_widget; ?>
-		<?php if ($title) echo $before_title . $title . $after_title; ?>  
-		<p class="vcard">
-			<a class="fn org url" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
-			<div class="adr">
-				<?php if ($street_address) { ?><div class="street-address"><?php echo $street_address; ?></div><?php } ?>
-				<?php if ($locality) { ?><span class="locality"><?php echo $locality; ?></span>,<?php } ?>
-				<?php if ($region) { ?><span class="region"><?php echo $region; ?></span>&nbsp;<?php } ?>
-				<?php if ($postal_code) { ?><span class="postal-code"><?php echo $postal_code; ?></span><?php } ?>
-				<?php if ($country) { ?><div class="country-name"><?php echo $country; ?></div><?php } ?>
-			</div>
-			<?php if ($tel) { ?><div class="tel"><span class="type">Office: </span><span class="value"><?php echo $tel; ?></span></div><?php } ?>
-			<?php if ($fax) { ?><div class="fax"><span class="type">Fax: </span><span class="value"><?php echo $fax; ?></span></div><?php } ?>
-			<?php if ($email) { ?><a class="email" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><?php } ?>
-		</p>        
-        
-        <?php echo $after_widget; ?>
-        
-	<?php
-	}
-	
-	function update($new_instance, $old_instance) {                
-		return $new_instance;
-	}
-
-	function form($instance) {
-		if (isset($instance['title'])) { $title = esc_attr($instance['title']); } else { $title = ''; }
-		if (isset($instance['street_address'])) { $street_address = esc_attr($instance['street_address']); } else { $street_address = ''; }
-		if (isset($instance['locality'])) { $locality = esc_attr($instance['locality']); } else { $locality = ''; }
-		if (isset($instance['region'])) { $region = esc_attr($instance['region']); } else { $region = ''; }
-		if (isset($instance['postal_code'])) { $postal_code = esc_attr($instance['postal_code']); } else { $postal_code = ''; }
-		if (isset($instance['country'])) { $country = esc_attr($instance['country']); } else { $country = ''; }
-		if (isset($instance['tel'])) { $tel = esc_attr($instance['tel']); } else { $tel = ''; }
-		if (isset($instance['email'])) { $email = esc_attr($instance['email']); } else { $email = ''; }
-	?>
-		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (optional):', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" />
-		</p>       
-		<p>
-			<label for="<?php echo $this->get_field_id('street_address'); ?>"><?php _e('Street Address:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('street_address'); ?>" value="<?php echo $street_address; ?>" class="widefat" id="<?php echo $this->get_field_id('street_address'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('locality'); ?>"><?php _e('City/Locality:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('locality'); ?>" value="<?php echo $locality; ?>" class="widefat" id="<?php echo $this->get_field_id('locality'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('region'); ?>"><?php _e('State/Region:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('region'); ?>" value="<?php echo $region; ?>" class="widefat" id="<?php echo $this->get_field_id('region'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('postal_code'); ?>"><?php _e('Zipcode/Postal Code:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('postal_code'); ?>" value="<?php echo $postal_code; ?>" class="widefat" id="<?php echo $this->get_field_id('postal_code'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('country'); ?>"><?php _e('Country:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('country'); ?>" value="<?php echo $country; ?>" class="widefat" id="<?php echo $this->get_field_id('country'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('tel'); ?>"><?php _e('Telephone:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('tel'); ?>" value="<?php echo $tel; ?>" class="widefat" id="<?php echo $this->get_field_id('tel'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('fax'); ?>"><?php _e('Fax Number:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('fax'); ?>" value="<?php echo $fax; ?>" class="widefat" id="<?php echo $this->get_field_id('fax'); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('email'); ?>"><?php _e('Email:', 'boilerplate'); ?></label>
-			<input type="text" name="<?php echo $this->get_field_name('email'); ?>" value="<?php echo $email; ?>" class="widefat" id="<?php echo $this->get_field_id('email'); ?>" />
-		</p>                                   
-	<?php
-	}
-} 
-
-register_widget('boilerplate_vcard');
-
-// remove dir and set lang="en" as default (rather than en-US)
-// https://github.com/retlehs/roots/issues/80
-function boilerplate_language_attributes() {
-	$attributes = array();
-	$output = '';
-	$lang = get_bloginfo('language');
-	if ($lang && $lang !== 'en-US') {
-		$attributes[] = "lang=\"$lang\"";
-	} else {
-		$attributes[] = 'lang="en"';
-	}
-
-	$output = implode(' ', $attributes);
-	$output = apply_filters('boilerplate_language_attributes', $output);
-	return $output;
-}
-
-add_filter('language_attributes', 'boilerplate_language_attributes');
-
-// http://www.deluxeblogtips.com/2011/01/remove-dashboard-widgets-in-wordpress.html
-function boilerplate_remove_dashboard_widgets() {
-	remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');
-	remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
-	remove_meta_box('dashboard_primary', 'dashboard', 'normal');
-	remove_meta_box('dashboard_secondary', 'dashboard', 'normal');
-}
-
-add_action('admin_init', 'boilerplate_remove_dashboard_widgets');
-
-//clean up the default WordPress style tags
-add_filter('style_loader_tag', 'boilerplate_clean_style_tag');
-
-function boilerplate_clean_style_tag($input) {
-  preg_match_all("!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches);
-  //only display media if it's print
-  $media = $matches[3][0] === 'print' ? ' media="print"' : '';                                                                             
-  return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
-}
-
-/**
-* END TLD scripts
-*/
   
  
 /**
@@ -733,7 +501,232 @@ function boilerplate_posted_in() {
 }
 endif;
 
-/*	Begin Boilerplate */
+
+/**
+* TLD additional scripts added by Micah
+*/
+
+// http://digwp.com/2010/03/wordpress-functions-php-template-custom-functions/ 
+// enable threaded comments
+function enable_threaded_comments(){
+	if (!is_admin()) {
+		if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1))
+			wp_enqueue_script('comment-reply');
+		}
+}
+add_action('get_header', 'enable_threaded_comments');
+
+// remove version info from head and feeds
+// http://digwp.com/2010/04/wordpress-custom-functions-php-template-part-2/
+function complete_version_removal() {
+	return '';
+}
+
+// remove CSS from recent comments widget
+function boilerplate_remove_recent_comments_style() {
+	global $wp_widget_factory;
+	if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
+		remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+	}
+}
+
+// remove CSS from gallery
+function boilerplate_gallery_style($css) {
+	return preg_replace("!<style type='text/css'>(.*?)</style>!s", '', $css);
+}
+
+// remove junk from head
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'wp_generator');
+	remove_action('wp_head', 'feed_links', 2);
+	remove_action('wp_head', 'index_rel_link');
+	remove_action('wp_head', 'wlwmanifest_link');
+	remove_action('wp_head', 'feed_links_extra', 3);
+	remove_action('wp_head', 'start_post_rel_link', 10, 0);
+	remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+	   add_action('wp_head', 'boilerplate_remove_recent_comments_style', 1);	
+	   add_filter('gallery_style', 'boilerplate_gallery_style');
+	   add_filter('the_generator', 'complete_version_removal');
+
+// kill the admin nag
+if (!current_user_can('edit_users')) {
+	add_action('init', create_function('$a', "remove_action('init', 'wp_version_check');"), 2);
+	add_filter('pre_option_update_core', create_function('$a', "return null;"));
+}
+
+// custom admin login logo
+function custom_login_logo() {
+	echo '<style type="text/css">
+	h1 a { background-image: url('.get_bloginfo('template_directory').'/images/custom-login-logo.png) !important; }
+	</style>';
+}
+add_action('login_head', 'custom_login_logo');
+
+// remove login errors
+// http://tutzone.net/2011/02/how-to-hide-login-errors-in-wordpress.html
+add_filter('login_errors', create_function('$a', "return null;"));
+
+// add to robots.txt
+// http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
+add_action('do_robots', 'boilerplate_robots');
+
+function boilerplate_robots() {
+	echo "Disallow: /cgi-bin\n";
+	echo "Disallow: /wp-admin\n";
+	echo "Disallow: /wp-includes\n";
+	echo "Disallow: /wp-content/plugins\n";
+	echo "Disallow: /plugins\n";
+	echo "Disallow: /wp-content/cache\n";
+	echo "Disallow: /wp-content/themes\n";
+	echo "Disallow: /trackback\n";
+	echo "Disallow: /feed\n";
+	echo "Disallow: /comments\n";
+	echo "Disallow: /category/*/*\n";
+	echo "Disallow: */trackback\n";
+	echo "Disallow: */feed\n";
+	echo "Disallow: */comments\n";
+	echo "Disallow: /*?*\n";
+	echo "Disallow: /*?\n";
+	echo "Allow: /wp-content/uploads\n";
+	echo "Allow: /assets";
+}
+
+// vCard generator widget
+class boilerplate_vcard extends WP_Widget {
+
+	function boilerplate_vcard() {
+		$widget_ops = array('description' => 'Display a vCard');
+		parent::WP_Widget(false, __('vCard', 'boilerplate'), $widget_ops);      
+	}
+   
+	function widget($args, $instance) {  
+		extract($args);
+		$title = $instance['title'];
+		$street_address = $instance['street_address'];
+		$locality = $instance['locality'];
+		$region = $instance['region'];
+		$postal_code = $instance['postal_code'];
+		$country = $instance['country'];
+		$tel = $instance['tel'];
+		$fax = $instance['fax'];
+		$email = $instance['email'];
+	?>
+		<?php echo $before_widget; ?>
+		<?php if ($title) echo $before_title . $title . $after_title; ?>  
+		<p class="vcard">
+			<a class="fn org url" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
+			<div class="adr">
+				<?php if ($street_address) { ?><div class="street-address"><?php echo $street_address; ?></div><?php } ?>
+				<?php if ($locality) { ?><span class="locality"><?php echo $locality; ?></span>,<?php } ?>
+				<?php if ($region) { ?><span class="region"><?php echo $region; ?></span>&nbsp;<?php } ?>
+				<?php if ($postal_code) { ?><span class="postal-code"><?php echo $postal_code; ?></span><?php } ?>
+				<?php if ($country) { ?><div class="country-name"><?php echo $country; ?></div><?php } ?>
+			</div>
+			<?php if ($tel) { ?><div class="tel"><span class="type">Office: </span><span class="value"><?php echo $tel; ?></span></div><?php } ?>
+			<?php if ($fax) { ?><div class="fax"><span class="type">Fax: </span><span class="value"><?php echo $fax; ?></span></div><?php } ?>
+			<?php if ($email) { ?><a class="email" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><?php } ?>
+		</p>        
+        
+        <?php echo $after_widget; ?>
+        
+	<?php
+	}
+	
+	function update($new_instance, $old_instance) {                
+		return $new_instance;
+	}
+
+	function form($instance) {
+		if (isset($instance['title'])) { $title = esc_attr($instance['title']); } else { $title = ''; }
+		if (isset($instance['street_address'])) { $street_address = esc_attr($instance['street_address']); } else { $street_address = ''; }
+		if (isset($instance['locality'])) { $locality = esc_attr($instance['locality']); } else { $locality = ''; }
+		if (isset($instance['region'])) { $region = esc_attr($instance['region']); } else { $region = ''; }
+		if (isset($instance['postal_code'])) { $postal_code = esc_attr($instance['postal_code']); } else { $postal_code = ''; }
+		if (isset($instance['country'])) { $country = esc_attr($instance['country']); } else { $country = ''; }
+		if (isset($instance['tel'])) { $tel = esc_attr($instance['tel']); } else { $tel = ''; }
+		if (isset($instance['email'])) { $email = esc_attr($instance['email']); } else { $email = ''; }
+	?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (optional):', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" />
+		</p>       
+		<p>
+			<label for="<?php echo $this->get_field_id('street_address'); ?>"><?php _e('Street Address:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('street_address'); ?>" value="<?php echo $street_address; ?>" class="widefat" id="<?php echo $this->get_field_id('street_address'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('locality'); ?>"><?php _e('City/Locality:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('locality'); ?>" value="<?php echo $locality; ?>" class="widefat" id="<?php echo $this->get_field_id('locality'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('region'); ?>"><?php _e('State/Region:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('region'); ?>" value="<?php echo $region; ?>" class="widefat" id="<?php echo $this->get_field_id('region'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('postal_code'); ?>"><?php _e('Zipcode/Postal Code:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('postal_code'); ?>" value="<?php echo $postal_code; ?>" class="widefat" id="<?php echo $this->get_field_id('postal_code'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('country'); ?>"><?php _e('Country:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('country'); ?>" value="<?php echo $country; ?>" class="widefat" id="<?php echo $this->get_field_id('country'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('tel'); ?>"><?php _e('Telephone:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('tel'); ?>" value="<?php echo $tel; ?>" class="widefat" id="<?php echo $this->get_field_id('tel'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('fax'); ?>"><?php _e('Fax Number:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('fax'); ?>" value="<?php echo $fax; ?>" class="widefat" id="<?php echo $this->get_field_id('fax'); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('email'); ?>"><?php _e('Email:', 'boilerplate'); ?></label>
+			<input type="text" name="<?php echo $this->get_field_name('email'); ?>" value="<?php echo $email; ?>" class="widefat" id="<?php echo $this->get_field_id('email'); ?>" />
+		</p>                                   
+	<?php
+	}
+} 
+
+register_widget('boilerplate_vcard');
+
+// remove dir and set lang="en" as default (rather than en-US)
+// https://github.com/retlehs/roots/issues/80
+function boilerplate_language_attributes() {
+	$attributes = array();
+	$output = '';
+	$lang = get_bloginfo('language');
+	if ($lang && $lang !== 'en-US') {
+		$attributes[] = "lang=\"$lang\"";
+	} else {
+		$attributes[] = 'lang="en"';
+	}
+
+	$output = implode(' ', $attributes);
+	$output = apply_filters('boilerplate_language_attributes', $output);
+	return $output;
+}
+
+add_filter('language_attributes', 'boilerplate_language_attributes');
+
+// http://www.deluxeblogtips.com/2011/01/remove-dashboard-widgets-in-wordpress.html
+function boilerplate_remove_dashboard_widgets() {
+	remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');
+	remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
+	remove_meta_box('dashboard_primary', 'dashboard', 'normal');
+	remove_meta_box('dashboard_secondary', 'dashboard', 'normal');
+}
+add_action('admin_init', 'boilerplate_remove_dashboard_widgets');
+
+//clean up the default WordPress style tags
+add_filter('style_loader_tag', 'boilerplate_clean_style_tag');
+
+function boilerplate_clean_style_tag($input) {
+  preg_match_all("!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches);
+  //only display media if it's print
+  $media = $matches[3][0] === 'print' ? ' media="print"' : '';                                                                             
+  return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
+}
+
 
 // IE Chrome Frame custom hook
 function ie_chrome_frame() {
@@ -748,7 +741,9 @@ function boilerplate_credits() {
 // Add Boilerplate Admin Panel
 	locate_template( 'boilerplate-admin/admin-menu.php', true );
 
-/*	End Boilerplate */
+/**
+* END TLD scripts
+*/
 
 // Add category nicenames in body and post class
 	function boilerplate_category_id_class($classes) {
