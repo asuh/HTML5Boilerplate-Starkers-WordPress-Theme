@@ -8,7 +8,7 @@
  */
 ?>
 
-			<ul class="xoxo">
+			<ul class="sidebar">
 
 <?php
 	/* When we call the dynamic_sidebar() function, it'll spit out

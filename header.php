@@ -25,7 +25,6 @@
 			wp_title( '|', true, 'right' );
 		?></title>
 
-		<!-- CSS : implied media="all" -->
 		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
