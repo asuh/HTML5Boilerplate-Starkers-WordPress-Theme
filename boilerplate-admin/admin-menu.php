@@ -149,12 +149,14 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['favicon_ithing']) && $options['favicon_ithing']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[favicon_ithing]" value="true" ' .$checked. '/>';
-			echo '<p>To allow <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr></em> users to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">add an icon for your site to their Home screen</a>, place the "apple-touch-icon.png" file in the root directory of your site.</p>';
-			echo '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>';
+			echo '<p>To allow <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr> Android, and other tablet device</em> users to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">add an icon for your site to their Home screen</a>, place the "apple-touch-icon.png" file and similar files in the root directory of your site.</p>';
+			echo '<p><strong>iOS-only</strong>, if the files are in the root directory, you don\'t really need to select this option because <a href="http://mathiasbynens.be/notes/touch-icons#no-html">the website root directory will be searched for these icons</a>. For full tablet/mobile support, enable this option.</p>';
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"114x114"</span> href=<span>"/apple-touch-icon-114x114-precomposed.png"</span> /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-72x72-precomposed.png" /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-57x57-precomposed.png" /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon-precomposed.png"</span> /&gt;</code>';
 			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon.png"</span> /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-ipad.png" /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"114x114"</span> href=<span>"/apple-touch-icon-iphone4.png"</span> /&gt;</code>';
 		}
 
 	//	callback fn for modernizr_js
@@ -320,9 +322,11 @@
 
 	//	$options['favicon_ithing']
 		function add_favicon_ithing() {
+			echo '<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png" />'.PHP_EOL;
+			echo '<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72-precomposed.png" />'.PHP_EOL;
+			echo '<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-57x57-precomposed.png" />'.PHP_EOL;
+			echo '<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png" />'.PHP_EOL;
 			echo '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />'.PHP_EOL;
-			echo '<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-ipad.png" />'.PHP_EOL;
-			echo '<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-iphone4.png" />'.PHP_EOL;
 		}
 
 	//	$options['modernizr_js']
