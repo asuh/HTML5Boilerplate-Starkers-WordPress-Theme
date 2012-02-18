@@ -506,8 +506,8 @@ endif;
 * TLD additional scripts added by Micah
 */
 
-// http://digwp.com/2010/03/wordpress-functions-php-template-custom-functions/ 
 // enable threaded comments
+// http://digwp.com/2010/03/wordpress-functions-php-template-custom-functions/ 
 function enable_threaded_comments(){
 	if (!is_admin()) {
 		if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1))

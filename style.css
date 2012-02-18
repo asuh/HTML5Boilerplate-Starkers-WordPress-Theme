@@ -383,7 +383,7 @@ li#theme-switcher { background:#fff; border:10px solid red; padding:20px; positi
 /* ----------------------------------------- */
 
 h1, h2, h3, h4, h5, h6 { font-weight:bold } /* This helps to identify headings at the initial build stage, so I thought it'd be useful to have it */
-.alert { background:red; color:white } /* 'alert' has a basic style, since it's useful to have it standing out for testing purposes.
+.alert { background:red; color:white } /* 'alert' has a basic style, since it's useful to have it standing out for testing purposes. */
 
 /** START WordPress-Defined CSS Classes **/
 .wp-caption-text { margin: 0; }
