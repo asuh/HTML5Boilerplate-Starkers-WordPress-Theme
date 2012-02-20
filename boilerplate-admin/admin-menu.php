@@ -168,8 +168,8 @@
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
 			//echo '<code><b>&lt;</b>script src<b>=</b><span>"//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
-			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.5.2.min.js"><\/script>\'))&lt;/script&gt;</code>';
-			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.5.2.min.js\'&gt;&lt;/script&gt;</code>';
+			//echo '<code>&lt;script&gt;!window.Modernizr && document.write(unescape(\'&lt;script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.5.3.min.js"><\/script>\'))&lt;/script&gt;</code>';
+			echo '<code>&lt;script type=\'text/javascript\' src=\'' .get_template_directory_uri().'/js/libs/modernizr-2.5.3.min.js\'&gt;&lt;/script&gt;</code>';
 			echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers:</strong></p>';
 			echo '<code class="comment">&lt;!--[if lt IE 9]&gt;</code>';
 			echo '<code class="comment">	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js" onload="window.ieshiv=true;"&gt;&lt;/script&gt;</code>';
@@ -337,7 +337,7 @@
 			//dropping cdnjs per Paul & Divya recommendation, leaving below line as it will hopefully soon become a Google CDN link
 			//echo '<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>'.PHP_EOL; // try getting from CDN
 			//echo '<script>!window.Modernizr && document.write(unescape(\'<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.0.min.js'.$cache.'"><\/script>\'))</script>'.PHP_EOL; // fallback to local if CDN fails
-			echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.5.2.min.js'.$cache.'"></script>'.PHP_EOL;
+			echo '<script src="' .get_template_directory_uri(). '/js/libs/modernizr-2.5.3.min.js'.$cache.'"></script>'.PHP_EOL;
 		}
 
 	//	$options['ieshiv_script']
