@@ -154,7 +154,7 @@
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
 			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"114x114"</span> href=<span>"/apple-touch-icon-114x114-precomposed.png"</span> /&gt;</code>';
 			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-72x72-precomposed.png" /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-57x57-precomposed.png" /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"57x57"</span> href=<span>"/apple-touch-icon-57x57-precomposed.png" /&gt;</code>';
 			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon-precomposed.png"</span> /&gt;</code>';
 			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon.png"</span> /&gt;</code>';
 		}
@@ -324,7 +324,7 @@
 		function add_favicon_ithing() {
 			echo '<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png" />'.PHP_EOL;
 			echo '<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72-precomposed.png" />'.PHP_EOL;
-			echo '<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-57x57-precomposed.png" />'.PHP_EOL;
+			echo '<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57-precomposed.png" />'.PHP_EOL;
 			echo '<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png" />'.PHP_EOL;
 			echo '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />'.PHP_EOL;
 		}
