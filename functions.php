@@ -342,7 +342,7 @@ function boilerplate_comment( $comment, $args, $depth ) {
 		<article id="comment-<?php comment_ID(); ?>">
 			<div class="comment-author vcard">
 				<?php echo get_avatar( $comment, 40 ); ?>
-				<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+				<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<span class="fn">%s</span>', get_comment_author_link() ) ); ?>
 			</div><!-- .comment-author .vcard -->
 			<?php if ( $comment->comment_approved == '0' ) : ?>
 			<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
