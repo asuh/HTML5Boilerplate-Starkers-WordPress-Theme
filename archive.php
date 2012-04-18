@@ -27,9 +27,9 @@ get_header();
 						if ( is_day() ) :
 							printf( __( 'Daily Archives: %s', 'boilerplate' ), get_the_date() );
 						elseif ( is_month() ) :
-							printf( __( 'Monthly Archives: %s', 'boilerplate' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'twentyten' ) ) );
+							printf( __( 'Monthly Archives: %s', 'boilerplate' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'boilerplate' ) ) );
 						elseif ( is_year() ) :
-							printf( __( 'Yearly Archives: %s', 'boilerplate' ), get_the_date( _x( 'Y', 'yearly archives date format', 'twentyten' ) ) );
+							printf( __( 'Yearly Archives: %s', 'boilerplate' ), get_the_date( _x( 'Y', 'yearly archives date format', 'boilerplate' ) ) );
 						else :
 							_e( 'Blog Archives', 'boilerplate' );
 						endif;
