@@ -38,7 +38,6 @@
  * @since Boilerplate 1.0
  */
   
- 
 /**
  * Set the content width based on the theme's design and stylesheet.
  *
@@ -458,16 +457,37 @@ if ( ! function_exists( 'boilerplate_posted_on' ) ) :
  * @since Twenty Ten 1.0
  */
 function boilerplate_posted_on() {
-	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', 'boilerplate' ),
+	// BP: slight modification to Twenty Ten function, converting single permalink to multi-archival link
+	// Y = 2012
+	// F = September
+	// m = 01–12
+	// j = 1–31
+	// d = 01–31
+	printf( __( '<span class="%1$s">Posted on</span> <span class="entry-date">%2$s %3$s %4$s</span> <span class="meta-sep">by</span> %5$s', 'boilerplate' ),
+		// %1$s = container class
 		'meta-prep meta-prep-author',
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
-			get_permalink(),
-			esc_attr( get_the_time() ),
-			get_the_date()
+		// %2$s = month: /yyyy/mm/
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
+			home_url() . '/' . get_the_date( 'Y' ) . '/' . get_the_date( 'm' ) . '/',
+			esc_attr( 'View Archives for ' . get_the_date( 'F' ) . ' ' . get_the_date( 'Y' ) ),
+			get_the_date( 'F' )
 		),
+		// %3$s = day: /yyyy/mm/dd/
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
+			home_url() . '/' . get_the_date( 'Y' ) . '/' . get_the_date( 'm' ) . '/' . get_the_date( 'd' ) . '/',
+			esc_attr( 'View Archives for ' . get_the_date( 'F' ) . ' ' . get_the_date( 'j' ) . ' ' . get_the_date( 'Y' ) ),
+			get_the_date( 'j' )
+		),
+		// %4$s = year: /yyyy/
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
+			home_url() . '/' . get_the_date( 'Y' ) . '/',
+			esc_attr( 'View Archives for ' . get_the_date( 'Y' ) ),
+			get_the_date( 'Y' )
+		),
+		// %5$s = author vcard
 		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			esc_attr( sprintf( __( 'View all posts by %s', 'boilerplate' ), get_the_author() ) ),
+			sprintf( esc_attr__( 'View all posts by %s', 'boilerplate' ), get_the_author() ),
 			get_the_author()
 		)
 	);
@@ -744,15 +764,3 @@ function boilerplate_credits() {
 /**
 * END TLD scripts
 */
-
-// Add category nicenames in body and post class
-	function boilerplate_category_id_class($classes) {
-	    global $post;
-	    foreach((get_the_category($post->ID)) as $category)
-	        $classes[] = $category->category_nicename;
-	        return $classes;
-	}
-	add_filter('post_class', 'boilerplate_category_id_class');
-	add_filter('body_class', 'boilerplate_category_id_class');
-
-?>
