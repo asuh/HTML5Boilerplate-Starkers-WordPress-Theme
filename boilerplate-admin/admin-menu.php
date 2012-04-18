@@ -201,12 +201,12 @@
 			echo '<p>Based upon <a href="http://mathiasbynens.be/notes/touch-icons">this Touch Icons research</a>, the icon code will be added in the specific order seen below.';
 			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
 			echo '<p><strong>(Be sure to relocate all the icons to the root directory!)</strong></p>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"144x144"</span> href=<span>"/apple-touch-icon-144x144-precomposed.png"</span> /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"114x114"</span> href=<span>"/apple-touch-icon-114x114-precomposed.png"</span> /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-72x72-precomposed.png" /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"57x57"</span> href=<span>"/apple-touch-icon-57x57-precomposed.png" /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon-precomposed.png"</span> /&gt;</code>';
-			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon.png"</span> /&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"144x144"</span> href=<span>"/apple-touch-icon-144x144-precomposed.png"</span>&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"114x114"</span> href=<span>"/apple-touch-icon-114x114-precomposed.png"</span>&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"72x72"</span> href=<span>"/apple-touch-icon-72x72-precomposed.png"</span>&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> sizes=<span>"57x57"</span> href=<span>"/apple-touch-icon-57x57-precomposed.png"</span>&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon-precomposed.png"</span>&gt;</code>';
+			echo '<code>&lt;link rel=<span>"apple-touch-icon"</span> href=<span>"/apple-touch-icon.png"</span>&gt;</code>';
 		}
 	endif; // favicon_ithing_setting
 
