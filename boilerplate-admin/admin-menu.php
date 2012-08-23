@@ -61,7 +61,6 @@
 		function register_and_build_fields() {
 			register_setting('plugin_options', 'plugin_options', 'validate_setting');
 			add_settings_section('main_section', '', 'section_cb', 'boilerplate-admin');
-			add_settings_field('toolbar', 'IE6 Image Toolbar?:', 'toolbar_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('google_chrome', 'IE-edge / Google Chrome?:', 'google_chrome_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('google_verification', 'Google/Bing Verification?:', 'google_verification_setting', 'boilerplate-admin', 'main_section');
 			add_settings_field('viewport', '<em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> use full zoom?:', 'viewport_setting', 'boilerplate-admin', 'main_section');
@@ -117,18 +116,6 @@
 	if ( ! function_exists( 'section_cb' ) ):
 		function section_cb() {}
 	endif; // section_cb
-
-	//	callback fn for toolbar
-	if ( ! function_exists( 'toolbar_setting' ) ):
-		function toolbar_setting() {
-			$options = get_option('plugin_options');
-			$checked = (isset($options['toolbar']) && $options['toolbar']) ? 'checked="checked" ' : '';
-			echo '<input class="check-field" type="checkbox" name="plugin_options[toolbar]" value="true" ' .$checked. '/>';
-			echo '<p>Kill the IE6 Image Toolbar that appears when users hover over images on your site.</p>';
-			echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
-			echo '<code>&lt;meta http-equiv=<span>"imagetoolbar"</span> content=<span>"false"</span>&gt;</code>';
-		}
-	endif; // toolbar_setting
 
 	//	callback fn for google_chrome
 	if ( ! function_exists( 'google_chrome_setting' ) ):
@@ -361,13 +348,6 @@
 
 /*	4)	Create functions to add above elements to pages */
 
-	//	$options['toolbar']
-	if ( ! function_exists( 'add_toolbar' ) ):
-		function add_toolbar() {
-			echo '<meta http-equiv="imagetoolbar" content="false">'.PHP_EOL;
-		}
-	endif; // add_toolbar
-
 	//	$options['google_chrome']
 	if ( ! function_exists( 'add_google_chrome' ) ):
 		function add_google_chrome() {
@@ -523,12 +503,6 @@
 
 			// get the options
 			$options = get_option('plugin_options');
-
-			// check if each option is set (meaning it exists) and check if it is true (meaning it was checked)
-			if (isset($options['toolbar']) && $options['toolbar']) {
-				// if yes to both, apply option
-				add_action('wp_print_styles', 'add_toolbar');
-			}
 
 			if (isset($options['google_chrome']) && $options['google_chrome']) {
 				add_action('wp_print_styles', 'add_google_chrome');
