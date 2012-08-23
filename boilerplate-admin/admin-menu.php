@@ -504,6 +504,7 @@
 			// get the options
 			$options = get_option('plugin_options');
 
+			// check if each option is set (meaning it exists) and check if it is true (meaning it was checked)
 			if (isset($options['google_chrome']) && $options['google_chrome']) {
 				add_action('wp_print_styles', 'add_google_chrome');
 			}
