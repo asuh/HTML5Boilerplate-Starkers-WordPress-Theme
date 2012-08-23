@@ -231,7 +231,7 @@
 		function jquery_js_setting() {
 			$options = get_option('plugin_options');
 			$checked = (isset($options['jquery_js']) && $options['jquery_js']) ? 'checked="checked" ' : '';
-			$version = (isset($options['jquery_version']) && $options['jquery_version'] && $options['jquery_version'] !== '') ? $options['jquery_version'] : '1.7.2';
+			$version = (isset($options['jquery_version']) && $options['jquery_version'] && $options['jquery_version'] !== '') ? $options['jquery_version'] : '1.8.0';
 			$inhead = (isset($options['jquery_head']) && $options['jquery_head']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
 			echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
@@ -433,7 +433,7 @@
 		function add_jquery_script() {
 			$cache = cache_buster();
 			$options = get_option('plugin_options');
-			$version = ($options['jquery_version']) ? $options['jquery_version'] : '1.7.2';
+			$version = ($options['jquery_version']) ? $options['jquery_version'] : '1.8.0';
 			wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 			echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js"></script>'.PHP_EOL; // try getting from CDN
 			echo '<script>window.jQuery || document.write(\'<script src="' .BP_THEME_URL. '/js/vendor/jquery.js'.$cache.'"><\/script>\')</script>'.PHP_EOL; // fallback to local if CDN fails
