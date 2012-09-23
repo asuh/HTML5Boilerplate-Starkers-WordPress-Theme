@@ -283,7 +283,7 @@
 			echo '<input class="check-field" type="checkbox" name="plugin_options[chrome_frame]" value="true" ' .$checked. '/>';
 			echo '<p>Prompt IE 6 users to upgrade or install <a href="http://chromium.org/developers/how-tos/chrome-frame-getting-started">Chrome Frame</a>.</p>';
 			echo '<p>Selecting this option will add the following code just after the <code class="html">&lt;body&gt;</code>:</p>';
-			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;&lt;p class=chromeframe&gt;Your browser is &lt;em&gt;ancient!&lt;/em&gt; &lt;a href="http://browsehappy.com/"&gt;Upgrade to a different browser&lt;/a&gt; or &lt;a href="http://www.google.com/chromeframe/?redirect=true"&gt;install Google Chrome Frame&lt;/a&gt; to experience this site.&lt;/p&gt;&lt;![endif]--&gt;</code>';
+			echo '<code class="comment">&lt;!--[if lt IE 7]&gt;&lt;p class=chromeframe&gt;You are using an &lt;em&gt;outdated&lt;/em&gt; browser. Please &lt;a href="http://browsehappy.com/"&gt;upgrade your browser&lt;/a&gt; or &lt;a href="http://www.google.com/chromeframe/?redirect=true"&gt;activate Google Chrome Frame&lt;/a&gt; to improve your experience.&lt;/p&gt;&lt;![endif]--&gt;</code>';
 		}
 	endif; // chrome_frame_setting
 
@@ -459,7 +459,7 @@
 	//	$options['chrome_frame']
 	if ( ! function_exists( 'add_chrome_frame' ) ):
 		function add_chrome_frame() {
-			echo '<!--[if lt IE 7 ]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->'.PHP_EOL;
+			echo '<!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->'.PHP_EOL;
 		}
 	endif; // add_chrome_frame
 
