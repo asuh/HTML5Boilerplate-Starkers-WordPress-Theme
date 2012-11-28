@@ -14,7 +14,7 @@
 	Comment blocks indicate where each begins and ends, like this, for example...
 */
 
-/*! normalize.css v1.0.1 | MIT License | git.io/normalize */
+/*! normalize.css v1.0.2 | MIT License | git.io/normalize */
 
 /* ==========================================================================
    HTML5 display definitions
@@ -165,7 +165,7 @@ h5 {
 }
 
 h6 {
-    font-size: 0.75em;
+    font-size: 0.67em;
     margin: 2.33em 0;
 }
 
