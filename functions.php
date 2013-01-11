@@ -142,28 +142,28 @@ function boilerplate_setup() {
 endif;
 
 if ( ! function_exists( 'boilerplate_admin_header_style' ) ) :
-/**
- * Styles the header image displayed on the Appearance > Header admin panel.
- *
- * Referenced via add_custom_image_header() in boilerplate_setup().
- *
- * @since Twenty Ten 1.0
- */
-function boilerplate_admin_header_style() {
-?>
-<style type="text/css">
-/* Shows the same border as on front end */
-#headimg {
-	border-bottom: 1px solid #000;
-	border-top: 4px solid #000;
-}
-/* If NO_HEADER_TEXT is false, you would style the text with these selectors:
-	#headimg #name { }
-	#headimg #desc { }
-*/
-</style>
-<?php
-}
+	/**
+	 * Styles the header image displayed on the Appearance > Header admin panel.
+	 *
+	 * Referenced via add_custom_image_header() in boilerplate_setup().
+	 *
+	 * @since Twenty Ten 1.0
+	 */
+	function boilerplate_admin_header_style() {
+	?>
+	<style type="text/css">
+	/* Shows the same border as on front end */
+	#headimg {
+		border-bottom: 1px solid #000;
+		border-top: 4px solid #000;
+	}
+	/* If NO_HEADER_TEXT is false, you would style the text with these selectors:
+		#headimg #name { }
+		#headimg #desc { }
+	*/
+	</style>
+	<?php
+	}
 endif;
 
 /**
@@ -322,53 +322,53 @@ if ( version_compare( $GLOBALS['wp_version'], '3.1', '<' ) )
 	add_filter( 'gallery_style', 'boilerplate_remove_gallery_css' );
 
 if ( ! function_exists( 'boilerplate_comment' ) ) :
-/**
- * Template for comments and pingbacks.
- *
- * To override this walker in a child theme without modifying the comments template
- * simply create your own boilerplate_comment(), and that function will be used instead.
- *
- * Used as a callback by wp_list_comments() for displaying the comments.
- *
- * @since Twenty Ten 1.0
- */
-function boilerplate_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	switch ( $comment->comment_type ) :
-		case '' :
-	?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-		<article id="comment-<?php comment_ID(); ?>">
-			<div class="comment-author vcard">
-				<?php echo get_avatar( $comment, 40 ); ?>
-				<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<span class="fn">%s</span>', get_comment_author_link() ) ); ?>
-			</div><!-- .comment-author .vcard -->
-			<?php if ( $comment->comment_approved == '0' ) : ?>
-			<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
-				<br />
-			<?php endif; ?>
-			<footer class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-				<?php
-					/* translators: 1: date, 2: time */
-					printf( __( '%1$s at %2$s', 'boilerplate' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'boilerplate' ), ' ' );
-				?>
-			</footer><!-- .comment-meta .commentmetadata -->
-			<div class="comment-body"><?php comment_text(); ?></div>
-			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-			</div><!-- .reply -->
-		</article><!-- #comment-##  -->
-	<?php
-			break;
-		case 'pingback'  :
-		case 'trackback' :
-	?>
-	<li class="post pingback">
-		<p><?php _e( 'Pingback:', 'boilerplate' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'boilerplate'), ' ' ); ?></p>
-	<?php
-			break;
-	endswitch;
-}
+	/**
+	 * Template for comments and pingbacks.
+	 *
+	 * To override this walker in a child theme without modifying the comments template
+	 * simply create your own boilerplate_comment(), and that function will be used instead.
+	 *
+	 * Used as a callback by wp_list_comments() for displaying the comments.
+	 *
+	 * @since Twenty Ten 1.0
+	 */
+	function boilerplate_comment( $comment, $args, $depth ) {
+		$GLOBALS['comment'] = $comment;
+		switch ( $comment->comment_type ) :
+			case '' :
+		?>
+		<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+			<article id="comment-<?php comment_ID(); ?>">
+				<div class="comment-author vcard">
+					<?php echo get_avatar( $comment, 40 ); ?>
+					<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<span class="fn">%s</span>', get_comment_author_link() ) ); ?>
+				</div><!-- .comment-author .vcard -->
+				<?php if ( $comment->comment_approved == '0' ) : ?>
+					<em><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
+					<br />
+				<?php endif; ?>
+				<footer class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+					<?php
+						/* translators: 1: date, 2: time */
+						printf( __( '%1$s at %2$s', 'boilerplate' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'boilerplate' ), ' ' );
+					?>
+				</footer><!-- .comment-meta .commentmetadata -->
+				<div class="comment-body"><?php comment_text(); ?></div>
+				<div class="reply">
+					<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+				</div><!-- .reply -->
+			</article><!-- #comment-##  -->
+		<?php
+				break;
+			case 'pingback'  :
+			case 'trackback' :
+		?>
+		<li class="post pingback">
+			<p><?php _e( 'Pingback:', 'boilerplate' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'boilerplate'), ' ' ); ?></p>
+		<?php
+				break;
+		endswitch;
+	}
 endif;
 
 /**
@@ -451,74 +451,74 @@ function boilerplate_widgets_init() {
 add_action( 'widgets_init', 'boilerplate_widgets_init' );
 
 if ( ! function_exists( 'boilerplate_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post—date/time and author.
- *
- * @since Twenty Ten 1.0
- */
-function boilerplate_posted_on() {
-	// BP: slight modification to Twenty Ten function, converting single permalink to multi-archival link
-	// Y = 2012
-	// F = September
-	// m = 01–12
-	// j = 1–31
-	// d = 01–31
-	printf( __( '<span class="%1$s">Posted on</span> <span class="entry-date">%2$s %3$s %4$s</span> <span class="meta-sep">by</span> %5$s', 'boilerplate' ),
-		// %1$s = container class
-		'meta-prep meta-prep-author',
-		// %2$s = month: /yyyy/mm/
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
-			home_url() . '/' . get_the_date( 'Y' ) . '/' . get_the_date( 'm' ) . '/',
-			esc_attr( 'View Archives for ' . get_the_date( 'F' ) . ' ' . get_the_date( 'Y' ) ),
-			get_the_date( 'F' )
-		),
-		// %3$s = day: /yyyy/mm/dd/
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
-			home_url() . '/' . get_the_date( 'Y' ) . '/' . get_the_date( 'm' ) . '/' . get_the_date( 'd' ) . '/',
-			esc_attr( 'View Archives for ' . get_the_date( 'F' ) . ' ' . get_the_date( 'j' ) . ' ' . get_the_date( 'Y' ) ),
-			get_the_date( 'j' )
-		),
-		// %4$s = year: /yyyy/
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
-			home_url() . '/' . get_the_date( 'Y' ) . '/',
-			esc_attr( 'View Archives for ' . get_the_date( 'Y' ) ),
-			get_the_date( 'Y' )
-		),
-		// %5$s = author vcard
-		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
-			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			sprintf( esc_attr__( 'View all posts by %s', 'boilerplate' ), get_the_author() ),
-			get_the_author()
-		)
-	);
-}
+	/**
+	 * Prints HTML with meta information for the current post—date/time and author.
+	 *
+	 * @since Twenty Ten 1.0
+	 */
+	function boilerplate_posted_on() {
+		// BP: slight modification to Twenty Ten function, converting single permalink to multi-archival link
+		// Y = 2012
+		// F = September
+		// m = 01–12
+		// j = 1–31
+		// d = 01–31
+		printf( __( '<span class="%1$s">Posted on</span> <span class="entry-date">%2$s %3$s %4$s</span> <span class="meta-sep">by</span> %5$s', 'boilerplate' ),
+			// %1$s = container class
+			'meta-prep meta-prep-author',
+			// %2$s = month: /yyyy/mm/
+			sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
+				home_url() . '/' . get_the_date( 'Y' ) . '/' . get_the_date( 'm' ) . '/',
+				esc_attr( 'View Archives for ' . get_the_date( 'F' ) . ' ' . get_the_date( 'Y' ) ),
+				get_the_date( 'F' )
+			),
+			// %3$s = day: /yyyy/mm/dd/
+			sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
+				home_url() . '/' . get_the_date( 'Y' ) . '/' . get_the_date( 'm' ) . '/' . get_the_date( 'd' ) . '/',
+				esc_attr( 'View Archives for ' . get_the_date( 'F' ) . ' ' . get_the_date( 'j' ) . ' ' . get_the_date( 'Y' ) ),
+				get_the_date( 'j' )
+			),
+			// %4$s = year: /yyyy/
+			sprintf( '<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
+				home_url() . '/' . get_the_date( 'Y' ) . '/',
+				esc_attr( 'View Archives for ' . get_the_date( 'Y' ) ),
+				get_the_date( 'Y' )
+			),
+			// %5$s = author vcard
+			sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+				get_author_posts_url( get_the_author_meta( 'ID' ) ),
+				sprintf( esc_attr__( 'View all posts by %s', 'boilerplate' ), get_the_author() ),
+				get_the_author()
+			)
+		);
+	}
 endif;
 
 if ( ! function_exists( 'boilerplate_posted_in' ) ) :
-/**
- * Prints HTML with meta information for the current post (category, tags and permalink).
- *
- * @since Twenty Ten 1.0
- */
-function boilerplate_posted_in() {
-	// Retrieves tag list of current post, separated by commas.
-	$tag_list = get_the_tag_list( '', ', ' );
-	if ( $tag_list ) {
-		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'boilerplate' );
-	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
-		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'boilerplate' );
-	} else {
-		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'boilerplate' );
+	/**
+	 * Prints HTML with meta information for the current post (category, tags and permalink).
+	 *
+	 * @since Twenty Ten 1.0
+	 */
+	function boilerplate_posted_in() {
+		// Retrieves tag list of current post, separated by commas.
+		$tag_list = get_the_tag_list( '', ', ' );
+		if ( $tag_list ) {
+			$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'boilerplate' );
+		} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+			$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'boilerplate' );
+		} else {
+			$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'boilerplate' );
+		}
+		// Prints the string, replacing the placeholders.
+		printf(
+			$posted_in,
+			get_the_category_list( ', ' ),
+			$tag_list,
+			get_permalink(),
+			the_title_attribute( 'echo=0' )
+		);
 	}
-	// Prints the string, replacing the placeholders.
-	printf(
-		$posted_in,
-		get_the_category_list( ', ' ),
-		$tag_list,
-		get_permalink(),
-		the_title_attribute( 'echo=0' )
-	);
-}
 endif;
 
 
