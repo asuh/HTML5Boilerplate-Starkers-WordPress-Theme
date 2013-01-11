@@ -14,7 +14,6 @@
 <!--[if gt IE 8]><!--><html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
-
 		<title><?php
 			/*
 			 * Print the <title> tag based on what is being viewed.
@@ -23,9 +22,7 @@
 			 */
 			wp_title( '|', true, 'right' );
 		?></title>
-
 		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> Feed" href="<?php echo home_url(); ?>/feed/">
@@ -59,4 +56,4 @@
 			<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
 			<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
 		</nav><!-- #access -->
-		<div id="content" role="main">
+		<section id="content" role="main">
