@@ -56,6 +56,7 @@
 					<div class="icon32" id="icon-tools"><br /></div>
 					<h2>HTML5 Boilerplate Admin</h2>
 					<p>So, there's actually a tremendous amount going on here.  If you're not familiar with <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> or the <a href="http://starkerstheme.com/">Starkers theme</a> (upon which this theme is based) you should check them out.</p>
+					<p>The clumsiest part of this is dealing with the CSS and JS "starter" files.  Check the <a href="<?php echo H5BP_URL ?>/readme.txt">Read Me file</a> for details on how I suggest handling them.</p>
 					<p>Choose below which options you want included in your site.</p>
 					<form id="boilerplate-options-form" method="post" action="options.php" enctype="multipart/form-data">
 						<?php settings_fields('plugin_options'); /* very last function on this page... */ ?>
@@ -503,7 +504,7 @@
 		if ( ! function_exists( 'H5BP_add_plugin_script' ) ):
 			function H5BP_add_plugin_script() {
 				$cache = H5BP_cache_buster();
-				echo '<script src="' .H5BP_URL. '/js/plugins.js'.$cache.'"></script>'.PHP_EOL;
+				echo '<script src="' .H5BP_CHILD_URL. '/js/plugins.js'.$cache.'"></script>'.PHP_EOL;
 			}
 		endif; // H5BP_add_plugin_script
 
@@ -511,7 +512,7 @@
 		if ( ! function_exists( 'H5BP_add_site_script' ) ):
 			function H5BP_add_site_script() {
 				$cache = H5BP_cache_buster();
-				echo '<script src="' .H5BP_URL. '/js/main.js'.$cache.'"></script>'.PHP_EOL;
+				echo '<script src="' .H5BP_CHILD_URL. '/js/main.js'.$cache.'"></script>'.PHP_EOL;
 			}
 		endif; // H5BP_add_site_script
 
