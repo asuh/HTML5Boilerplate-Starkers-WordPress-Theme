@@ -1,5 +1,5 @@
 === Theme Name ===
-Contributors: aarontgrogg
+Contributors: aarontgrogg, micah cambre
 Tags: html5, boilerplate
 
 Based on the HTML5 Boilerplate created by Paul Irish and Divya Manian,
@@ -18,10 +18,7 @@ first WordPress theme, [Boilerplate - Starkers WP Theme](http://aarontgrogg.com/
 
 The clumsiest part of this is dealing with the Boilerplate CSS and JS files.
 To avoid any changes you make from being overwritten during upgrades,
-"starter" files have been created in the `/css` and `/js` directories.  I recommend
-creating copies of the starter files (removing '-starter' from the new filenames)
-that you can safely edit.  That way, if the starter files are updated later, you can
-simply copy/paste from them into your files again, and all is fine.
+"starter" files have been created in the `/js` directory.
 
 Another route would be to add additional links in your pages, but this does increase
 your HTTP Requests, which hurts performance...
