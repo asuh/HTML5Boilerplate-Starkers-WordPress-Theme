@@ -619,14 +619,14 @@
 			}
 
 			// for jQuery plug-ins, jQuery must also be set
-			if (isset($options['H5BP_jquery_js']) && $options['H5BP_jquery_js'] && isset($options['H5BP_jquery_version']) && $options['H5BP_jquery_version'] && $options['H5BP_jquery_version'] !== '') {
+			if (isset($options['H5BP_plugins_js']) && $options['H5BP_plugins_js']) {
+				add_action('wp_footer', 'H5BP_add_plugin_script');
+			}
+
+			if (isset($options['H5BP_site_js']) && $options['H5BP_site_js']) {
 				// check if should be loaded in <head> or at end of <body>
-				$hook = (isset($options['H5BP_jquery_head']) && $options['H5BP_jquery_head']) ? 'wp_print_styles' : 'wp_footer';
-				add_action($hook, 'H5BP_add_jquery_script');
-				// for jQuery plug-ins, jQuery must also be set
-				if (isset($options['H5BP_plugins_js']) && $options['H5BP_plugins_js']) {
-					add_action($hook, 'H5BP_add_plugin_script');
-				}
+				$hook = (isset($options['H5BP_site_head']) && $options['H5BP_site_head']) ? 'wp_print_styles' : 'wp_footer';
+				add_action($hook, 'H5BP_add_site_script');
 			}
 
 			if (isset($options['H5BP_search_form']) && $options['H5BP_search_form']) {
