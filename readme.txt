@@ -1,13 +1,20 @@
 === Theme Name ===
-Contributors: aarontgrogg, micah cambre
+Contributors: aarontgrogg
 Tags: html5, boilerplate
+Requires at least: 3.1
+Tested up to: 3.5.1
+Stable tag: 4.3.2
 
-Based on the HTML5 Boilerplate created by Paul Irish and Divya Manian,
-this allows for easy inclusion/removal of all HTML5 Boilerplate options.
+Based on the [HTML5 Boilerplate](http://html5boilerplate.com/) created by
+[Paul Irish](http://paulirish.com/) and [Divya Manian](http://nimbupani.com/),
+this plug-in allows for easy inclusion and removal of all HTML5 Boilerplate options
+that are pertinent to WP.
 
 This theme might look like a little bit of a quagmire at first blush because
 it is a merger of two great themes with a very minor bit by me, but stay
 with me, it'll all make sense in a bit, I promise.
+
+More about this theme can be found at http://aarontgrogg.com/boilerplate/
 
 == Description ==
 
@@ -18,30 +25,104 @@ first WordPress theme, [Boilerplate - Starkers WP Theme](http://aarontgrogg.com/
 
 The clumsiest part of this is dealing with the Boilerplate CSS and JS files.
 To avoid any changes you make from being overwritten during upgrades,
-"starter" files have been created in the `/js` directory.
+"starter" files have been created in the `/css` and `/js` directories.  I recommend
+creating copies of the starter files (removing '-starter' from the new filenames)
+that you can safely edit.  That way, if the starter files are updated later, you can
+simply copy/paste from them into your files again, and all is fine.
 
 Another route would be to add additional links in your pages, but this does increase
 your HTTP Requests, which hurts performance...
 Your call, let me know if you can think of a better implementation.
 
 More about this theme can be found at:
-[http://aarontgrogg.com/boilerplate/](http://aarontgrogg.com/boilerplate/).
+http://aarontgrogg.com/boilerplate/
 
 I also built a Boilerplate plug-in that can be found at:
-[http://aarontgrogg.com/html5boilerplate/](http://aarontgrogg.com/html5boilerplate/).
+http://aarontgrogg.com/html5boilerplate/.
 The plug-in can be added to any existing or new theme, allowing the easy additional of
 all the delicious HTML5 Boilerplate goodness with the ease of checking checkboxes.
 
 Please let me know if you have any questions/suggestions/thoughts,
+
 Atg
-[http://aarontgrogg.com/](http://aarontgrogg.com/)
-[aarontgrogg@gmail.com](mailto:aarontgrogg@gmail.com)
+
+http://aarontgrogg.com/
+
+aarontgrogg@gmail.com
+
+
+== Installation ==
+
+1. Download the ZIP
+2. Unzip the ZIP
+3. Copy/paste the unzipped files into your WP themes directory (`/wp-content/themes/`)
+4. From within WP's Themes Admin panel, Activate the Boilerplate theme
+5. In the left-nav, within the Appearance menu, you should now have an HTML5 Boilerplate link
+6. Click the link to view the HTML5 Boilerplate Admin panel
+7. Check and un-check options to add and remove stuff from your site!
+
+
+== Frequently Asked Questions ==
+
+= What HTML5 Boilerplate options does the theme add? =
+* Use HTML5 `DOCTYPE`?
+* Add IE Conditional `<html>` Tags?
+* Move XFN profile from `<head>` to `<link>`?
+* Use HTML5 Character-Encoding `<meta>` Tag?
+= What HTML5 Boilerplate options does the theme let me manipulate? =
+* Kill IE6 Image Toolbar?
+* Force IE-edge / Google Chrome?
+* Add Google Verification?
+* Force iThings to Use Full Zoom?
+* Add Favicon?
+* Add iThing Favicon?
+* Add IE-only CSS file?
+* Add Modernizr JS?
+* Add Respond JS?
+* Add jQuery JS?
+* Which jQuery version?
+* Put jQuery in `<head>` or at end of `<body>`?
+* Add jQuery Plug-ins JS?
+* Add Site-specific JS?
+* Use HTML5 Search `<input>` Type?
+* Add Search `placeholder` Text?
+* Add Cache Buster to CSS &amp; JS Files?
+
+
+== Screenshots ==
+
+1. Admin Screen
+2. View Source Before HTML5 Boilerplate
+3. View Source After HTML5 Boilerplate
 
 
 === Change Log ===
 
+= 4.3.2 2013-06-01 =
+* Removing Git files....
+
+= 4.3.1 2013-05-23 =
+* Trying to convince the uploader to upload...
+
+= 4.3 2013-05-23 =
+* Big thanks to FrŽdŽric Bolduc for pointing out that jQuery was being added twice, once from the Google CDN,
+  then again the local version, because I had `!window.jQuery || ...` instead of `window.jQuery || ...`  Doh!
+* And speaking of jQuery, updated the local version to 1.9.1.
+* Update to version 4.2.0 of HTML5 Boilerplate, including:
+  * `style.css` now reflects latest `/css/normalize.css` and `/css/main.css`
+  * all `/doc` files
+  * `/js/plugins-starter.js` now reflects latest `/js/plugins.js`
+  * `/js/ieshiv.js` now uses `html5shiv-printshiv.js`, which includes additional stuff for printing: https://github.com/aFarkas/html5shiv
+  * `/js/respond.js` uses the latest version from: https://github.com/scottjehl/Respond
+* Thanks to Sophie for the French translation files!
+* Added a few minor enhancements based on personal use of this Theme
+* Seems Screenshots do not work for Themes?  Well, I'll add them in an `/assets` directory anyway, you never know, maybe some day...
+
+= 4.2 2013-01-12 =
+* Tested & verified in WP 3.5
+
 = 4.1 2012-11-14 =
-* Fixed an issue where the `html5shiv.js` was getting applied to a page 2-3 times in IE < 9...  erps!
+* Fixed an issue where the `ieshiv.js` was getting applied to a page 2-3 times in IE < 9...  erps!
 
 = 4.0.1 2012-10-05 =
 Let's try that again...
@@ -218,10 +299,10 @@ Grabbed updated assets (css, js, etc.) from github per:
 Boilerplate starts with the Starkers theme (http://starkerstheme.com/)...
   mixes in HTML5 Boilerplate (http://html5boilerplate.com/)...
     then makes a couple minor modifications...
-  1) moved IE conditionals from <boby> to <html>, to better synch with Modernizr...
-  2) above also allowed me to remove the <!--[if IE]><![endif]--> recommended by www.phpied.com/conditional-comments-block-downloads/...
-  3) moved extraneous items (like Modernizr, jQuery, Belated PNG, etc.) to Admin panel (not the last item in the Settings drop-down)...
-  The only extraneous items left in the mark-up are the two favicon references in header.php; read about it there.
+	1) moved IE conditionals from <boby> to <html>, to better synch with Modernizr...
+	2) above also allowed me to remove the <!--[if IE]><![endif]--> recommended by www.phpied.com/conditional-comments-block-downloads/...
+	3) moved extraneous items (like Modernizr, jQuery, Belated PNG, etc.) to Admin panel (not the last item in the Settings drop-down)...
+	The only extraneous items left in the mark-up are the two favicon references in header.php; read about it there.
 
 * The directory "- MOVE TO ROOT" is filled with HTML5 Boilerplate goodness that
   should be copied FROM that directory and pasted TO your blog's root directory.
@@ -229,8 +310,8 @@ Boilerplate starts with the Starkers theme (http://starkerstheme.com/)...
   I had to comment-out several items in order to get my WP installation to work, so, play if you like.
 
 Be sure to read these "read me" type files as well:
-  - _READ_ME.txt and _LICENSE.txt are from Starkers Theme
-  - README.markdown is from HTML5 Boilerplate
+	- _READ_ME.txt and _LICENSE.txt are from Starkers Theme
+	- README.markdown is from HTML5 Boilerplate
 
 
 = v.1.0 2010-10-01 =
