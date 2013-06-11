@@ -1,18 +1,10 @@
 /*
 	Theme Name: Boilerplate
 	Theme URI: https://github.com/asuh/HTML5Boilerplate-Starkers-WordPress-Theme
-    Description: A merger created by Aaron T. Grogg (<a href="http://aarontgrogg.com/">http://aarontgrogg.com/</a>)
-        of the HTML5 Boilerplate (<a href="http://html5boilerplate.com/">http://html5boilerplate.com/</a>)
-        and the Starkers theme (<a href="http://starkerstheme.com/">http://starkerstheme.com/</a>),
-        Boilerplate: Starkers provides developers with an ideal, bleeding-edge, clean-start theme.
-        Mark-up is minimal (thanks Elliott) and the most edge-case web technology is baked right in
-        (thanks Paul, Divya and a large cast of supporting characters)!  Boilerplate themes are designed to serve as a Parent theme
-        to whatever Child (<a href="http://codex.wordpress.org/Child_Themes">http://codex.wordpress.org/Child_Themes</a>) you care to add,
-        but you could just as easily use this as a starting point and alter the PHP as your design needs.
-        More about this theme can be found at <a href="http://aarontgrogg.com/boilerplate/">http://aarontgrogg.com/boilerplate/</a>.
+	Description: A merger created by Aaron T. Grogg (<a href="http://aarontgrogg.com/">http://aarontgrogg.com/</a>) of the HTML5 Boilerplate (<a href="http://html5boilerplate.com/">http://html5boilerplate.com/</a>) and the Starkers theme (<a href="http://starkerstheme.com/">http://starkerstheme.com/</a>), Boilerplate: Starkers provides developers with an ideal, bleeding-edge, clean-start theme. Mark-up is minimal (thanks Elliott) and the most edge-case web technology is baked right in (thanks Paul, Divya and a large cast of supporting characters)!  Boilerplate themes are designed to serve as a Parent theme to whatever Child (<a href="http://codex.wordpress.org/Child_Themes">http://codex.wordpress.org/Child_Themes</a>) you care to add, but you could just as easily use this as a starting point and alter the PHP as your design needs. More about this theme can be found at <a href="http://aarontgrogg.com/boilerplate/">http://aarontgrogg.com/boilerplate/</a>.
 	Author: Micah Cambre via Aaron T. Grogg, based on the work of Paul Irish, Divya Manian, and Elliot Jay Stocks
 	Author URI: http://twolanedesign.com/
-    Version: 10.1
+    Version: 10.3.2
 	Tags: custom-menu, editor-style, theme-options, threaded-comments, sticky-post, microformats, rtl-language-support, translation-ready
 
 	License: GNU General Public License v2.0
@@ -22,7 +14,7 @@
 	Comment blocks indicate where each begins and ends, like this, for example...
 */
 
-/*! normalize.css v1.1.0 | MIT License | git.io/normalize */
+/*! normalize.css v1.1.2 | MIT License | git.io/normalize */
 
 /* ==========================================================================
    HTML5 display definitions
@@ -91,8 +83,8 @@ audio:not([controls]) {
 
 html {
     font-size: 100%; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /**
@@ -551,6 +543,7 @@ table {
 }
 
 
+
 /*
  * HTML5 Boilerplate
  *
@@ -578,7 +571,7 @@ body {
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection declarations have to be separate.
+ * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
 
@@ -765,7 +758,7 @@ textarea {
 
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
-   Theses examples override the primary ('mobile first') styles.
+   These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
 
@@ -1052,5 +1045,3 @@ Verdana, Geneva, Tahoma, sans-serif - p
 Verdana, Tahoma, Geneva, sans-serif - t
 
 */
-
-/** END Starkers CSS **/
