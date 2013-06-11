@@ -10,7 +10,7 @@
  * @since Boilerplate 1.0
  */
 ?>
-		</section><!-- #content -->
+		</main><!-- .content -->
 		<footer role="contentinfo">
 <?php
 	/* A sidebar in the footer? Yep. You can can customize
