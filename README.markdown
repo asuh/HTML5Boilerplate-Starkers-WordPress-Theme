@@ -4,7 +4,7 @@
 * Update email for vCard to include Obfuscation http://www.albionresearch.com/misc/obfuscator.php
 
 ##  Project origins
-* HTML5 Boilerplate [https://github.com/paulirish/html5-boilerplate](https://github.com/paulirish/html5-boilerplate)
+* HTML5 Boilerplate [https://github.com/h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate)
 * Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
 * Aaron T. Grogg's Boilerplate [http://aarontgrogg.com/2010/10/06/my-first-wp-theme-boilerplate-starkers/] (http://aarontgrogg.com/2010/10/06/my-first-wp-theme-boilerplate-starkers/)
 
