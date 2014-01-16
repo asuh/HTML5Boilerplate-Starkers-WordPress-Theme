@@ -3,7 +3,7 @@
  * The template for displaying the footer.
  *
  * Contains the closing of the id=content div and all content
- * after.  Calls sidebar-footer.php for bottom widgets.
+ * after. Calls sidebar-footer.php for bottom widgets.
  *
  * @package WordPress
  * @subpackage Boilerplate

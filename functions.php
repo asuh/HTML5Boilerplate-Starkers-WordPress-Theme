@@ -158,7 +158,7 @@ if ( ! function_exists( 'boilerplate_admin_header_style' ) ) :
  */
 function boilerplate_admin_header_style() {
 ?>
-<style type="text/css">
+<style type="text/css" id="boilerplate-admin-header-css">
 /* Shows the same border as on front end */
 #headimg {
 	border-bottom: 1px solid #000;
@@ -306,7 +306,7 @@ if ( ! function_exists( 'boilerplate_comment' ) ) :
 						printf( __( '%1$s at %2$s', 'boilerplate' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'boilerplate' ), ' ' );
 					?>
 				</div><!-- .comment-meta .commentmetadata -->
-				
+
 				<div class="comment-body"><?php comment_text(); ?></div>
 
 				<div class="reply">
@@ -341,7 +341,7 @@ function boilerplate_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Primary Widget Area', 'boilerplate' ),
 		'id' => 'primary-widget-area',
-		'description' => __( 'The primary widget area', 'boilerplate' ),
+		'description' => __( 'Add widgets here to appear in your sidebar.', 'boilerplate' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -352,7 +352,7 @@ function boilerplate_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Secondary Widget Area', 'boilerplate' ),
 		'id' => 'secondary-widget-area',
-		'description' => __( 'The secondary widget area', 'boilerplate' ),
+		'description' => __( 'An optional secondary widget area, displays below the primary widget area in your sidebar.', 'boilerplate' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -363,7 +363,7 @@ function boilerplate_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'First Footer Widget Area', 'boilerplate' ),
 		'id' => 'first-footer-widget-area',
-		'description' => __( 'The first footer widget area', 'boilerplate' ),
+		'description' => __( 'An optional widget area for your site footer.', 'boilerplate' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -374,7 +374,7 @@ function boilerplate_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Second Footer Widget Area', 'boilerplate' ),
 		'id' => 'second-footer-widget-area',
-		'description' => __( 'The second footer widget area', 'boilerplate' ),
+		'description' => __( 'An optional widget area for your site footer.', 'boilerplate' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -385,7 +385,7 @@ function boilerplate_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Third Footer Widget Area', 'boilerplate' ),
 		'id' => 'third-footer-widget-area',
-		'description' => __( 'The third footer widget area', 'boilerplate' ),
+		'description' => __( 'An optional widget area for your site footer.', 'boilerplate' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -396,7 +396,7 @@ function boilerplate_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Fourth Footer Widget Area', 'boilerplate' ),
 		'id' => 'fourth-footer-widget-area',
-		'description' => __( 'The fourth footer widget area', 'boilerplate' ),
+		'description' => __( 'An optional widget area for your site footer.', 'boilerplate' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -472,6 +472,47 @@ function boilerplate_posted_in() {
 	);
 }
 endif;
+
+/**
+ * Retrieves the IDs for images in a gallery.
+ *
+ * @uses get_post_galleries() first, if available. Falls back to shortcode parsing,
+ * then as last option uses a get_posts() call.
+ *
+ * @since Twenty Ten 1.6.
+ *
+ * @return array List of image IDs from the post gallery.
+ */
+function boilerplate_get_gallery_images() {
+	$images = array();
+
+	if ( function_exists( 'get_post_galleries' ) ) {
+		$galleries = get_post_galleries( get_the_ID(), false );
+		if ( isset( $galleries[0]['ids'] ) )
+		 	$images = explode( ',', $galleries[0]['ids'] );
+	} else {
+		$pattern = get_shortcode_regex();
+		preg_match( "/$pattern/s", get_the_content(), $match );
+		$atts = shortcode_parse_atts( $match[3] );
+		if ( isset( $atts['ids'] ) )
+			$images = explode( ',', $atts['ids'] );
+	}
+
+	if ( ! $images ) {
+		$images = get_posts( array(
+			'fields'         => 'ids',
+			'numberposts'    => 999,
+			'order'          => 'ASC',
+			'orderby'        => 'menu_order',
+			'post_mime_type' => 'image',
+			'post_parent'    => get_the_ID(),
+			'post_type'      => 'attachment',
+		) );
+	}
+
+	return $images;
+}
+
 
 /*	Begin Boilerplate */
 
