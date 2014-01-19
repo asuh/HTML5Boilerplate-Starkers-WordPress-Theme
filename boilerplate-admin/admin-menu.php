@@ -102,7 +102,7 @@
 		add_action('admin_head', 'H5BP_admin_register_head');
 
 
-/*	3)	Add "Boilerplate Admin" Page options */
+/*	3)	Add "HTML5 Boilerplate Admin" Page options */
 
 		//	Register form elements
 		if ( ! function_exists( 'H5BP_register_and_build_fields' ) ):
@@ -119,7 +119,7 @@
 				add_settings_field('H5BP_jquery_js', 'jQuery JS?:', 'H5BP_jquery_js_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_plugins_js', 'jQuery Plug-ins JS?:', 'H5BP_plugins_js_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_site_js', 'Site-specific JS?:', 'H5BP_site_js_setting', 'boilerplate-admin', 'main_section');
-				add_settings_field('H5BP_chrome_frame', 'Chrome-Frame?:', 'H5BP_chrome_frame_setting', 'boilerplate-admin', 'main_section');
+				add_settings_field('H5BP_browse_happy', 'Browse-Happy?:', 'H5BP_browse_happy_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_search_form', 'HTML5 Search?:', 'H5BP_search_form_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_cache_buster', 'Cache-Buster?:', 'H5BP_cache_buster_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_google_analytics_js', 'Google Analytics?:', 'H5BP_google_analytics_js_setting', 'boilerplate-admin', 'main_section');
@@ -176,7 +176,7 @@
 				echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
 				echo '<code>&lt;meta http-equiv=<span>"X-UA-Compatible"</span> content=<span>"IE=edge,chrome=1"</span>&gt;</code>';
 			}
-		endif; // google_chrome_setting
+		endif; // H5BP_google_chrome_setting
 
 		//	callback fn for H5BP_google_verification
 		if ( ! function_exists( 'H5BP_google_verification_setting' ) ):
@@ -268,14 +268,14 @@
 				echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 				echo '<code class="comment">&lt;!--[if lt IE 9]&gt;&lt;script src="' .H5BP_URL. '/js/vendor/respond.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;</code>';
 			}
-		endif; // respond_js_setting
+		endif; // H5BP_respond_js_setting
 
 		//	callback fn for H5BP_jquery_js
 		if ( ! function_exists( 'H5BP_jquery_js_setting' ) ):
 			function H5BP_jquery_js_setting() {
 				$options = get_option('plugin_options');
 				$checked = (isset($options['H5BP_jquery_js']) && $options['H5BP_jquery_js']) ? 'checked="checked" ' : '';
-				$version = (isset($options['H5BP_jquery_version']) && $options['H5BP_jquery_version'] && $options['H5BP_jquery_version'] !== '') ? $options['H5BP_jquery_version'] : '1.10.1';
+				$version = (isset($options['H5BP_jquery_version']) && $options['H5BP_jquery_version'] && $options['H5BP_jquery_version'] !== '') ? $options['H5BP_jquery_version'] : '1.10.2';
 				$inhead = (isset($options['H5BP_jquery_head']) && $options['H5BP_jquery_head']) ? 'checked="checked" ' : '';
 				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_jquery_js]" value="true" ' .$checked. '/>';
 				echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
@@ -325,17 +325,16 @@
 			}
 		endif; // H5BP_site_js_setting
 
-		//	callback fn for H5BP_chrome_frame
-		if ( ! function_exists( 'H5BP_chrome_frame_setting' ) ):
-			function H5BP_chrome_frame_setting() {
+		//	callback fn for H5BP_browse_happy
+		if ( ! function_exists( 'H5BP_browse_happy_setting' ) ):
+			function H5BP_browse_happy_setting() {
 				$options = get_option('plugin_options');
-				$checked = (isset($options['H5BP_chrome_frame']) && $options['H5BP_chrome_frame']) ? 'checked="checked" ' : '';
-				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_chrome_frame]" value="true" ' .$checked. '/>';
-				echo '<p>Prompt IE7 or less users to upgrade or install <a href="http://chromium.org/developers/how-tos/chrome-frame-getting-started">Chrome Frame</a>.</p>';
+				$checked = (isset($options['H5BP_browse_happy']) && $options['H5BP_browse_happy']) ? 'checked="checked" ' : '';
+				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_browse_happy]" value="true" ' .$checked. '/>';
 				echo '<p>Selecting this option will add the following code just after the <code class="html">&lt;body&gt;</code>:</p>';
-				echo '<code class="comment">&lt;!--[if lt IE 8]&gt;&lt;p class=chromeframe&gt;You are using an &lt;em&gt;outdated&lt;/em&gt; browser. Please &lt;a href="http://browsehappy.com/"&gt;upgrade your browser&lt;/a&gt; or &lt;a href="http://www.google.com/chromeframe/?redirect=true"&gt;activate Google Chrome Frame&lt;/a&gt; to improve your experience.&lt;/p&gt;&lt;![endif]--&gt;</code>';
+				echo '<code class="comment">&lt;!--[if lt IE 8]&gt;&lt;p class="browsehappy"&gt;You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please &lt;a href="http://browsehappy.com/"&lt;upgrade your browser&lt;/a&gt; to improve your experience.&lt;/p&gt;![endif]--&gt;</code>';
 			}
-		endif; // H5BP_chrome_frame_setting
+		endif; // H5BP_browse_happy_setting
 
 		//	callback fn for H5BP_google_analytics_js
 		if ( ! function_exists( 'H5BP_google_analytics_js_setting' ) ):
@@ -491,7 +490,7 @@
 			function H5BP_add_jquery_script() {
 				$cache = H5BP_cache_buster();
 				$options = get_option('plugin_options');
-				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.10.1';
+				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.10.2';
 				wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js"></script>'.PHP_EOL; // try getting from CDN
 				echo '<script>window.jQuery || document.write(\'<script src="' .H5BP_URL. '/js/vendor/jquery.js'.$cache.'"><\/script>\')</script>'.PHP_EOL; // fallback to local if CDN fails
@@ -529,12 +528,12 @@
 			}
 		endif; // H5BP_search_form
 
-		//	$options['H5BP_chrome_frame']
-		if ( ! function_exists( 'H5BP_add_chrome_frame' ) ):
-			function H5BP_add_chrome_frame() {
-				echo '<!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->'.PHP_EOL;
+		//	$options['H5BP_browse_happy']
+		if ( ! function_exists( 'H5BP_add_browse_happy' ) ):
+			function H5BP_add_browse_happy() {
+				echo '<!--[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->'.PHP_EOL;
 			}
-		endif; // H5BP_add_chrome_frame
+		endif; // H5BP_add_browse_happy
 
 		//	$options['H5BP_google_analytics_js']
 		if ( ! function_exists( 'H5BP_add_google_analytics_script' ) ):
@@ -632,8 +631,8 @@
 				add_filter( 'get_search_form', 'H5BP_search_form');
 			}			
 
-			if (isset($options['H5BP_chrome_frame']) && $options['H5BP_chrome_frame']) {
-				add_action('ie_chrome_frame', 'H5BP_add_chrome_frame');
+			if (isset($options['H5BP_browse_happy']) && $options['H5BP_browse_happy']) {
+				add_action('ie_browse_happy', 'H5BP_add_browse_happy');
 			}
 
 			if (isset($options['H5BP_google_analytics_js']) && $options['H5BP_google_analytics_js'] && isset($options['H5BP_google_analytics_account']) && $options['H5BP_google_analytics_account'] && $options['H5BP_google_analytics_account'] !== 'XXXXX-X') {
