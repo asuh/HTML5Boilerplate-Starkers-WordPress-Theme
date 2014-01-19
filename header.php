@@ -9,7 +9,6 @@
  * @since Boilerplate 1.0
  */
 ?><!DOCTYPE html>
-<!--[if IE 7]>	 <html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>><![endif]-->
 <!--[if IE 8]>	 <html class="no-js lt-ie9" <?php language_attributes(); ?>><![endif]-->
 <!--[if gt IE 8]><!--><html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 	<head>
@@ -34,7 +33,7 @@
 ?>
 	</head>
 	<body <?php body_class(); ?>>
-	<?php ie_chrome_frame(); ?>
+	<?php ie_browse_happy(); ?>
 		<div id="header">
 			<div id="masthead">
 				<div id="branding" role="banner">
