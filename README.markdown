@@ -6,7 +6,7 @@
 ##  Project origins
 * HTML5 Boilerplate [https://github.com/h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate)
 * Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
-* Aaron T. Grogg's Boilerplate [http://aarontgrogg.com/2010/10/06/my-first-wp-theme-boilerplate-starkers/] (http://aarontgrogg.com/2010/10/06/my-first-wp-theme-boilerplate-starkers/)
+* Aaron T. Grogg's Boilerplate [https://github.com/aarontgrogg/wp-theme-html5-boilerplate] (https://github.com/aarontgrogg/wp-theme-html5-boilerplate)
 
 ## Annex theme (Twenty Eleven + Boilerplate)
 * If you like this theme and want to try the Twenty Eleven theme equivalent, go to this link: https://github.com/asuh/Annex

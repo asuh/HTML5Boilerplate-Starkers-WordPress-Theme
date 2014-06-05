@@ -3,7 +3,7 @@ Contributors: aarontgrogg
 Tags: html5, boilerplate
 Requires at least: 3.1
 Tested up to: 3.5.1
-Stable tag: 4.3.2
+Stable tag: 4.4.2
 
 Based on the [HTML5 Boilerplate](http://html5boilerplate.com/) created by
 [Paul Irish](http://paulirish.com/) and [Divya Manian](http://nimbupani.com/),
@@ -45,9 +45,7 @@ all the delicious HTML5 Boilerplate goodness with the ease of checking checkboxe
 Please let me know if you have any questions/suggestions/thoughts,
 
 Atg
-
 http://aarontgrogg.com/
-
 aarontgrogg@gmail.com
 
 
@@ -97,6 +95,21 @@ aarontgrogg@gmail.com
 
 
 === Change Log ===
+
+= 4.4.2 2013-04-22 =
+* Updated <h2> to <h1> in main index loop, and wrapped <h1>s in <header>
+
+= 4.4.1 2013-08-28 =
+* MASSIVE aplogies, there was a bug in one of my pages (a missing '), it is fixed now...  thanks and apologies to mediagrin for pointing it out so quickly!
+
+= 4.4 2013-08-25 =
+* Tested for WP 3.6
+* Upgraded jQuery to 1.10.2
+* Updated main.css to latest version
+* Updated all H5BP doc files
+* Added dir="<?php bloginfo('text_direction'); ?>" to <html> tag(s)
+* Added Serbian translation files, big thanks to Andrijana Nikolic!
+* Added example "remove no-js" script to script-starter.js
 
 = 4.3.2 2013-06-01 =
 * Removing Git files....
@@ -298,11 +311,11 @@ Grabbed updated assets (css, js, etc.) from github per:
 
 Boilerplate starts with the Starkers theme (http://starkerstheme.com/)...
   mixes in HTML5 Boilerplate (http://html5boilerplate.com/)...
-    then makes a couple minor modifications...
-	1) moved IE conditionals from <boby> to <html>, to better synch with Modernizr...
-	2) above also allowed me to remove the <!--[if IE]><![endif]--> recommended by www.phpied.com/conditional-comments-block-downloads/...
-	3) moved extraneous items (like Modernizr, jQuery, Belated PNG, etc.) to Admin panel (not the last item in the Settings drop-down)...
-	The only extraneous items left in the mark-up are the two favicon references in header.php; read about it there.
+  then makes a couple minor modifications...
+  1) moved IE conditionals from <boby> to <html>, to better synch with Modernizr...
+  2) above also allowed me to remove the <!--[if IE]><![endif]--> recommended by www.phpied.com/conditional-comments-block-downloads/...
+  3) moved extraneous items (like Modernizr, jQuery, Belated PNG, etc.) to Admin panel (not the last item in the Settings drop-down)...
+  The only extraneous items left in the mark-up are the two favicon references in header.php; read about it there.
 
 * The directory "- MOVE TO ROOT" is filled with HTML5 Boilerplate goodness that
   should be copied FROM that directory and pasted TO your blog's root directory.
@@ -310,8 +323,8 @@ Boilerplate starts with the Starkers theme (http://starkerstheme.com/)...
   I had to comment-out several items in order to get my WP installation to work, so, play if you like.
 
 Be sure to read these "read me" type files as well:
-	- _READ_ME.txt and _LICENSE.txt are from Starkers Theme
-	- README.markdown is from HTML5 Boilerplate
+  - _READ_ME.txt and _LICENSE.txt are from Starkers Theme
+  - README.markdown is from HTML5 Boilerplate
 
 
 = v.1.0 2010-10-01 =

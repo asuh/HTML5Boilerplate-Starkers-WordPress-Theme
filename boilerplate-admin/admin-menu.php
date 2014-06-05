@@ -28,7 +28,7 @@
 
 /*
 	There are essentially 5 sections to this:
-	1)	Add "HTML5 Boilerplate" link to left-nav Admin Menu & callback function for clicking that menu link
+	1)	Add "Boilerplate Admin" link to left-nav Admin Menu & callback function for clicking that menu link
 	2)	Add Admin Page CSS if on the Admin Page
 	3)	Add "Boilerplate Admin" Page options
 	4)	Create functions to add above elements to pages
@@ -92,6 +92,7 @@
 			}
 		endif; // H5BP_build_boilerplate_admin_page
 
+		
 /*	2)	Add Admin Page CSS if on the Admin Page */
 
 		if ( ! function_exists( 'H5BP_admin_register_head' ) ):
@@ -275,7 +276,7 @@
 			function H5BP_jquery_js_setting() {
 				$options = get_option('plugin_options');
 				$checked = (isset($options['H5BP_jquery_js']) && $options['H5BP_jquery_js']) ? 'checked="checked" ' : '';
-				$version = (isset($options['H5BP_jquery_version']) && $options['H5BP_jquery_version'] && $options['H5BP_jquery_version'] !== '') ? $options['H5BP_jquery_version'] : '1.10.2';
+				$version = (isset($options['H5BP_jquery_version']) && $options['H5BP_jquery_version'] && $options['H5BP_jquery_version'] !== '') ? $options['H5BP_jquery_version'] : '1.11.1';
 				$inhead = (isset($options['H5BP_jquery_head']) && $options['H5BP_jquery_head']) ? 'checked="checked" ' : '';
 				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_jquery_js]" value="true" ' .$checked. '/>';
 				echo '<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>';
@@ -490,7 +491,7 @@
 			function H5BP_add_jquery_script() {
 				$cache = H5BP_cache_buster();
 				$options = get_option('plugin_options');
-				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.10.2';
+				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.11.1';
 				wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js"></script>'.PHP_EOL; // try getting from CDN
 				echo '<script>window.jQuery || document.write(\'<script src="' .H5BP_URL. '/js/vendor/jquery.js'.$cache.'"><\/script>\')</script>'.PHP_EOL; // fallback to local if CDN fails

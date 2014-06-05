@@ -12,9 +12,9 @@
 * [HTML](html.md) — A guide to the default HTML.
 * [CSS](css.md) — A guide to the default CSS.
 * [JavaScript](js.md) — A guide to the default JavaScript.
-* [.htaccess](https://github.com/h5bp/server-configs/blob/master/apache/README.md)
-  — All about the Apache web server configs (also see our
-  [alternative server configs](https://github.com/h5bp/server-configs)).
+* [.htaccess](https://github.com/h5bp/server-configs-apache)
+  — All about the Apache web server configs (also see our [alternative server
+  configs](https://github.com/h5bp/server-configs/blob/master/README.md)).
 * [crossdomain.xml](crossdomain.md) — An introduction to making use of
   crossdomain requests.
 * [Everything else](misc.md).
@@ -31,7 +31,5 @@ of your site/app in various production environments.
 
 * [Server configs](https://github.com/h5bp/server-configs) — Configs for
   different servers.
-* [Node build script](https://github.com/h5bp/node-build-script) — A
-  feature-rich [grunt](https://github.com/gruntjs/grunt) plugin.
 * [Ant build script](https://github.com/h5bp/ant-build-script) — The original
   HTML5 Boilerplate build script.
