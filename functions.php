@@ -877,8 +877,8 @@ add_filter('request', 'boilerplate_request_filter');
 
 
 // IE Chrome Frame custom hook
-function ie_chrome_frame() {
-	do_action('ie_chrome_frame');
+function ie_browse_happy() {
+	do_action('ie_browse_happy');
 }
 
 // Boilerplate Footer Credits Custom Hook
