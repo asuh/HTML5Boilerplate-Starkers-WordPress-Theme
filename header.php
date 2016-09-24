@@ -8,21 +8,21 @@
  * @subpackage Boilerplate
  * @since Boilerplate 1.0
  */
-?><!DOCTYPE html>
-<!--[if IE 8]>	 <html class="no-js lt-ie9" <?php language_attributes(); ?>><![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
+?><!doctype html>
+<html class="no-js" <?php language_attributes(); ?>>
 	<head>
-		<meta charset="<?php bloginfo( 'charset' ); ?>" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="<?php bloginfo( 'charset' ); ?>">
+	        <meta http-equiv="x-ua-compatible" content="ie=edge">	
 		<title><?php
 			/*
 			 * Print the <title> tag based on what is being viewed.
 			 */
 			wp_title( '|', true, 'right' );
 		?></title>
-		<link rel="profile" href="http://gmpg.org/xfn/11" />
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>">
+		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 		
 		<?php
 		/* Always have wp_head() just before the closing </head>
@@ -35,7 +35,7 @@
 	</head>
 	<body <?php body_class(); ?>>
 	<?php ie_browse_happy(); ?>
-		<div id="header">
+		<header id="header">
 			<div id="masthead">
 				<div id="branding" role="banner">
 					<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
@@ -77,12 +77,12 @@
 						<?php endif; ?>
 				</div><!-- #branding -->
 
-				<div id="access" role="navigation">
+				<nav id="access" role="navigation">
 				  <?php /* Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
 					<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a></div>
 					<?php /* Our navigation menu. If one isn't filled out, wp_nav_menu falls back to wp_page_menu. The menu assiged to the primary position is the one used. If none is assigned, the menu with the lowest ID is used. */ ?>
 					<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
-				</div><!-- #access -->
+				</nav><!-- #access -->
 			</div><!-- #masthead -->
-		</div><!-- #header -->
+		</header><!-- #header -->
 		<main class="content" role="main">
