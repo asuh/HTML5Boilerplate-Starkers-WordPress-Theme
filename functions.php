@@ -84,8 +84,10 @@ function boilerplate_setup() {
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
 
-	// Make theme available for translation
-	// Translations can be filed in the /languages/ directory
+	/*
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory
+	 */
 	load_theme_textdomain( 'boilerplate', get_template_directory() . '/languages' );
 
 	// This theme uses wp_nav_menu() in one location.
@@ -101,20 +103,36 @@ function boilerplate_setup() {
 
 	// The custom header business starts here.
 
-	$custom_header_support = array(
-		// The default image to use.
-		// The %s is a placeholder for the theme template directory URI.
-		'default-image' => '%s/images/headers/path.jpg',
-		// The height and width of our custom header.
-		'width' => apply_filters( 'boilerplate_header_image_width', 940 ),
-		'height' => apply_filters( 'boilerplate_header_image_height', 198 ),
-		// Support flexible heights.
-		'flex-height' => true,
-		// Don't support text inside the header image.
-		'header-text' => false,
-		// Callback for styling the header preview in the admin.
-		'admin-head-callback' => 'boilerplate_admin_header_style',
-	);
+        $custom_header_support = array(
+                /*
+                 * The default image to use.
+                 * The %s is a placeholder for the theme template directory URI.
+                 */
+                'default-image' => '%s/images/headers/path.jpg',
+                // The height and width of our custom header.
+                /**
+                 * Filter the Twenty Ten default header image width.
+                 *
+                 * @since Twenty Ten 1.0
+                 *
+                 * @param int The default header image width in pixels. Default 940.
+                 */
+                'width' => apply_filters( 'boilerplate_header_image_width', 940 ),
+                /**
+                 * Filter the Twenty Ten defaul header image height.
+                 *
+                 * @since Twenty Ten 1.0
+                 *
+                 * @param int The default header image height in pixels. Default 198.
+                 */
+                'height' => apply_filters( 'boilerplate_header_image_height', 198 ),
+                // Support flexible heights.
+                'flex-height' => true,
+                // Don't support text inside the header image.
+                'header-text' => false,
+                // Callback for styling the header preview in the admin.
+                'admin-head-callback' => 'boilerplate_admin_header_style',
+        );
 
 	add_theme_support( 'custom-header', $custom_header_support );
 
@@ -129,9 +147,11 @@ function boilerplate_setup() {
 		add_custom_background();
 	}
 
-	// We'll be using post thumbnails for custom header images on posts and pages.
-	// We want them to be 940 pixels wide by 198 pixels tall.
-	// Larger images will be auto-cropped to fit, smaller ones will be ignored. See header.php.
+	/*
+	 * We'll be using post thumbnails for custom header images on posts and pages.
+	 * We want them to be 940 pixels wide by 198 pixels tall.
+	 * Larger images will be auto-cropped to fit, smaller ones will be ignored. See header.php.
+	 */
 	set_post_thumbnail_size( $custom_header_support['width'], $custom_header_support['height'], true );
 
 	// ... and thus ends the custom header business.
@@ -174,12 +194,14 @@ function boilerplate_admin_header_style() {
 endif;
 
 /**
- * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
+ * Show a home link for our wp_nav_menu() fallback, wp_page_menu().
  *
  * To override this in a child theme, remove the filter and optionally add
  * your own function tied to the wp_page_menu_args filter hook.
  *
  * @since Twenty Ten 1.0
+ *
+ * @param array $args An optional array of arguments. @see wp_page_menu()
  */
 function boilerplate_page_menu_args( $args ) {
 	if ( ! isset( $args['show_home'] ) )
@@ -189,13 +211,15 @@ function boilerplate_page_menu_args( $args ) {
 add_filter( 'wp_page_menu_args', 'boilerplate_page_menu_args' );
 
 /**
- * Sets the post excerpt length to 40 characters.
+ * Set the post excerpt length to 40 characters.
  *
  * To override this length in a child theme, remove the filter and add your own
  * function tied to the excerpt_length filter hook.
  *
  * @since Twenty Ten 1.0
- * @return int
+ *
+ * @param int $length The number of excerpt characters.
+ * @return int The filtered number of excerpt characters.
  */
 function boilerplate_excerpt_length( $length ) {
 	return 40;
@@ -204,10 +228,11 @@ add_filter( 'excerpt_length', 'boilerplate_excerpt_length' );
 
 if ( ! function_exists( 'boilerplate_continue_reading_link' ) ) :
 /**
- * Returns a "Continue Reading" link for excerpts
+ * Return a "Continue Reading" link for excerpts.
  *
  * @since Twenty Ten 1.0
- * @return string "Continue Reading" link
+ *
+ * @return string "Continue Reading" link.
  */
 function boilerplate_continue_reading_link() {
 	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'boilerplate' ) . '</a>';
@@ -215,30 +240,39 @@ function boilerplate_continue_reading_link() {
 endif;
 
 /**
- * Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and boilerplate_continue_reading_link().
+ * Replace "[...]" with an ellipsis and twentyten_continue_reading_link().
+ *
+ * "[...]" is appended to automatically generated excerpts.
  *
  * To override this in a child theme, remove the filter and add your own
  * function tied to the excerpt_more filter hook.
  *
  * @since Twenty Ten 1.0
- * @return string An ellipsis
+ *
+ * @param string $more The Read More text.
+ * @return string An ellipsis.
  */
 function boilerplate_auto_excerpt_more( $more ) {
-	return ' &hellip;' . boilerplate_continue_reading_link();
+	if ( ! is_admin() ) {
+		return ' &hellip;' . boilerplate_continue_reading_link();
+	}
+	return $more;	
 }
 add_filter( 'excerpt_more', 'boilerplate_auto_excerpt_more' );
 
 /**
- * Adds a pretty "Continue Reading" link to custom post excerpts.
+ * Add a pretty "Continue Reading" link to custom post excerpts.
  *
  * To override this link in a child theme, remove the filter and add your own
  * function tied to the get_the_excerpt filter hook.
  *
  * @since Twenty Ten 1.0
- * @return string Excerpt with a pretty "Continue Reading" link
+ *
+ * @param string $output The "Coninue Reading" link.
+ * @return string Excerpt with a pretty "Continue Reading" link.
  */
 function boilerplate_custom_excerpt_more( $output ) {
-	if ( has_excerpt() && ! is_attachment() ) {
+	if ( has_excerpt() && ! is_attachment() && ! is_admin() ) {
 		$output .= boilerplate_continue_reading_link();
 	}
 	return $output;
@@ -274,57 +308,61 @@ if ( version_compare( $GLOBALS['wp_version'], '3.1', '<' ) )
 	add_filter( 'gallery_style', 'boilerplate_remove_gallery_css' );
 
 if ( ! function_exists( 'boilerplate_comment' ) ) :
-	/**
-	 * Template for comments and pingbacks.
-	 *
-	 * To override this walker in a child theme without modifying the comments template
-	 * simply create your own boilerplate_comment(), and that function will be used instead.
-	 *
-	 * Used as a callback by wp_list_comments() for displaying the comments.
-	 *
-	 * @since Twenty Ten 1.0
-	 */
-	function boilerplate_comment( $comment, $args, $depth ) {
-		$GLOBALS['comment'] = $comment;
-		switch ( $comment->comment_type ) :
-			case '' :
-		?>
-		<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-			<div id="comment-<?php comment_ID(); ?>">
-				<div class="comment-author vcard">
-					<?php echo get_avatar( $comment, 40 ); ?>
-					<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
-				</div><!-- .comment-author .vcard -->
-				<?php if ( $comment->comment_approved == '0' ) : ?>
-					<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
-					<br />
-				<?php endif; ?>
+/**
+ * Template for comments and pingbacks.
+ *
+ * To override this walker in a child theme without modifying the comments template
+ * simply create your own twentyten_comment(), and that function will be used instead.
+ *
+ * Used as a callback by wp_list_comments() for displaying the comments.
+ *
+ * @since Twenty Ten 1.0
+ *
+ * @param object $comment The comment object.
+ * @param array  $args    An array of arguments. @see get_comment_reply_link()
+ * @param int    $depth   The depth of the comment.
+ */
+function boilerplate_comment( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+	switch ( $comment->comment_type ) :
+		case '' :
+	?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+		<div id="comment-<?php comment_ID(); ?>">
+			<div class="comment-author vcard">
+				<?php echo get_avatar( $comment, 40 ); ?>
+				<?php printf( __( '%s <span class="says">says:</span>', 'boilerplate' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+			</div><!-- .comment-author .vcard -->
+			<?php if ( $comment->comment_approved == '0' ) : ?>
+				<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'boilerplate' ); ?></em>
+				<br />
+			<?php endif; ?>
 
-				<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-					<?php
-						/* translators: 1: date, 2: time */
-						printf( __( '%1$s at %2$s', 'boilerplate' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'boilerplate' ), ' ' );
-					?>
-				</div><!-- .comment-meta .commentmetadata -->
+			<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+				<?php
+					/* translators: 1: date, 2: time */
+					printf( __( '%1$s at %2$s', 'boilerplate' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'boilerplate' ), ' ' );
+				?>
+			</div><!-- .comment-meta .commentmetadata -->
 
-				<div class="comment-body"><?php comment_text(); ?></div>
+			<div class="comment-body"><?php comment_text(); ?></div>
 
-				<div class="reply">
-					<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-				</div><!-- .reply -->
-			</div><!-- #comment-##  -->
+			<div class="reply">
+				<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
 
-		<?php
-				break;
-			case 'pingback'  :
-			case 'trackback' :
-		?>
-		<li class="post pingback">
-			<p><?php _e( 'Pingback:', 'boilerplate' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'boilerplate'), ' ' ); ?></p>
-		<?php
-				break;
-		endswitch;
-	}
+	<?php
+			break;
+		case 'pingback'  :
+		case 'trackback' :
+	?>
+	<li class="post pingback">
+		<p><?php _e( 'Pingback:', 'boilerplate' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'boilerplate'), ' ' ); ?></p>
+	<?php
+			break;
+	endswitch;
+}
 endif;
 
 /**
@@ -448,7 +486,7 @@ endif;
 
 if ( ! function_exists( 'boilerplate_posted_in' ) ) :
 /**
- * Prints HTML with meta information for the current post (category, tags and permalink).
+ * Print HTML with meta information for the current post (category, tags and permalink).
  *
  * @since Twenty Ten 1.0
  */
