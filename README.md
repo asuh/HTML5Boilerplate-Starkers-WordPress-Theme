@@ -8,19 +8,13 @@
 * Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
 * Aaron T. Grogg's Boilerplate [https://github.com/aarontgrogg/wp-theme-html5-boilerplate] (https://github.com/aarontgrogg/wp-theme-html5-boilerplate)
 
-## Annex theme (Twenty Eleven + Boilerplate)
-* If you like this theme and want to try the Twenty Eleven theme equivalent, go to this link: https://github.com/asuh/Annex
-
 ## License:
 
 Major components:
 
 * Modernizr: MIT/BSD license
 * jQuery: MIT/GPL license
-* DD_belatedPNG: MIT license
 * Respond: MIT/GPL license
-* HTML5Doctor CSS reset: Public Domain
-* CSS Reset Reloaded: Public Domain
 
 Everything else:
 
