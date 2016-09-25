@@ -15,7 +15,7 @@
 		More about this theme can be found at <a href="http://aarontgrogg.com/boilerplate/">http://aarontgrogg.com/boilerplate/</a>.
 	Author: Aaron T. Grogg, based on the work of Paul Irish, Divya Manian, and Elliot Jay Stocks
 	Author URI: http://aarontgrogg.com/
-	Version: 10.3.2
+	Version: 10.5
 	Tags: custom-menu, editor-style, theme-options, threaded-comments, sticky-post, microformats, rtl-language-support, translation-ready
 
 	License: GNU General Public License v2.0
@@ -110,9 +110,7 @@
 			function H5BP_register_and_build_fields() {
 				register_setting('plugin_options', 'plugin_options', 'H5BP_validate_setting');
 				add_settings_section('main_section', '', 'H5BP_section_cb', 'boilerplate-admin');
-				add_settings_field('H5BP_google_chrome', 'IE-edge / Google Chrome?:', 'H5BP_google_chrome_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_google_verification', 'Google Verification?:', 'H5BP_google_verification_setting', 'boilerplate-admin', 'main_section');
-				add_settings_field('H5BP_viewport', '<em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> use full zoom?:', 'H5BP_viewport_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_favicon', 'Got Favicon?:', 'H5BP_favicon_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_favicon_ithing', 'Got <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr></em> Favicon?', 'H5BP_favicon_ithing_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_modernizr_js', 'Modernizr JS?:', 'H5BP_modernizr_js_setting', 'boilerplate-admin', 'main_section');
@@ -167,18 +165,6 @@
 			}
 		endif; // H5BP_section_cb
 
-		//	callback fn for H5BP_google_chrome
-		if ( ! function_exists( 'H5BP_google_chrome_setting' ) ):
-			function H5BP_google_chrome_setting() {
-				$options = get_option('plugin_options');
-				$checked = (isset($options['H5BP_google_chrome']) && $options['H5BP_google_chrome']) ? 'checked="checked" ' : '';
-				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_google_chrome]" value="true" ' .$checked. '/>';
-				echo '<p>Force the most-recent IE rendering engine or users with <a href="http://www.chromium.org/developers/how-tos/chrome-frame-getting-started">Google Chrome Frame</a> installed to see your site using Google Frame.</p>';
-				echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
-				echo '<code>&lt;meta http-equiv=<span>"X-UA-Compatible"</span> content=<span>"IE=edge,chrome=1"</span>&gt;</code>';
-			}
-		endif; // H5BP_google_chrome_setting
-
 		//	callback fn for H5BP_google_verification
 		if ( ! function_exists( 'H5BP_google_verification_setting' ) ):
 			function H5BP_google_verification_setting() {
@@ -194,21 +180,6 @@
 				echo '<code>&lt;meta name=<span>"google-site-verification"</span> content=<span>"'.$account.'"</soan>&gt;</code>';
 			}
 		endif; // H5BP_google_verification_setting
-
-		//	callback fn for H5BP_viewport
-		if ( ! function_exists( 'H5BP_viewport_setting' ) ):
-			function H5BP_viewport_setting() {
-				$options = get_option('plugin_options');
-				$checked = (isset($options['H5BP_viewport']) && $options['H5BP_viewport']) ? 'checked="checked" ' : '';
-				$setting = (isset($options['H5BP_viewport_setting']) && $options['H5BP_viewport_setting']) ? $options['H5BP_viewport_setting'] : 'width=device-width';
-				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_viewport]" value="true" ' .$checked. '/>';
-				echo '<p>Force <em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html#//apple_ref/doc/uid/TP40006509-SW19">show site at full-zoom</a>, instead of trying to show the entire page.</p>';
-				echo '<p>The HTML5 Boilerplate project suggests using just <code>width=device-width</code>, but you can use <a href="http://developer.apple.com/library/safari/#documentation/appleapplications/reference/safariwebcontent/usingtheviewport/usingtheviewport.html">any option you want</a>:</p>';
-				echo '<p><input type="text" size="40" name="plugin_options[H5BP_viewport_setting]" value="'.$setting.'"></p>';
-				echo '<p>Selecting this option will add the following code to the <code class="html">&lt;head&gt;</code> of your pages:</p>';
-				echo '<code>&lt;meta name=<span>"viewport"</span> content=<span>"'.$setting.'"</span>&gt;</code>';
-			}
-		endif; // H5BP_viewport_setting
 
 		//	callback fn for H5BP_favicon
 		if ( ! function_exists( 'H5BP_favicon_setting' ) ):
@@ -253,7 +224,6 @@
 				echo '<code><b>&lt;</b>script src=<span>"' .H5BP_URL. '/js/vendor/modernizr.js"</span><b>&gt;&lt;/</b>script<b>&gt;</b></code>';
 				echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to weaker browsers to accommodate the HTML5 elements used in Boilerplate:</strong></p>';
 				echo '<code class="comment">&lt;!--[if lt IE 9]&gt;</code>';
-				echo '<code class="comment">&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;</code>';
 				echo '<code class="comment">&lt;script&gt;!window.html5 || document.write(unescape(\'&lt;script src="' .H5BP_URL. '/js/ieshiv.js"&gt;&lt;/script&gt;\'))&lt;/script&gt;</code>';
 				echo '<code class="comment">&lt;![endif]--&gt;</code>';
 			}
@@ -333,7 +303,7 @@
 				$checked = (isset($options['H5BP_browse_happy']) && $options['H5BP_browse_happy']) ? 'checked="checked" ' : '';
 				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_browse_happy]" value="true" ' .$checked. '/>';
 				echo '<p>Selecting this option will add the following code just after the <code class="html">&lt;body&gt;</code>:</p>';
-				echo '<code class="comment">&lt;!--[if lt IE 8]&gt;&lt;p class="browsehappy"&gt;You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please &lt;a href="http://browsehappy.com/"&lt;upgrade your browser&lt;/a&gt; to improve your experience.&lt;/p&gt;![endif]--&gt;</code>';
+				echo '<code class="comment">&lt;!--[if lte IE 9]&gt;&lt;p class="browsehappy"&gt;You are using an &lt;strong&gt;outdated&lt;/strong&gt; browser. Please &lt;a href="http://browsehappy.com/"&lt;upgrade your browser&lt;/a&gt; to improve your experience.&lt;/p&gt;![endif]--&gt;</code>';
 			}
 		endif; // H5BP_browse_happy_setting
 
@@ -413,12 +383,6 @@
 
 /*	4)	Create functions to add above elements to pages */
 
-		//	$options['H5BP_google_chrome']
-		if ( ! function_exists( 'H5BP_add_google_chrome' ) ):
-			function H5BP_add_google_chrome() {
-				echo '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">'.PHP_EOL;
-			}
-		endif; // H5BP_add_google_chrome
 
 		//	$options['H5BP_google_verification']
 		if ( ! function_exists( 'H5BP_add_google_verification' ) ):
@@ -428,15 +392,6 @@
 				echo '<meta name="google-site-verification" content="'.$account.'">'.PHP_EOL;
 			}
 		endif; // H5BP_add_google_verification
-
-		//	$options['H5BP_viewport']
-		if ( ! function_exists( 'H5BP_add_viewport' ) ):
-			function H5BP_add_viewport() {
-				$options = get_option('plugin_options');
-				$setting = (isset($options['H5BP_viewport_setting']) && $options['H5BP_viewport_setting']) ? $options['H5BP_viewport_setting'] : 'width=device-width';
-				echo '<meta name="viewport" content="'.$setting.'">'.PHP_EOL;
-			}
-		endif; // H5BP_add_viewport
 
 		//	$options['H5BP_favicon']
 		if ( ! function_exists( 'H5BP_add_favicon' ) ):
@@ -472,7 +427,6 @@
 			function H5BP_add_ieshiv_script() {
 				$cache = H5BP_cache_buster();
 				echo '<!--[if lt IE 9]>'.PHP_EOL;
-				echo '<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>'.PHP_EOL; // try getting from CDN
 				echo '<script>window.html5 || document.write(\'<script src="' .H5BP_URL. '/js/ieshiv.js'.$cache.'"><\/script>\')</script>'.PHP_EOL; // fallback to local if CDN fails
 				echo '<![endif]-->'.PHP_EOL;
 			}
@@ -491,7 +445,7 @@
 			function H5BP_add_jquery_script() {
 				$cache = H5BP_cache_buster();
 				$options = get_option('plugin_options');
-				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.11.1';
+				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '3.1.1';
 				wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js"></script>'.PHP_EOL; // try getting from CDN
 				echo '<script>window.jQuery || document.write(\'<script src="' .H5BP_URL. '/js/vendor/jquery.js'.$cache.'"><\/script>\')</script>'.PHP_EOL; // fallback to local if CDN fails
@@ -532,7 +486,7 @@
 		//	$options['H5BP_browse_happy']
 		if ( ! function_exists( 'H5BP_add_browse_happy' ) ):
 			function H5BP_add_browse_happy() {
-				echo '<!--[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->'.PHP_EOL;
+				echo '<!--[if lte IE 9]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->'.PHP_EOL;
 			}
 		endif; // H5BP_add_browse_happy
 
@@ -580,16 +534,8 @@
 			$options = get_option('plugin_options');
 
 			// check if each option is set (meaning it exists) and check if it is true (meaning it was checked)
-			if (isset($options['H5BP_google_chrome']) && $options['H5BP_google_chrome']) {
-				add_action('wp_print_styles', 'H5BP_add_google_chrome');
-			}
-
 			if (isset($options['H5BP_google_verification']) && $options['H5BP_google_verification'] && $options['H5BP_google_verification_account'] && $options['H5BP_google_verification_account'] !== 'XXXXXXXXX...') {
 				add_action('wp_print_styles', 'H5BP_add_google_verification');
-			}
-
-			if (isset($options['H5BP_viewport']) && $options['H5BP_viewport']) {
-				add_action('wp_print_styles', 'H5BP_add_viewport');
 			}
 
 			if (isset($options['H5BP_favicon']) && $options['H5BP_favicon']) {
