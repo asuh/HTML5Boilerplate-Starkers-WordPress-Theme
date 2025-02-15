@@ -1,12 +1,12 @@
-#  HTML5 Boilerplate Starkers WordPress Theme
+> [!NOTE]
+> I will deprecate this project in favor of a new starter theme called [Forage](https://github.com/asuh/forage). I highly recommend to switch to Forage which is in active development and has few dependencies.
 
-## To Do List
-* Update email for vCard to include Obfuscation http://www.albionresearch.com/misc/obfuscator.php
+#  HTML5 Boilerplate Starkers WordPress Theme
 
 ##  Project origins
 * HTML5 Boilerplate [https://github.com/h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate)
-* Starkers Theme [https://github.com/elliotjaystocks/starkers] (https://github.com/elliotjaystocks/starkers)
-* Aaron T. Grogg's Boilerplate [https://github.com/aarontgrogg/wp-theme-html5-boilerplate] (https://github.com/aarontgrogg/wp-theme-html5-boilerplate)
+* Starkers Theme https://github.com/elliotjaystocks/starkers
+* Aaron T. Grogg's Boilerplate [https://github.com/aarontgrogg/wp-theme-html5-boilerplate](https://github.com/aarontgrogg/wp-theme-html5-boilerplate)
 
 ## License:
 
